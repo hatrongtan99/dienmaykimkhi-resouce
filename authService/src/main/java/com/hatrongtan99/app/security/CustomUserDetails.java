@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,9 +20,9 @@ public class CustomUserDetails implements UserDetails {
     private String userName;
     private String email;
     private String password;
-    private List<Role> roles;
+    private Set<Role> roles;
 
-    public CustomUserDetails(Long id, String userName, String email, String password, List<Role> roles) {
+    public CustomUserDetails(Long id, String userName, String email, String password, Set<Role> roles) {
         this.id = id;
         this.userName = userName;
         this.email = email;
@@ -29,7 +30,7 @@ public class CustomUserDetails implements UserDetails {
         this.roles = roles;
     }
 
-    public CustomUserDetails(String userName, List<Role> roles) {
+    public CustomUserDetails(String userName, Set<Role> roles) {
         this.userName = userName;
         this.roles = roles;
     }

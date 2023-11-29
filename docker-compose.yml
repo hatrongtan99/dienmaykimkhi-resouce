@@ -1,0 +1,25 @@
+version: "3.8"
+services:
+#  nginx:
+#    image: nginx:alpine
+#    restart: always
+#    ports:
+#      - 80:80
+##      - 443:443
+#    volumes:
+#      - ./docker/nginx/customConfig.conf:/etc/nginx/conf.d/customConfig.conf
+  db-mysql:
+    image: mysql:8.2.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql:/var/lib/mysql
+      - ./docker/database/mysql/init:/docker-entrypoint-initdb.d
+volumes:
+  mysql:
+networks:
+  dienmaykimkhi:
+    driver: bridge

@@ -34,12 +34,4 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseObject<>(true, "Register success", this.userService.userRegister(userRegisterRequestDto)));
     }
 
-    @GetMapping
-    public ResponseEntity<String> test() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println(authentication.getAuthorities());
-        System.out.println(authentication.getName());
-        System.out.println(authentication.getPrincipal());
-        return ResponseEntity.ok("success");
-    }
 }
