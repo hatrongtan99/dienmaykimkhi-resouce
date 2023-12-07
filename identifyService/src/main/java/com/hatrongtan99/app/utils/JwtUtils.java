@@ -1,15 +1,16 @@
 package com.hatrongtan99.app.utils;
 
-import com.nimbusds.jose.Algorithm;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.springframework.core.io.ClassPathResource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
@@ -19,11 +20,15 @@ import java.util.function.Function;
 @Component
 public class JwtUtils {
 
+    @Autowired
+    private ResourceLoader resource;
+
+
     static Long EXPIRED_TIME = (long) 60 * 1000 * 30;
 
     public String generateToken(Long id, Map<String, Object> claims) throws Exception {
         Date expiredDate = new Date(System.currentTimeMillis() + EXPIRED_TIME);
-        PrivateKey privateKey = this.getPrivateKey(new File(ClassLoader.getSystemResource("key/jwtRSA256.pem").getFile()));
+        PrivateKey privateKey = this.getPrivateKey(resource.getResource("classpath:key/jwtRSA256.pem").getURI());
         return Jwts.builder()
                 .subject(String.valueOf(id))
                 .issuedAt(new Date())
@@ -49,15 +54,15 @@ public class JwtUtils {
         return (usernameFromToken.equals(fullName) && new Date().before(extractClaims(token, Claims::getExpiration)));
     }
     private Claims extractAllClaims(String token) throws Exception {
-        PublicKey publicKey = this.getPublicKey(new File(ClassLoader.getSystemResource("key/jwtRSA256.pub.crt").getFile()));
+        PublicKey publicKey = this.getPublicKey(resource.getResource("classpath:key/jwtRSA256.pub.crt").getURI());
         return Jwts.parser()
                 .verifyWith(publicKey)
                 .build()
                 .parseSignedClaims(token).getPayload();
     }
 
-    private PrivateKey getPrivateKey(File file) throws Exception {
-        String key = Files.readString(file.toPath(), Charset.defaultCharset());
+    private PrivateKey getPrivateKey(URI file) throws Exception {
+        String key = Files.readString(Path.of(file), Charset.defaultCharset());
 
         String privateKeyPEM = key
                 .replace("-----BEGIN PRIVATE KEY-----", "")
@@ -71,9 +76,8 @@ public class JwtUtils {
         return keyFactory.generatePrivate(keySpec);
     }
 
-    private PublicKey getPublicKey(File file) throws Exception {
-        String key = Files.readString(file.toPath(), Charset.defaultCharset());
-
+    private PublicKey getPublicKey(URI file) throws Exception {
+        String key = Files.readString(Path.of(file), Charset.defaultCharset());
         String publicKeyPEM = key
                 .replace("-----BEGIN PUBLIC KEY-----", "")
                 .replaceAll(System.lineSeparator(), "")
