@@ -1,0 +1,2 @@
+openssl genrsa -out jwtRSA256.pem 2048
+openssl rsa -in jwtRSA256.pem -pubout -out jwtRSA256.pub.crt

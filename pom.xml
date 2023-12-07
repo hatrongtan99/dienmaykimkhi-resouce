@@ -11,12 +11,12 @@
 
     <modules>
         <module>common</module>
-        <module>authService</module>
         <module>productService</module>
         <module>cartService</module>
         <module>mediaService</module>
         <module>ratingService</module>
         <module>orderService</module>
         <module>inventoryService</module>
+        <module>identifyService</module>
     </modules>
 </project>
