@@ -30,9 +30,13 @@ public class UserEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "varchar(50) default 'LOCAL'")
+    @Builder.Default
     private TypeProvider typeProvider = TypeProvider.LOCAL;
 
+    private String providerId;
+
     @Column(columnDefinition="boolean default 1")
+    @Builder.Default
     private boolean isActive = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -40,40 +44,30 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
+    @Builder.Default
     private Set<RoleEntity> roles = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
+    @Builder.Default
     private Set<AuthorityEntity> authorities = new HashSet<>();
 
     public void addRole(RoleEntity role) {
-        if (this.roles == null) {
-            this.roles = new HashSet<>();
-        }
         this.roles.add(role);
     }
 
     public boolean removeRole(RoleEntity role) {
-        if (!this.roles.contains(role)) {
-            return false;
-        }
         this.roles.remove(role);
         return true;
     }
 
     public void addAuthority(AuthorityEntity authority) {
-        if (this.authorities == null) {
-            this.authorities = new HashSet<>();
-        }
         this.authorities.add(authority);
     }
 
     public boolean removeAuthority(AuthorityEntity authority) {
-        if (!this.authorities.contains(authority)) {
-            return false;
-        }
         this.authorities.remove(authority);
         return true;
     }

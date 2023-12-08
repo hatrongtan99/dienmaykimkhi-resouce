@@ -1,6 +1,6 @@
 package com.hatrongtan99.app.services.impl;
 
-import com.hatrongtan99.app.config.securitory.CustomUserDetail;
+import com.hatrongtan99.app.security.UserPrincipal;
 import com.hatrongtan99.app.dto.UserDetailAuthResponseDto;
 import com.hatrongtan99.app.dto.UserLoginRequestDto;
 import com.hatrongtan99.app.dto.UserRegisterRequestDto;
@@ -49,15 +49,15 @@ public class AuthService implements IAuthService {
         Authentication authentication = new UsernamePasswordAuthenticationToken(userLogin.username(), userLogin.password());
         authentication = authenticationManager.authenticate(authentication);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        CustomUserDetail principal = (CustomUserDetail) authentication.getPrincipal();
-        String token = getToken(principal);
+        UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
+        String token = jwtUtils.getToken(principal);
         response.addCookie(new Cookie("Authorization", token));
         return "success";
     }
 
     @Override
-    public UserDetailAuthResponseDto authenticated(CustomUserDetail principal) throws Exception {
-            String token = getToken(principal);
+    public UserDetailAuthResponseDto authenticated(UserPrincipal principal) throws Exception {
+            String token = jwtUtils.getToken(principal);
             return new UserDetailAuthResponseDto(
                     principal.getId(),
                     principal.getFullName(),
@@ -87,11 +87,5 @@ public class AuthService implements IAuthService {
         return "success";
     }
 
-    private String getToken(CustomUserDetail principal) throws Exception {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("username", principal.getUsername());
-        claims.put("roles", principal.getAuthorities());
-        return jwtUtils.generateToken(principal.getId(), claims);
 
-    }
 }

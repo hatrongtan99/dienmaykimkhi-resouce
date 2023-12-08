@@ -1,7 +1,8 @@
-package com.hatrongtan99.app.config.securitory;
+package com.hatrongtan99.app.security;
 
 import com.hatrongtan99.app.entity.AuthorityEntity;
 import com.hatrongtan99.app.entity.RoleEntity;
+import com.hatrongtan99.app.entity.UserEntity;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,7 +16,7 @@ import java.util.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class CustomUserDetail implements UserDetails, OAuth2User {
+public class UserPrincipal implements UserDetails, OAuth2User {
 
     private Long id;
     private String fullName;
@@ -26,6 +27,25 @@ public class CustomUserDetail implements UserDetails, OAuth2User {
     private boolean isActive;
     private Set<AuthorityEntity> authorities;
     private Map<String, Object> attributes;
+
+    public static UserPrincipal create(UserEntity user) {
+        return UserPrincipal.builder()
+                .id(user.getId())
+                .fullName(user.getFullName())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .password(user.getPassword())
+                .roles(user.getRoles())
+                .authorities(user.getAuthorities())
+                .isActive(user.isActive())
+                .build();
+    }
+
+    public static  UserPrincipal create(UserEntity user, Map<String, Object> attributes) {
+        UserPrincipal userPrincipal = create(user);
+        userPrincipal.setAttributes(attributes);
+        return userPrincipal;
+    }
     @Override
     public String getName() {
         return this.fullName;

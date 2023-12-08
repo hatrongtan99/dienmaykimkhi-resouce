@@ -1,5 +1,6 @@
 package com.hatrongtan99.app.utils;
 
+import com.hatrongtan99.app.security.UserPrincipal;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -15,6 +16,7 @@ import java.security.*;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 @Component
@@ -36,6 +38,13 @@ public class JwtUtils {
                 .claims(claims)
                 .signWith(privateKey, Jwts.SIG.RS256)
                 .compact();
+    }
+
+    public String getToken(UserPrincipal principal) throws Exception {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("username", principal.getUsername());
+        claims.put("roles", principal.getAuthorities());
+        return generateToken(principal.getId(), claims);
     }
 
     public Long getUserId(String token) throws Exception {

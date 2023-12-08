@@ -1,4 +1,4 @@
-package com.hatrongtan99.app.config.securitory;
+package com.hatrongtan99.app.security;
 
 import com.hatrongtan99.app.entity.UserEntity;
 import com.hatrongtan99.app.repository.UserRepository;
@@ -37,7 +37,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 Long userId = jwtUtils.getUserId(token);
                 UserEntity user = userRepository.findById(userId).orElseThrow(() -> new UsernameNotFoundException("user not found"));
                 if (jwtUtils.verifyToken(token, user.getUsername()))  {
-                    CustomUserDetail userDetail = CustomUserDetail.builder()
+                    UserPrincipal userDetail = UserPrincipal.builder()
                             .id(user.getId())
                             .fullName(user.getFullName())
                             .username(user.getUsername())

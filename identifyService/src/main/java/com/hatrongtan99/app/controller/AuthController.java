@@ -1,6 +1,6 @@
 package com.hatrongtan99.app.controller;
 
-import com.hatrongtan99.app.config.securitory.CustomUserDetail;
+import com.hatrongtan99.app.security.UserPrincipal;
 import com.hatrongtan99.app.dto.UserDetailAuthResponseDto;
 import com.hatrongtan99.app.dto.UserLoginRequestDto;
 import com.hatrongtan99.app.dto.UserRegisterRequestDto;
@@ -32,8 +32,9 @@ public class AuthController {
     }
 
     @GetMapping("/authenticate")
-    public ResponseEntity<ResponseObject<UserDetailAuthResponseDto>> authenticate(@AuthenticationPrincipal() CustomUserDetail principal) throws Exception {
+    public ResponseEntity<ResponseObject<UserDetailAuthResponseDto>> authenticate(@AuthenticationPrincipal() UserPrincipal principal) throws Exception {
         return ResponseEntity.ok(new ResponseObject<>(true, "success", userService.authenticated(principal)));
     }
+
 
 }
