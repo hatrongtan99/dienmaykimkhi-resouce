@@ -6,6 +6,8 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.util.Optional;
+
 public class AuthenticationUtils {
 
     private AuthenticationUtils() {
@@ -18,5 +20,14 @@ public class AuthenticationUtils {
         }
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
         return userPrincipal.getId();
+    }
+
+    public static Optional<Long> getCurrentAuditing() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication instanceof AnonymousAuthenticationToken) {
+            return Optional.empty();
+        }
+        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+        return Optional.of(userPrincipal.getId());
     }
 }
