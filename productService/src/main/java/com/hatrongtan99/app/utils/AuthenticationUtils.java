@@ -1,14 +1,16 @@
 package com.hatrongtan99.app.utils;
 
-import com.hatrongtan99.app.security.UserPrincipal;
 import com.hatrongtan99.exception.RequiredSignInException;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.Jwt;
 
 import java.util.Optional;
 
 public class AuthenticationUtils {
+
+    private static String claimsIdUser = "idUser";
 
     private AuthenticationUtils() {
 
@@ -18,8 +20,7 @@ public class AuthenticationUtils {
         if (authentication instanceof AnonymousAuthenticationToken) {
             throw new RequiredSignInException("require sign in before process");
         }
-        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-        return userPrincipal.getId();
+        return null;
     }
 
     public static Optional<Long> getCurrentAuditing() {
@@ -27,7 +28,7 @@ public class AuthenticationUtils {
         if (authentication instanceof AnonymousAuthenticationToken) {
             return Optional.empty();
         }
-        UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-        return Optional.of(userPrincipal.getId());
+        Long idUser = ((Jwt) authentication.getPrincipal()).getClaim(claimsIdUser);
+        return Optional.of(idUser);
     }
 }

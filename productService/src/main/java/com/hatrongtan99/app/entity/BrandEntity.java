@@ -22,12 +22,14 @@ public class BrandEntity extends BaseAuditEntity{
 
     private Long thumbnailId;
 
+    @Column(unique = true, nullable = false)
     private String slug;
 
     @OneToMany(mappedBy = "brandId")
     private List<ProductEntity> products = new ArrayList<>();
 
-    private boolean isActive;
+    @Builder.Default
+    private boolean isActive = true;
 
     private int displayOrder;
 

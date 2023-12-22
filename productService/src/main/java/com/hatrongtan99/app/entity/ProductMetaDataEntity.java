@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "product_meta_data")
-public class ProductMetaDataEntity extends BaseAuditEntity{
+public class ProductMetaDataEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

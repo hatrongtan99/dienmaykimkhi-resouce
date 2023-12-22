@@ -1,5 +1,6 @@
 package com.hatrongtan99.app.entity;
 
+import com.hatrongtan99.app.entity.filter.FilterGroup;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,11 +24,12 @@ public class CategoryEntity extends BaseAuditEntity {
     @Column(columnDefinition = "text default null")
     private String description;
 
+    @Column(unique = true, nullable = false)
     private String slug;
 
     private Long thumbnailId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private CategoryEntity parentId;
 
@@ -37,8 +39,22 @@ public class CategoryEntity extends BaseAuditEntity {
     @ManyToMany(mappedBy = "categories")
     private List<ProductEntity> products = new ArrayList<>();
 
-    private boolean isActive;
+    @ManyToMany(mappedBy = "categories", fetch = FetchType.LAZY)
+    private List<FilterGroup> filterGroups = new ArrayList<>();
+
+    @Builder.Default
+    private boolean isActive = true;
 
     private int displayOrder;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o){
+            return true;
+        }
+        if (!(o instanceof CategoryEntity)) {
+            return false;
+        }
+        return (id != null) && id.equals(((CategoryEntity) o).id);
+    }
 }

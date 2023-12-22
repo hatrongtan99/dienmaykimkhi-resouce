@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "product_attribute_item")
-public class ProductAttributeItemEntity extends BaseAuditEntity {
+public class ProductAttributeItemEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

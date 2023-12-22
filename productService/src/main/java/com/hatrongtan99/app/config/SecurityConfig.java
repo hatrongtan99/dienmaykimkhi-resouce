@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final String[] WHITE_LIST = new String[]{"/*"};
+    private final String[] WHITE_LIST = new String[]{};
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -29,13 +29,15 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> {
-                    authorize.requestMatchers(WHITE_LIST).permitAll()
-                            .requestMatchers("/**").authenticated();
+                    authorize
+                            .anyRequest().permitAll();
+//                            .requestMatchers("/bff-admin/**").hasRole("ROLE_ADMIN")
+//                            .requestMatchers(WHITE_LIST).permitAll()
+//                            .requestMatchers("/**").authenticated();
                 })
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
-
         return http.build();
     }
 

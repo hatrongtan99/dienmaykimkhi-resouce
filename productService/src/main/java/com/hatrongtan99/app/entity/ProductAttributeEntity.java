@@ -10,14 +10,15 @@ import lombok.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "product_attribute")
-public class ProductAttributeEntity extends BaseAuditEntity{
+public class ProductAttributeEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    private boolean isActive;
+    @Builder.Default
+    private boolean isActive = true;
 
     private int displayOrder;
 }
