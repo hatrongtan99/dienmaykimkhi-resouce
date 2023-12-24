@@ -1,5 +1,5 @@
 package com.hatrongtan99.enumeration.media;
 
-public enum MediaType {
+public enum FileType {
      IMAGE, VIDEO, URL
 }
