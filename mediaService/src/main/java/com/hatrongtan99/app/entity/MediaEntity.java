@@ -1,8 +1,10 @@
 package com.hatrongtan99.app.entity;
 
-import com.hatrongtan99.enumeration.media.MediaType;
+import com.hatrongtan99.enumeration.media.FileType;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.sql.Blob;
 
 @Getter
 @Setter
@@ -21,9 +23,12 @@ public class MediaEntity  {
     private String filename;
 
     @Enumerated(EnumType.STRING)
-    private MediaType mediaType;
+    private FileType fileType;
+
+    private String mediaType;
 
     @Lob
+    @Column(columnDefinition = "mediumblob default null")
     private byte[] data;
 
     private String url;
