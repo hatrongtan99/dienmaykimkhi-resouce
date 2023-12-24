@@ -1,0 +1,9 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://127.0.0.1:9000
+properties:
+  product-service-url: http://localhost:8082
+  media-service-url: http://localhost:8083
