@@ -1,10 +1,5 @@
 package com.hatrongtan99.app.services.impl;
 
-import com.hatrongtan99.app.dto.paginationDto.MetadataDto;
-import com.hatrongtan99.app.dto.productDto.ProductCardDto;
-import com.hatrongtan99.app.dto.productDto.ProductDetailResponseDto;
-import com.hatrongtan99.app.dto.productDto.ProductGetListWithPageDto;
-import com.hatrongtan99.app.dto.productDto.ProductResponseDto;
 import com.hatrongtan99.app.entity.CategoryEntity;
 import com.hatrongtan99.app.entity.ProductEntity;
 import com.hatrongtan99.app.repository.*;
@@ -13,6 +8,7 @@ import com.hatrongtan99.app.repository.spec.ProductSpec;
 import com.hatrongtan99.app.services.IProductReadService;
 import com.hatrongtan99.app.utils.CommonUtils;
 import com.hatrongtan99.app.utils.Constant;
+import com.hatrongtan99.app.exception.NotFoundException;
 import jakarta.persistence.criteria.Join;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,7 +27,7 @@ public class ProductReadService implements IProductReadService {
     private final ProductRepository productRepository;
 
     @Override
-    public ProductGetListWithPageDto listProductWithPageBySlugCategory(int pageNumber, int pageLimit, String slugCate, Map<String, String> allStringQuery) {
+    public Page<ProductEntity> listProductWithPageBySlugCategory(int pageNumber, int pageLimit, String slugCate, Map<String, String> allStringQuery) {
         Specification<ProductEntity> spec = Specification.where((root, query, criteriaBuilder) -> {
             Join<ProductEntity, CategoryEntity> joinCate = root.join("categories");
             return criteriaBuilder.equal(joinCate.get("slug"), slugCate);
@@ -43,43 +39,25 @@ public class ProductReadService implements IProductReadService {
         Sort priceSort = CommonUtils.getSort(allStringQuery.get(Constant.FILTER_QUERY_SORT));
 
         Pageable pageable = PageRequest.of(pageNumber, pageLimit, priceSort);
-        Page<ProductEntity> page = this.productRepository.findByIdIn(listId, pageable);
-
-        MetadataDto metadataDto = new MetadataDto(
-                page.getNumber(),
-                page.getSize(),
-                page.getTotalPages(),
-                (int) page.getTotalElements()
-        );
-        List<ProductEntity> productEntities = page.getContent();
-        List<ProductCardDto> records = productEntities.stream().map(p -> ProductCardDto.mapToDto(p, p.getPrice().get(0).getPrice())).toList();
-        return new ProductGetListWithPageDto(metadataDto, records);
+        return this.productRepository.findByIdIn(listId, pageable);
     }
 
     @Override
-    public ProductGetListWithPageDto listProductWithPageBySlugBrand(int pageNumber, int pageLimit, String slugBrand, Map<String, String> stringQuery) {
+    public Page<ProductEntity> listProductWithPageBySlugBrand(int pageNumber, int pageLimit, String slugBrand, Map<String, String> stringQuery) {
         Sort sortPrice = CommonUtils.getSort(stringQuery.get(Constant.FILTER_QUERY_SORT));
         Pageable pageable = PageRequest.of(pageNumber, pageLimit, sortPrice);
-        Page<ProductEntity> page = this.productRepository.findByBrandSlugWithPriceActive(slugBrand, pageable);
-        MetadataDto metadataDto = new MetadataDto(
-                page.getNumber(),
-                page.getSize(),
-                page.getTotalPages(),
-                (int) page.getTotalElements()
-        );
-        List<ProductEntity> productEntities = page.getContent();
-        List<ProductCardDto> records = productEntities.stream().map(p -> ProductCardDto.mapToDto(p, p.getPrice().get(0).getPrice())).toList();
-        return new ProductGetListWithPageDto(metadataDto, records);
+        return this.productRepository.findByBrandSlugWithPriceActive(slugBrand, pageable);
     }
 
     @Override
-    public ProductDetailResponseDto getProductBySlug(String slug) {
-        return null;
+    public ProductEntity getProductBySlug(String slug) {
+        return this.productRepository.findBySlugAndIsActiveIsTrue(slug)
+                .orElseThrow(() -> new NotFoundException("Product not found"));
     }
 
     @Override
-    public ProductResponseDto getProductById(Long id) {
-        return null;
+    public ProductEntity getProductById(Long id) {
+        return this.productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
     }
 
     private List<PriceRange> getPriceRanges(String queryString) {

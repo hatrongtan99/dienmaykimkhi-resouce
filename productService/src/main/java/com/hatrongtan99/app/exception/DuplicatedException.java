@@ -1,4 +1,4 @@
-package com.hatrongtan99.exception;
+package com.hatrongtan99.app.exception;
 
 public class DuplicatedException extends RuntimeException{
     public DuplicatedException(String message) {

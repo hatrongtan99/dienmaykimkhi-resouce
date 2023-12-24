@@ -1,4 +1,4 @@
-package com.hatrongtan99.exception;
+package com.hatrongtan99.app.exception;
 
 import org.springframework.security.core.Authentication;
 

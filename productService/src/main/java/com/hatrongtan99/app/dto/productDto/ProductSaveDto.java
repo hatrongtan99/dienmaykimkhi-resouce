@@ -1,6 +1,5 @@
 package com.hatrongtan99.app.dto.productDto;
 
-import com.hatrongtan99.app.dto.mediaDto.MediaSaveDto;
 import com.hatrongtan99.app.dto.productMetadataDto.ProductMetadataSaveOrUpdateDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,7 +18,8 @@ public record ProductSaveDto(
         String slug,
         @Positive
         double price,
-        MediaSaveDto thumbnail,
+        @NotBlank
+        Long thumbnailId,
         @NotNull
         Long brandId,
         @NotNull

@@ -1,26 +1,28 @@
 package com.hatrongtan99.app.services.impl;
 
+import com.hatrongtan99.app.config.PropertiesConfig;
 import com.hatrongtan99.app.dto.mediaDto.MediaResponseDto;
-import com.hatrongtan99.app.dto.mediaDto.MediaSaveDto;
 import com.hatrongtan99.app.services.IMediaService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 @Service
 @RequiredArgsConstructor
 public class MediaService implements IMediaService {
 
     private final WebClient webClient;
-
-    @Override
-    public Long saveFile(MediaSaveDto file) {
-        return null;
-    }
-
+    private final PropertiesConfig propertiesConfig;
     @Override
     public MediaResponseDto getFile(Long id) {
-        return null;
+        final URI uri = UriComponentsBuilder.fromHttpUrl(propertiesConfig.getMediaUrl()).path("/medias/{id}").buildAndExpand(id).toUri();
+        return this.webClient.get()
+                .uri(uri)
+                .retrieve()
+                .bodyToMono(MediaResponseDto.class)
+                .block();
     }
 }

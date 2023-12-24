@@ -1,6 +1,5 @@
 package com.hatrongtan99.app.dto.brandDto;
 
-import com.hatrongtan99.app.dto.mediaDto.MediaSaveDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -13,6 +12,6 @@ public record BrandSaveDto(
         String slug,
 
         @NotNull
-        MediaSaveDto brandThumbnail
+        Long thumbnailId
 ) {
 }

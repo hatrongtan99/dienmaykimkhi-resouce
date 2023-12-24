@@ -1,14 +1,12 @@
 package com.hatrongtan99.app.services.impl;
 
-import com.hatrongtan99.app.dto.productAttributeDto.AttributeGetListDto;
 import com.hatrongtan99.app.dto.productAttributeDto.AttributeSaveDto;
 import com.hatrongtan99.app.dto.productAttributeDto.AttributeUpdateDto;
 import com.hatrongtan99.app.entity.ProductAttributeEntity;
 import com.hatrongtan99.app.repository.ProductAttributeRepository;
 import com.hatrongtan99.app.services.IProductAttributeService;
-import com.hatrongtan99.exception.DuplicatedException;
-import com.hatrongtan99.exception.NotFoundException;
-import lombok.AllArgsConstructor;
+import com.hatrongtan99.app.exception.DuplicatedException;
+import com.hatrongtan99.app.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -41,8 +39,7 @@ public class ProductAttributeService implements IProductAttributeService {
     }
 
     @Override
-    public List<AttributeGetListDto> getAttributes() {
-        List<ProductAttributeEntity> listAttribute = this.attributeRepository.findAll();
-        return listAttribute.stream().map(att -> new AttributeGetListDto(att.getId(), att.getName(), att.isActive())).toList();
+    public List<ProductAttributeEntity> getAttributes() {
+       return this.attributeRepository.findAll();
     }
 }

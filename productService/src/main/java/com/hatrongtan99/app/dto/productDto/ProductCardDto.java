@@ -13,7 +13,10 @@ public record ProductCardDto(
 ) {
     public static ProductCardDto mapToDto(ProductEntity product, double price) {
         BrandEntity brandEntity = product.getBrandId();
-        BrandCardDto brand = new BrandCardDto(brandEntity.getId(), brandEntity.getName(), brandEntity.getSlug(), null);
+        BrandCardDto brand = null;
+        if (brandEntity != null) {
+            brand = new BrandCardDto(brandEntity.getId(), brandEntity.getName(), brandEntity.getSlug(), null);
+        }
         return new ProductCardDto(
                 product.getId(),
                 product.getName(),

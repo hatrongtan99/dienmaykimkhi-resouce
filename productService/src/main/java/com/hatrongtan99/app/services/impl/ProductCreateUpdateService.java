@@ -5,7 +5,7 @@ import com.hatrongtan99.app.entity.*;
 import com.hatrongtan99.app.repository.*;
 import com.hatrongtan99.app.services.IProductCreateUpdateService;
 import com.hatrongtan99.app.services.ProductServiceHelper;
-import com.hatrongtan99.exception.NotFoundException;
+import com.hatrongtan99.app.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductCreateUpdateService extends ProductServiceHelper implements IProductCreateUpdateService {
 
     private final ProductRepository productRepository;
-    private final MediaService mediaService;
 
     public ProductCreateUpdateService(
             ProductRepository productRepository,
@@ -24,25 +23,22 @@ public class ProductCreateUpdateService extends ProductServiceHelper implements 
             ProductMetaDataRepository metaDataRepository) {
         super(productRepository, mediaService, brandRepository, productImageRepository, categoryRepository, metaDataRepository);
         this.productRepository = productRepository;
-        this.mediaService = mediaService;
     }
 
     @Override
     @Transactional
-    public ProductResponseDto createProduct(ProductSaveDto product) {
+    public ProductEntity createProduct(ProductSaveDto product) {
         this.validateNewProduct(product.slug(), product.sku());
         //create description row
         DescriptionEntity description = DescriptionEntity.builder().content(product.description()).build();
         // save thumbnail image
-        Long thumbnailId = this.mediaService.saveFile(product.thumbnail());
-
         ProductEntity newProduct = ProductEntity.builder()
                 .name(product.name())
                 .shortDescription(product.shortDescription())
                 .descriptionId(description)
                 .sku(product.sku())
                 .slug(product.slug())
-                .thumbnailId(thumbnailId)
+                .thumbnailId(product.thumbnailId())
                 .isAvailInStock(product.isAvailInStock())
                 .build();
         // create first price row
@@ -62,16 +58,12 @@ public class ProductCreateUpdateService extends ProductServiceHelper implements 
             setMetadata(newProduct, product.metadata());
         }
 
-
-
-        this.productRepository.saveAndFlush(newProduct);
-
-        return ProductResponseDto.mapToDto(newProduct);
+        return this.productRepository.saveAndFlush(newProduct);
     }
 
 
     @Override
-    public ProductResponseDto updateProduct(Long id, ProductUpdateDto product) {
+    public ProductEntity updateProduct(Long id, ProductUpdateDto product) {
         return null;
     }
 

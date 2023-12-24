@@ -3,6 +3,7 @@ package com.hatrongtan99.app.controller;
 import com.hatrongtan99.app.dto.brandDto.BrandResponseDto;
 import com.hatrongtan99.app.dto.brandDto.BrandSaveDto;
 import com.hatrongtan99.app.dto.brandDto.BrandUpdateDto;
+import com.hatrongtan99.app.entity.BrandEntity;
 import com.hatrongtan99.app.services.IBrandService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -21,22 +22,26 @@ public class BranchController {
 
     @GetMapping
     public ResponseEntity<List<BrandResponseDto>> getBrands() {
-        return ResponseEntity.ok(this.brandService.getBrands());
+        List<BrandEntity> listBrand = this.brandService.getBrands();
+        return ResponseEntity.ok(listBrand.stream().map(BrandResponseDto::mapToDto).toList());
     }
+
     @PostMapping
-//    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<BrandResponseDto> createBrand(
             @Valid @RequestBody BrandSaveDto brand
-            ) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.brandService.create(brand));
+    ) {
+        BrandEntity newBrand = this.brandService.create(brand);
+        return ResponseEntity.status(HttpStatus.CREATED).body(BrandResponseDto.mapToDto(newBrand));
     }
 
     @PutMapping({"/{id}"})
-//    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<BrandResponseDto> updateBrand(
             @PathVariable("id") Long id,
             @Valid @RequestBody BrandUpdateDto brand
-            ) {
-        return ResponseEntity.ok(this.brandService.update(id, brand));
+    ) {
+        BrandEntity brandUpdate = this.brandService.update(id, brand);
+        return ResponseEntity.ok(BrandResponseDto.mapToDto(brandUpdate));
     }
 }

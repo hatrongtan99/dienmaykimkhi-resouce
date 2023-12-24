@@ -23,9 +23,9 @@ public record ProductDetailPageResponseDto(
         boolean isAvailInStock,
         boolean isActive
 ) {
-    public static ProductDetailResponseDto mapToDto(ProductEntity product) {
+    public static ProductDetailPageResponseDto mapToDto(ProductEntity product) {
         double price = product.getPrice().get(0) != null ? product.getPrice().get(0).getPrice() : 0;
-        return new ProductDetailResponseDto(
+        return new ProductDetailPageResponseDto(
                 product.getId(),
                 product.getName(),
                 product.getSlug(),
@@ -34,7 +34,7 @@ public record ProductDetailPageResponseDto(
                 product.getSku(),
                 price,
                 product.getThumbnailId(),
-                product.getBrandId().getId(),
+                product.getBrandId() == null ? null : product.getBrandId().getId(),
                 product.getCategories().stream().map(CategoryEntity::getId).toList(),
                 product.getProductRelate().stream().map(ProductEntity::getId).toList(),
                 product.getMetadata().stream().map(m -> new ProductMetadataResponseDto(m.getId(), m.getName(), m.getValue())).toList(),

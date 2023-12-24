@@ -16,7 +16,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long>, J
     @Query(
             value = """
                        FROM ProductEntity p LEFT JOIN p.brandId b LEFT JOIN p.price pr
-                        WHERE b.slug = :brandSlug AND pr.isActive = TRUE
+                        WHERE b.slug = :brandSlug AND b.isActive = TRUE AND pr.isActive = TRUE
                     """
     )
     Page<ProductEntity> findByBrandSlugWithPriceActive(@Param("brandSlug") String brandSlug, Pageable pageable);
@@ -27,7 +27,7 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Long>, J
     )
     Page<ProductEntity> findByIdIn(@Param("ids") List<Long> ids, Pageable pageable);
 
-    Optional<ProductEntity> findBySlug(String slug);
+    Optional<ProductEntity> findBySlugAndIsActiveIsTrue(String slug);
 
     boolean existsBySlug(String slug);
 

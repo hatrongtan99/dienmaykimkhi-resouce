@@ -1,10 +1,11 @@
 package com.hatrongtan99.app.services;
 
 import com.hatrongtan99.app.dto.productDto.*;
+import com.hatrongtan99.app.entity.ProductEntity;
 
 public interface IProductCreateUpdateService {
-    ProductResponseDto createProduct(ProductSaveDto product);
-    ProductResponseDto updateProduct(Long id, ProductUpdateDto product);
+    ProductEntity createProduct(ProductSaveDto product);
+    ProductEntity updateProduct(Long id, ProductUpdateDto product);
     void deleteProduct(Long id);
 
 }

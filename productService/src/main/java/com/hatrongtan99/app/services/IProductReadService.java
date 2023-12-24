@@ -1,15 +1,14 @@
 package com.hatrongtan99.app.services;
 
-import com.hatrongtan99.app.dto.productDto.ProductDetailResponseDto;
-import com.hatrongtan99.app.dto.productDto.ProductGetListWithPageDto;
-import com.hatrongtan99.app.dto.productDto.ProductResponseDto;
+import com.hatrongtan99.app.entity.ProductEntity;
+import org.springframework.data.domain.Page;
 
 import java.util.Map;
 
 public interface IProductReadService {
 
-    ProductGetListWithPageDto listProductWithPageBySlugCategory(int pageNumber, int pageLimit, String slugCate, Map<String, String> allStringQuery);
-    ProductGetListWithPageDto listProductWithPageBySlugBrand(int pageNumber, int pageLimit, String slugBrand, Map<String, String> allStringQuery);
-    ProductDetailResponseDto getProductBySlug(String slug);
-    ProductResponseDto getProductById(Long id);
+    Page<ProductEntity> listProductWithPageBySlugCategory(int pageNumber, int pageLimit, String slugCate, Map<String, String> allStringQuery);
+    Page<ProductEntity> listProductWithPageBySlugBrand(int pageNumber, int pageLimit, String slugBrand, Map<String, String> allStringQuery);
+    ProductEntity getProductBySlug(String slug);
+    ProductEntity getProductById(Long id);
 }

@@ -4,8 +4,8 @@ import com.hatrongtan99.app.dto.productMetadataDto.ProductMetadataSaveOrUpdateDt
 import com.hatrongtan99.app.entity.*;
 import com.hatrongtan99.app.repository.*;
 import com.hatrongtan99.app.services.impl.MediaService;
-import com.hatrongtan99.exception.DuplicatedException;
-import com.hatrongtan99.exception.NotFoundException;
+import com.hatrongtan99.app.exception.DuplicatedException;
+import com.hatrongtan99.app.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
