@@ -30,7 +30,7 @@ public class ProductEntity extends BaseAuditEntity {
     @Column(columnDefinition = "text default null")
     private String shortDescription;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     @JoinColumn(name = "description_id")
     private DescriptionEntity descriptionId;
 
@@ -38,6 +38,8 @@ public class ProductEntity extends BaseAuditEntity {
 
     @Column(unique = true, nullable = false)
     private String slug;
+
+    private String guarantee;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST}, mappedBy = "productId")
     @OrderBy("price")

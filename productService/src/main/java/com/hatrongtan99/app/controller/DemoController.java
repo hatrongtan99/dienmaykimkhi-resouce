@@ -16,31 +16,31 @@ import java.util.List;
 @RequestMapping("/demo")
 @AllArgsConstructor
 public class DemoController {
-private StudentRepo studentRepo;
-private GroupRepo groupRepo;
+    private StudentRepo studentRepo;
+    private GroupRepo groupRepo;
 
-@PostMapping("/create-student")
-public String createStudent(
-@RequestBody StudentEntity student
-        ) {
+    @PostMapping("/create-student")
+    public String createStudent(
+            @RequestBody StudentEntity student
+    ) {
         this.studentRepo.save(student);
         return "success";
-        }
+    }
 
-@PostMapping("/create-group")
-public String createGroup(
-@RequestBody GroupEntity group
-        ) {
+    @PostMapping("/create-group")
+    public String createGroup(
+            @RequestBody GroupEntity group
+    ) {
         this.groupRepo.save(group);
         return "success";
-        }
+    }
 
-@Getter
-@Setter
-private static class Join {
-    private String studentId;
-    private String groupId;
-}
+    @Getter
+    @Setter
+    private static class Join {
+        private String studentId;
+        private String groupId;
+    }
 
     @PostMapping("join")
     @Transactional

@@ -12,7 +12,7 @@ public record CategorySaveDto(
         @NotBlank
         String slug,
         String description,
-        @NotNull
+
         Long thumbnailId,
         Long parentId
 ) {

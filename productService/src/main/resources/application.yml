@@ -6,4 +6,9 @@ spring:
           issuer-uri: http://127.0.0.1:9000
 
 properties:
-  media-url: http://localhost:8083
+  media-url: http://localhost:8083/api/v1
+  inventory-url: http://localhost:8085/api/v1
+
+server:
+  servlet:
+    context-path: /api/v1/

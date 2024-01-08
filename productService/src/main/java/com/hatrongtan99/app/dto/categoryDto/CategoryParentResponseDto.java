@@ -1,31 +1,28 @@
 package com.hatrongtan99.app.dto.categoryDto;
 
-import com.hatrongtan99.app.dto.mediaDto.MediaResponseDto;
-import com.hatrongtan99.app.dto.mediaDto.ThumbnailResponseDto;
 import com.hatrongtan99.app.entity.CategoryEntity;
 
-public record CategoryResponseDto(
+import java.util.List;
+
+public record CategoryParentResponseDto(
         Long id,
         String name,
         String slug,
         String description,
-        ThumbnailResponseDto thumbnail,
+        Long thumbnail,
         Long parentId,
+        List<CategoryResponseDto> childCategories,
         boolean isActive
 ) {
-    public static CategoryResponseDto mapToDto(CategoryEntity category, MediaResponseDto media) {
-        ThumbnailResponseDto thumbnail = null;
-        if (media != null) {
-            thumbnail = new ThumbnailResponseDto(media.id(), media.url());
-        }
-
-        return new CategoryResponseDto(
+    public static CategoryParentResponseDto mapToDto(CategoryEntity category) {
+        return new CategoryParentResponseDto(
                 category.getId(),
                 category.getName(),
                 category.getSlug(),
                 category.getDescription(),
-                thumbnail,
+                category.getThumbnailId(),
                 category.getParentId() == null ? null : category.getParentId().getId(),
+                category.getCategories().stream().map((c) -> CategoryResponseDto.mapToDto(c, null)).toList(),
                 category.isActive()
         );
     }

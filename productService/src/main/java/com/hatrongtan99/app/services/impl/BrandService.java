@@ -19,7 +19,6 @@ public class BrandService implements IBrandService {
 
     private final BrandRepository brandRepository;
 
-
     @Override
     public BrandEntity create(BrandSaveDto brand) {
         boolean existBrandSlug = this.checkBrandSlugExist(brand.slug());
@@ -65,4 +64,8 @@ public class BrandService implements IBrandService {
         return this.brandRepository.existsBySlug(slug);
     }
 
+    @Override
+    public BrandEntity findBySlug(String slug) {
+        return this.brandRepository.findBySlug(slug).orElseThrow(() -> new NotFoundException("Brand with slug: " + slug + " not found"));
+    }
 }

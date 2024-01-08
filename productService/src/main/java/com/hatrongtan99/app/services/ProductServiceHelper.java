@@ -1,5 +1,6 @@
 package com.hatrongtan99.app.services;
 
+import com.hatrongtan99.app.dto.productAttributeDto.ProductAttributeListItemSaveDto;
 import com.hatrongtan99.app.dto.productMetadataDto.ProductMetadataSaveOrUpdateDto;
 import com.hatrongtan99.app.entity.*;
 import com.hatrongtan99.app.repository.*;
@@ -20,6 +21,7 @@ public abstract class ProductServiceHelper {
     private final ProductImageRepository productImageRepository;
     private final CategoryRepository categoryRepository;
     private final ProductMetaDataRepository metaDataRepository;
+    private final IProductAttributeService productAttributeService;
     private boolean checkExistBySlug(String slug) {
         return this.productRepository.existsBySlug(slug);
     }
@@ -156,5 +158,14 @@ public abstract class ProductServiceHelper {
             product.getMetadata().addAll(metadataSave);
             this.metaDataRepository.saveAllAndFlush(metadataUpdate);
         }
+    }
+
+    protected void setProductAttributes(ProductEntity product, List<ProductAttributeListItemSaveDto> attributes) {
+        if (attributes.isEmpty()) {
+            return;
+        }
+        attributes.forEach(attribute -> {
+            this.productAttributeService.saveListAttributeItem(product.getId(), attribute.attributeId(), attribute.items());
+        });
     }
 }

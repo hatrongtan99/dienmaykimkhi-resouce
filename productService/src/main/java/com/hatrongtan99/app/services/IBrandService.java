@@ -15,4 +15,6 @@ public interface IBrandService {
 
     BrandEntity update(Long id, BrandUpdateDto brand);
 
+    BrandEntity findBySlug(String slug);
+
 }

@@ -1,10 +1,12 @@
 package com.hatrongtan99.app.services.impl;
 
+import com.hatrongtan99.app.config.PropertiesConfig;
 import com.hatrongtan99.app.entity.CategoryEntity;
 import com.hatrongtan99.app.entity.ProductEntity;
 import com.hatrongtan99.app.repository.*;
 import com.hatrongtan99.app.repository.filter.PriceRange;
 import com.hatrongtan99.app.repository.spec.ProductSpec;
+import com.hatrongtan99.app.services.IInventoryService;
 import com.hatrongtan99.app.services.IProductReadService;
 import com.hatrongtan99.app.utils.CommonUtils;
 import com.hatrongtan99.app.utils.Constant;
@@ -25,12 +27,27 @@ import java.util.*;
 public class ProductReadService implements IProductReadService {
 
     private final ProductRepository productRepository;
-
+    private final IInventoryService inventoryService;
     @Override
     public Page<ProductEntity> listProductWithPageBySlugCategory(int pageNumber, int pageLimit, String slugCate, Map<String, String> allStringQuery) {
+//        SELECT * FROM product AS p LEFT JOIN product_category AS pc on p.id = pc.product_id left join category as c0 on pc.category_id = c0.id where c0.slug in (
+//                with RECURSIVE cte as (
+//                select c1.slug from category as c1 where c1.slug = "may-khoan"
+//                UNION
+//                SELECT c2.slug from category as c2 INNER JOIN category as c3 on c2.parent_id = c3.id where c3.slug = "may-khoan"
+//        ) select * from cte
+//);
+
         Specification<ProductEntity> spec = Specification.where((root, query, criteriaBuilder) -> {
+
+            // join if match child slug category
             Join<ProductEntity, CategoryEntity> joinCate = root.join("categories");
-            return criteriaBuilder.equal(joinCate.get("slug"), slugCate);
+            // join if match parent slug category
+            Join<CategoryEntity, CategoryEntity> joinParenCate = joinCate.join("parentId");
+            return criteriaBuilder.or(
+                    criteriaBuilder.equal(joinCate.get("slug"), slugCate),
+                    criteriaBuilder.equal(joinParenCate.get("slug"), slugCate)
+            );
         });
         spec = this.getSpecificationFilter(spec, allStringQuery);
         List<ProductEntity> productFiltered = this.productRepository.findAll(spec);
@@ -51,8 +68,11 @@ public class ProductReadService implements IProductReadService {
 
     @Override
     public ProductEntity getProductBySlug(String slug) {
-        return this.productRepository.findBySlugAndIsActiveIsTrue(slug)
+        ProductEntity product = this.productRepository.findBySlugAndIsActiveIsTrue(slug)
                 .orElseThrow(() -> new NotFoundException("Product not found"));
+//        boolean isInStock = this.inventoryService.productIsInStock(product.getId());
+//        product.setAvailInStock(isInStock);
+        return product;
     }
 
     @Override

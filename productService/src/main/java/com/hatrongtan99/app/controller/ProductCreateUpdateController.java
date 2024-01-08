@@ -32,7 +32,7 @@ public class ProductCreateUpdateController {
         return null;
     }
 
-    @DeleteMapping("/{id}}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProduct(
             @PathVariable("id") Long id
     ) {

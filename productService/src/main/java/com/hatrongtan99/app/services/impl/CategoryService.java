@@ -5,7 +5,6 @@ import com.hatrongtan99.app.dto.categoryDto.CategoryUpdateDto;
 import com.hatrongtan99.app.entity.CategoryEntity;
 import com.hatrongtan99.app.repository.CategoryRepository;
 import com.hatrongtan99.app.services.ICategoryService;
-import com.hatrongtan99.app.services.IMediaService;
 import com.hatrongtan99.app.exception.BadRequestException;
 import com.hatrongtan99.app.exception.DuplicatedException;
 import com.hatrongtan99.app.exception.NotFoundException;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CategoryService implements ICategoryService {
 
-    private final IMediaService mediaService;
     private final CategoryRepository categoryRepository;
 
     @Override
@@ -48,7 +46,7 @@ public class CategoryService implements ICategoryService {
         CategoryEntity existCategory = this.categoryRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("category not found"));
         if (existCategorySlug && !existCategory.getSlug().equals(category.slug())) {
-             throw new DuplicatedException("Slug category " + category.name() + " already exist");
+            throw new DuplicatedException("Slug category " + category.name() + " already exist");
         }
         existCategory.setName(category.name());
         existCategory.setSlug(category.slug());
@@ -72,9 +70,22 @@ public class CategoryService implements ICategoryService {
         return this.categoryRepository.findAll(pageable);
     }
 
+    @Override
+    public Page<CategoryEntity> getAllParentCategory(int pageNumber, int pageLimit) {
+        Pageable pageable = PageRequest.of(pageNumber, pageLimit);
+        return this.categoryRepository.findByParentIdIsNull(pageable);
+    }
+
+    @Override
+    public Page<CategoryEntity> getAllChildCategory(Long id, int pageNumber, int pageLimit) {
+        Pageable pageable = PageRequest.of(pageNumber, pageLimit);
+        return this.categoryRepository.findAllChildByParentId(id, pageable);
+    }
+
     private boolean checkExistCategorySlug(String slug) {
         return this.categoryRepository.existsBySlug(slug);
     }
+
     private CategoryEntity validateParentCategory(Long currentId, Long parentId) {
         if (currentId.equals(parentId)) {
             throw new BadRequestException("Parent category cant not be itself");
