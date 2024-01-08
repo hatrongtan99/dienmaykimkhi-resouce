@@ -3,25 +3,69 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+
+    --primary-color: #ee4d2d;
+    --primary-light-color: #f05d40;
+
+    --secondary-color: #337ab7;
+    --secondary-light-color: rgb(69, 147, 214);
+
+    --text-color: #333;
+    --text-light-color: #666;
+
+    --header-height: 50px;
+    --header-search-height: 40px;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+            to bottom,
+            transparent,
+            rgb(var(--background-end-rgb))
+        )
+        rgb(var(--background-start-rgb));
+} */
+
+@layer base {
+    h1 {
+        @apply text-2xl font-semibold leading-8;
+    }
+
+    h2 {
+        @apply text-xl font-medium leading-9;
+    }
+}
+
+@layer components {
+    .slide-btn {
+        @apply flex items-center content-center absolute cursor-pointer rounded-sm z-20 hover:bg-[rgba(0,0,0,0.2)];
+    }
+
+    .price-box-line a {
+        @apply text-secondary-color hover:text-secondary-light-color;
+    }
+
+    .price-box-line .price-box-line__lable {
+        @apply text-sm min-w-[140px] inline-block text-text-light-color mb-3;
+    }
+
+    .price-box-line span {
+        @apply text-sm text-inherit font-medium;
+    }
+
+    #description-content p {
+        @apply text-base font-normal leading-6;
+    }
 }

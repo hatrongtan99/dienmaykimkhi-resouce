@@ -1,0 +1,23 @@
+export interface ProductDetailResponse {
+    id: number;
+    name: string;
+    slug: string;
+    images: number[];
+    descriptionId: number;
+    sku: string;
+    guarantee: string;
+    price: number;
+    thumbnailId: number;
+    brandId: number;
+    categories: number[];
+    productRelate: number[];
+    metadata: MetadataProduct[];
+    isAvailInStock: boolean;
+    isActive: boolean;
+}
+
+interface MetadataProduct {
+    id: number;
+    name: string;
+    value: string;
+}
