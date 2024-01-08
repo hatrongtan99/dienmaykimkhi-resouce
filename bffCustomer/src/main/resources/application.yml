@@ -1,0 +1,44 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          api-client:
+            provider: spring
+            client-id: api-client
+            client-secret: secret
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            scope:
+              - openid
+        provider:
+          spring:
+            issuer-uri: http://127.0.0.1:9000
+  cloud:
+    gateway:
+      routes:
+        - id: api_product
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/products/**
+          filters:
+            - RewritePath=/api/v1/products/(?<segment>.*), /api/v1/$\{segment}
+            - TokenRelay=
+        - id: api_medias
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/v1/medias/**
+          filters:
+            - RewritePath=/api/v1/medias/(?<segment>.*), /api/v1/$\{segment}
+            - TokenRelay=
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+
+server:
+  port: 8080
+
