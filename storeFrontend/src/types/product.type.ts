@@ -1,3 +1,5 @@
+import { MetadataPage } from ".";
+
 export interface ProductDetailResponse {
     id: number;
     name: string;
@@ -21,3 +23,22 @@ interface MetadataProduct {
     name: string;
     value: string;
 }
+
+export interface ProductItemResponse {
+    id: number;
+    name: string;
+    slug: string;
+    price: number;
+    thumbnail: string;
+
+    brand: {
+        id: number;
+        name: string;
+        slug: string;
+        urlThumbnail: string | null;
+    };
+}
+
+export type ProductResponseWithPage = {
+    records: ProductItemResponse[];
+} & MetadataPage;

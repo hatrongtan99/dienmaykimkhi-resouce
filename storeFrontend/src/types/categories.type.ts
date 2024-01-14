@@ -5,7 +5,11 @@ export interface CategoryResponse {
     name: string;
     slug: string;
     description: string | null;
-    thumbnail: null;
+    thumbnail: null | {
+        id: number;
+        url: string;
+    };
+    hasChild: boolean;
     parentId: number | null;
     isActive: boolean;
 }

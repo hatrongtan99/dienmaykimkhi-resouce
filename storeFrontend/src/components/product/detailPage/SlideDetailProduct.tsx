@@ -83,6 +83,7 @@ const SlideDetailProduct = ({ images }: SlideDetailProductProps) => {
         return {
             transform: `translateX(${imageIndex * -100}%)`,
             transition: `${needTransition ? "all 0.25s ease 0s" : "none"}`,
+            display: "flex"
         };
     }, [needTransition, imageIndex])
 
@@ -93,37 +94,35 @@ const SlideDetailProduct = ({ images }: SlideDetailProductProps) => {
                 handleTransionEnd={handleTransionEnd}
                 style={styleTransition}
             >
-                <div className="flex">
-                    {images.map((img, index) => {
-                        return (
+                {images.map((img, index) => {
+                    return (
+                        <div
+                            className="min-h-[400px] w-full flex-shrink-0 relative border overflow-hidden "
+                            key={index}
+                        >
+                            <Image
+                                alt=""
+                                src={img}
+                                className="bg-cover"
+                                fill
+                                onMouseMove={(e) =>
+                                    handleMouseMove(e, index)
+                                }
+                                onMouseLeave={(e) => handleMouseOut(e, index)}
+                                ref={(el) => el && (manifyImgRef.current[index] = el)}
+                            />
+                            {/* lens */}
                             <div
-                                className="min-h-[400px] w-full flex-shrink-0 relative border overflow-hidden "
-                                key={index}
-                            >
-                                <Image
-                                    alt=""
-                                    src={img}
-                                    className="bg-cover"
-                                    fill
-                                    onMouseMove={(e) =>
-                                        handleMouseMove(e, index)
-                                    }
-                                    onMouseLeave={(e) => handleMouseOut(e, index)}
-                                    ref={(el) => el && (manifyImgRef.current[index] = el)}
-                                />
-                                {/* lens */}
-                                <div
-                                    className="absolute w-[150px] h-[150px] rounded-full pointer-events-none border opacity-0"
-                                    ref={(el) =>
-                                        el &&
-                                        (manifyLensRef.current[index] = el)
-                                    }
-                                ></div>
+                                className="absolute w-[150px] h-[150px] rounded-full pointer-events-none border opacity-0"
+                                ref={(el) =>
+                                    el &&
+                                    (manifyLensRef.current[index] = el)
+                                }
+                            ></div>
 
-                            </div>
-                        );
-                    })}
-                </div>
+                        </div>
+                    );
+                })}
             </SlideWraper >
 
             < div className="flex space-x-1 mt-2" >

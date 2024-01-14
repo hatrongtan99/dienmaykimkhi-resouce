@@ -19,7 +19,7 @@ const SlideWraper = ({ handleMoveSlide, children, handleTransionEnd, style }: Sl
                     <GrPrevious size={20} />
                 </button>
             </div>
-            <div onTransitionEnd={handleTransionEnd} style={style}  >
+            <div onTransitionEnd={handleTransionEnd} style={style} >
                 {children}
             </div>
             <div className="slide-btn right-0 top-1/2 -translate-y-1/2">

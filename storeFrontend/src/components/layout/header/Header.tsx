@@ -15,7 +15,7 @@ const Header = () => {
 
     useEffect(() => {
         const fixedHeader = () => {
-            if (window.scrollY > HEADER_HEIGHT - 10) {
+            if (window.scrollY > HEADER_HEIGHT) {
                 refHeaderRef.current!.classList.add("fixed")
                 refHeaderRef.current!.classList.add("top-0")
                 refHeaderRef.current!.classList.add("left-0")

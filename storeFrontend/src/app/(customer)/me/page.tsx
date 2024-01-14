@@ -1,27 +1,28 @@
-"use client"
+"use client";
 
-import { getAllBrand } from "@/api/brand.api"
-import { useEffect } from "react"
+import { getAllBrand } from "@/api/brand/brand.api";
+import { useEffect } from "react";
 
-
-const page = () => {
-
+const MePage = () => {
     useEffect(() => {
         (async function () {
             // const data = await getAllBrand();
             // console.log(data)
-            const data = await (await fetch("http://localhost:8080/api/v1/products/bff-customer/brands/test", {
-                method: "post",
-                headers: { 'Content-type': 'application/json' },
-                body: JSON.stringify({ "body": "data" })
-            })).text()
-            console.log(data)
-        })()
-    }, [])
+            const data = await (
+                await fetch(
+                    "http://localhost:8080/api/v1/products/bff-customer/brands/test",
+                    {
+                        method: "post",
+                        headers: { "Content-type": "application/json" },
+                        body: JSON.stringify({ body: "data" }),
+                    }
+                )
+            ).text();
+            console.log(data);
+        })();
+    }, []);
 
-    return (
-        <div>page</div>
-    )
-}
+    return <div>MePage</div>;
+};
 
-export default page
+export default MePage;

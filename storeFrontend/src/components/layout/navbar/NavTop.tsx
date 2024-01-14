@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { AiFillCaretDown } from 'react-icons/ai';
 import { IoMenuOutline } from "react-icons/io5";
 import { usePathname, useSelectedLayoutSegment, useSelectedLayoutSegments } from 'next/navigation'
+import { useEffect, useRef } from 'react';
 
 const navList = [
     {
@@ -39,9 +40,30 @@ const NavTop = () => {
     const pathname = usePathname()
     const isHomePage = pathname === "/";
 
+    const refHeaderRef = useRef<HTMLElement>(null)
+
+    useEffect(() => {
+        const addMargin = () => {
+            if (window.scrollY > 50 - 5) {
+                refHeaderRef.current!.classList.add("mt-[50px]")
+            } else {
+                refHeaderRef.current!.classList.remove("mt-[50px]")
+            }
+        }
+
+        if (refHeaderRef.current) {
+            window.addEventListener("scroll", addMargin)
+        }
+
+        return () => {
+            window.removeEventListener("scroll", addMargin)
+        }
+    }, [])
+
+
 
     return (
-        <nav className="shadow-md">
+        <nav className="shadow-md" ref={refHeaderRef}>
             <div className="container">
                 <ul className='flex items-center py-1'>
                     <li className='w-56 border-r  relative group'>

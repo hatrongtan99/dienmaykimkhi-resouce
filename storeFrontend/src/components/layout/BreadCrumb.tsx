@@ -14,7 +14,7 @@ const arowRightIcon = <svg className="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1"
 const BreadCrumb = () => {
     const pathName = usePathname();
     return (
-        <nav className="flex py-4" aria-label="Breadcrumb">
+        <nav className="flex py-3" aria-label="Breadcrumb">
             <ol className="inline-flex items-center space-x-1 md:space-x-2">
                 <li className="inline-flex items-center">
                     <Link href="#" className="inline-flex items-center text-sm font-medium text-secondary-color hover:text-secondary-light-color ">

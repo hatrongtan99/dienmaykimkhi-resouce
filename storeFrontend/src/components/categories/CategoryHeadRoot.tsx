@@ -1,36 +1,64 @@
-import Link from 'next/link'
-import React from 'react'
-import SlideWraper from '../common/SlideWraper'
-import CardMainProduct from '../product/CardMainProduct'
+"use client";
 
-const CategoryHeadRoot = ({ title }: { title: string }) => {
+import Link from "next/link";
+import React from "react";
+import SlideWraper from "../common/SlideWraper";
+import CardMainProduct from "../product/CardMainProduct";
+import { CategoryResponse } from "@/types/categories.type";
+import { useQuery } from "@tanstack/react-query";
+import { getProductByCategorySlugOption } from "@/api/product/product.queryOption";
+import { useParams } from "next/navigation";
+
+interface CategoryHeadRootProps {
+    category: CategoryResponse;
+}
+
+const CategoryHeadRoot = ({ category }: CategoryHeadRootProps) => {
+    const params = useParams();
+
+    const { data, isSuccess } = useQuery(
+        getProductByCategorySlugOption({
+            categorySlug: category.slug,
+            params: "page=0&limit=8",
+        })
+    );
+
     return (
-        <div>
-            <div className='bg-white py-2 px-3 mt-4'>
-                <Link href={"/"} className='rounded-sm uppercase text-xl font-semibold pl-3 border-l-[3px] border-l-red-600 text-secondary-color hover:text-secondary-light-color'>
-                    {title}
+        <section className="mb-4">
+            <div className="bg-white py-2 px-3">
+                <Link
+                    href={`/cat/${params.rootCategorySlug}/${category.slug}`}
+                    className="rounded-sm uppercase text-xl font-semibold pl-3 border-l-[3px] border-l-red-600 text-secondary-color hover:text-secondary-light-color"
+                >
+                    {category.name}
                 </Link>
             </div>
 
             <div className="mt-0.5">
-                <SlideWraper
-                    handleMoveSlide={() => { }}
-                    handleTransionEnd={() => {
-
-                    }}
-                    style={{}}
-                >
-                    <div className="grid grid-cols-4 lg:grid-cols-5 gap-[2px] mt-[2px]">
-                        <CardMainProduct productItem={null} hasBrandImg />
-                        <CardMainProduct productItem={null} hasBrandImg />
-                        <CardMainProduct productItem={null} hasBrandImg />
-                        <CardMainProduct productItem={null} hasBrandImg />
-                    </div>
-                </SlideWraper>
+                {isSuccess && data.records.length > 0 ? (
+                    <SlideWraper
+                        handleMoveSlide={() => {}}
+                        handleTransionEnd={() => {}}
+                        style={{
+                            display: "flex",
+                        }}
+                    >
+                        {data.records.map((product) => (
+                            <div
+                                className="w-[calc(100%/4)] flex-shrink-0"
+                                key={product.id}
+                            >
+                                <CardMainProduct
+                                    productItem={product}
+                                    hasBrandImg
+                                />
+                            </div>
+                        ))}
+                    </SlideWraper>
+                ) : null}
             </div>
+        </section>
+    );
+};
 
-        </div>
-    )
-}
-
-export default CategoryHeadRoot
+export default CategoryHeadRoot;

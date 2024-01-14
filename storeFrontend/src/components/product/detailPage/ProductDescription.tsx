@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import Button from '@/components/custom/button/Button';
-import descriptionContent from '@/data/description';
-import React, { useEffect, useRef, useState } from 'react'
+import Button from "@/components/custom/button/Button";
+import descriptionContent from "@/data/description";
+import React, { useEffect, useRef, useState } from "react";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
-import { twMerge } from 'tailwind-merge'
+import { twMerge } from "tailwind-merge";
 
 const ProductDescription = () => {
     const [isShowFull, setIsShowFull] = useState(false);
@@ -15,23 +15,31 @@ const ProductDescription = () => {
         if (descriptionRef.current != null) {
             const x = descriptionRef.current.getBoundingClientRect();
             if (x && x.height <= 500) {
-                setShowBtn(false)
+                setShowBtn(false);
             }
         }
-    }, [descriptionRef.current])
+    }, [descriptionRef.current]);
 
     return (
-        <section className={twMerge("relative text-text-color text-justify my-4 max-h-[500px] overflow-hidden transition duration-1000 ease-linear", isShowFull && "max-h-none h-auto")}>
+        <section
+            className={twMerge(
+                "relative text-text-color text-justify my-4 max-h-[500px] overflow-hidden transition duration-1000 ease-linear",
+                isShowFull && "max-h-none h-auto"
+            )}
+        >
             <div
                 dangerouslySetInnerHTML={{ __html: descriptionContent }}
                 ref={descriptionRef}
                 id="description-content"
-                className='text-justify'
+                className="text-justify"
             />
             {showBtn && (
                 <>
                     <div
-                        className={twMerge("absolute w-full h-2/5 bottom-0 right-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(255,255,255,0.8)]", isShowFull && "hidden")}
+                        className={twMerge(
+                            "absolute w-full h-2/5 bottom-0 right-0 bg-gradient-to-b from-[rgba(255,255,255,0)] to-[rgba(255,255,255,0.8)]",
+                            isShowFull && "hidden"
+                        )}
                     >
                         <Button
                             size="sm"
@@ -56,7 +64,7 @@ const ProductDescription = () => {
                 </>
             )}
         </section>
-    )
-}
+    );
+};
 
-export default ProductDescription
+export default ProductDescription;
