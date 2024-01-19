@@ -4,8 +4,8 @@ import com.hatrongtan99.enumeration.cart.CartStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,11 +21,10 @@ public class CartEntity extends BaseAuditEntity{
 
     private Long userId;
 
-    private Long orderId;
-
-    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
-    private List<CartItemEntity> cartItemList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true, mappedBy = "cartId")
+    private Set<CartItemEntity> listCartItem = new HashSet<>();
 
     @Enumerated(EnumType.STRING)
-    private CartStatus status;
+    @Builder.Default
+    private CartStatus status = CartStatus.IDLE;
 }

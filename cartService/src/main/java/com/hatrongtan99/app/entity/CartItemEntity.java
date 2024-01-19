@@ -10,7 +10,7 @@ import lombok.*;
 @Builder
 @Entity
 @Table(name = "cart_item")
-public class CartItemEntity extends BaseAuditEntity{
+public class CartItemEntity extends BaseAuditEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,4 +21,15 @@ public class CartItemEntity extends BaseAuditEntity{
 
     private Long productId;
     private int quantity;
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof CartItemEntity)) {
+            return false;
+        }
+        return this.id != null && this.id.equals(((CartItemEntity) obj).id);
+    }
 }

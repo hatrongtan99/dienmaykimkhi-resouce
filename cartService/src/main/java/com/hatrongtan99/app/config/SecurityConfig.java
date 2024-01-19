@@ -28,7 +28,9 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> {
-                    authorize.anyRequest().permitAll();
+                    authorize
+                            .requestMatchers("/bff-admin").hasAuthority("ROLE_ADMIN")
+                            .anyRequest().authenticated();
                 })
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)

@@ -1,6 +1,7 @@
 package com.hatrongtan99.app.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 
@@ -18,14 +20,15 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
 public abstract class BaseAuditEntity {
 
     @CreatedBy
     @Column(updatable = false)
-    private String createBy;
+    private Long createBy;
 
     @LastModifiedBy
-    private String lastModifyBy;
+    private Long lastModifyBy;
 
     @CreationTimestamp
     @Column(updatable = false)
