@@ -18,13 +18,19 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-@RequiredArgsConstructor
-public class CartService implements ICartService {
+public class CartService extends AbstractCartServiceHelper implements ICartService {
 
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
 
+    public CartService(CartRepository cartRepository, CartItemRepository cartItemRepository) {
+        super(cartRepository, cartItemRepository);
+        this.cartRepository = cartRepository;
+        this.cartItemRepository = cartItemRepository;
+    }
+
     @Override
+    @Transactional
     public List<CartItemEntity> getCartItemUser(Long userId) {
         CartEntity cartCurrent = this.getOrCreateCartIdle(userId);
         return this.cartItemRepository.findAllCartItemByUserIdAndCartId(userId, cartCurrent.getId());
@@ -41,6 +47,7 @@ public class CartService implements ICartService {
     }
 
     @Override
+    @Transactional
     public CartEntity updateCartItem(Long userId, CartItemSaveOrUpdateDto cartUpdate) {
         CartEntity mainCart = this.getOrCreateCartIdle(userId);
         // validate if null throw
@@ -58,7 +65,7 @@ public class CartService implements ICartService {
     @Transactional
     public void deleteCartItemByListProduct(Long userId, List<Long> listProductId) {
         CartEntity mainCart = this.getOrCreateCartIdle(userId);
-        for (Long productId: listProductId) {
+        for (Long productId : listProductId) {
             validateCartItemIsInCart(mainCart, productId);
             CartItemEntity cartItem = this.findExistItemInCart(mainCart, productId);
             mainCart.getListCartItem().remove(cartItem);
@@ -66,9 +73,10 @@ public class CartService implements ICartService {
     }
 
     @Override
+    @Transactional
     public CartEntity addCartItem(Long userId, CartItemSaveOrUpdateDto cartItem) {
         CartEntity mainCart = this.getOrCreateCartIdle(userId);
-            //  check if null create new
+        //  check if null create new
         if (!this.checkItemExistOnCart(mainCart, cartItem.productId())) {
             CartItemEntity newItem = CartItemEntity.builder()
                     .cartId(mainCart)
@@ -93,33 +101,11 @@ public class CartService implements ICartService {
     }
 
     @Override
+    @Transactional
     public Integer countCartItem(Long userId) {
         CartEntity currentCart = this.getOrCreateCartIdle(userId);
         return this.cartItemRepository.countByCartId(currentCart);
     }
 
-    private CartEntity getOrCreateCartIdle(Long userId) {
-        Optional<CartEntity> cartIdle = this.cartRepository.findByUserIdAndStatus(userId, CartStatus.IDLE);
-        if (cartIdle.isEmpty()) {
-            CartEntity newCart = CartEntity.builder()
-                    .userId(userId)
-                    .build();
-            return this.cartRepository.saveAndFlush(newCart);
-        }
-        return cartIdle.get();
-    }
 
-    private boolean checkItemExistOnCart(CartEntity currentCart, Long productId) {
-        return this.cartItemRepository.findByCartIdAndProductId(currentCart, productId).isPresent();
-    }
-
-    private void validateCartItemIsInCart(CartEntity currentCart, Long productId) {
-        if (!this.checkItemExistOnCart(currentCart, productId)) {
-            throw new BadRequestException("cart item is not in cart");
-        }
-    }
-
-    private CartItemEntity findExistItemInCart(CartEntity currentCart, Long productId) {
-        return this.cartItemRepository.findByCartIdAndProductId(currentCart, productId).get();
-    }
 }

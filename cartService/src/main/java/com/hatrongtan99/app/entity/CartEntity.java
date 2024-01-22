@@ -22,6 +22,7 @@ public class CartEntity extends BaseAuditEntity{
     private Long userId;
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true, mappedBy = "cartId")
+    @Builder.Default
     private Set<CartItemEntity> listCartItem = new HashSet<>();
 
     @Enumerated(EnumType.STRING)

@@ -5,5 +5,5 @@ spring:
         jwt:
           issuer-uri: http://127.0.0.1:9000
 properties:
-  product-service-url: http://localhost:8082
-  media-service-url: http://localhost:8083
+  product-service-url: http://localhost:8082/api/v1
+  media-service-url: http://localhost:8083/api/v1

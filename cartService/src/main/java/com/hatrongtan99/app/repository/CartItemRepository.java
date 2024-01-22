@@ -13,7 +13,7 @@ public interface CartItemRepository extends JpaRepository<CartItemEntity, Long> 
     Integer countByCartId(CartEntity cartId);
 
     @Query(value = """
-                FROM CartItemEntity AS i LEFT JOIN i.cartId AS c WHERE c.userId = :userId AND c.id = :cartId ORDER BY i.lastModifyAt
+                FROM CartItemEntity AS i LEFT JOIN i.cartId AS c WHERE c.userId = :userId AND c.id = :cartId ORDER BY i.lastModifyAt DESC 
             """)
     List<CartItemEntity> findAllCartItemByUserIdAndCartId(@Param("userId") Long userId, @Param("cartId") Long cartId);
     Optional<CartItemEntity> findByCartIdAndProductId(CartEntity currentCart, Long ProductId);
