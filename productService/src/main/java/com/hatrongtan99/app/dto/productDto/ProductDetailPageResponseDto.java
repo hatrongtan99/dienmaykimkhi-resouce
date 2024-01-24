@@ -30,7 +30,7 @@ public record ProductDetailPageResponseDto(
                 product.getId(),
                 product.getName(),
                 product.getSlug(),
-                product.getImages().stream().map(ProductImageEntity::getId).toList(),
+                product.getImages().stream().map(ProductImageEntity::getImageId).toList(),
                 product.getDescriptionId().getId(),
                 product.getSku(),
                 product.getGuarantee(),

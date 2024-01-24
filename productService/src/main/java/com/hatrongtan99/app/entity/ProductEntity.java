@@ -47,7 +47,7 @@ public class ProductEntity extends BaseAuditEntity {
 
     private Long thumbnailId;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "brand_id")
     private BrandEntity brandId;
 

@@ -1,12 +1,20 @@
 package com.hatrongtan99.app.services.impl;
 
-import com.hatrongtan99.app.config.PropertiesConfig;
+import com.hatrongtan99.app.dto.brandDto.BrandCardDto;
+import com.hatrongtan99.app.dto.mediaDto.ThumbnailResponseDto;
+import com.hatrongtan99.app.dto.paginationDto.MetadataDto;
+import com.hatrongtan99.app.dto.productDto.ProductCardDto;
+import com.hatrongtan99.app.dto.productDto.ProductGetListWithPageDto;
+import com.hatrongtan99.app.dto.productDto.ProductLineCartResponseDto;
+import com.hatrongtan99.app.entity.BrandEntity;
 import com.hatrongtan99.app.entity.CategoryEntity;
+import com.hatrongtan99.app.entity.PriceEntity;
 import com.hatrongtan99.app.entity.ProductEntity;
 import com.hatrongtan99.app.repository.*;
 import com.hatrongtan99.app.repository.filter.PriceRange;
 import com.hatrongtan99.app.repository.spec.ProductSpec;
 import com.hatrongtan99.app.services.IInventoryService;
+import com.hatrongtan99.app.services.IMediaService;
 import com.hatrongtan99.app.services.IProductReadService;
 import com.hatrongtan99.app.utils.CommonUtils;
 import com.hatrongtan99.app.utils.Constant;
@@ -28,8 +36,10 @@ public class ProductReadService implements IProductReadService {
 
     private final ProductRepository productRepository;
     private final IInventoryService inventoryService;
+    private final IMediaService mediaService;
+    private final PriceRepository priceRepository;
     @Override
-    public Page<ProductEntity> listProductWithPageBySlugCategory(int pageNumber, int pageLimit, String slugCate, Map<String, String> allStringQuery) {
+    public ProductGetListWithPageDto listProductWithPageBySlugCategory(int pageNumber, int pageLimit, String slugCate, Map<String, String> allStringQuery) {
 //        SELECT * FROM product AS p LEFT JOIN product_category AS pc on p.id = pc.product_id left join category as c0 on pc.category_id = c0.id where c0.slug in (
 //                with RECURSIVE cte as (
 //                select c1.slug from category as c1 where c1.slug = "may-khoan"
@@ -56,28 +66,43 @@ public class ProductReadService implements IProductReadService {
         Sort priceSort = CommonUtils.getSort(allStringQuery.get(Constant.FILTER_QUERY_SORT));
 
         Pageable pageable = PageRequest.of(pageNumber, pageLimit, priceSort);
-        return this.productRepository.findByIdIn(listId, pageable);
+        Page<ProductEntity> page =  this.productRepository.findByIdIn(listId, pageable);
+        return this.getProductResponseWithPage(page);
     }
 
     @Override
-    public Page<ProductEntity> listProductWithPageBySlugBrand(int pageNumber, int pageLimit, String slugBrand, Map<String, String> stringQuery) {
+    public ProductGetListWithPageDto listProductWithPageBySlugBrand(int pageNumber, int pageLimit, String slugBrand, Map<String, String> stringQuery) {
         Sort sortPrice = CommonUtils.getSort(stringQuery.get(Constant.FILTER_QUERY_SORT));
         Pageable pageable = PageRequest.of(pageNumber, pageLimit, sortPrice);
-        return this.productRepository.findByBrandSlugWithPriceActive(slugBrand, pageable);
+        Page<ProductEntity> page = this.productRepository.findByBrandSlugWithPriceActive(slugBrand, pageable);
+
+        return this.getProductResponseWithPage(page);
     }
 
     @Override
     public ProductEntity getProductBySlug(String slug) {
-        ProductEntity product = this.productRepository.findBySlugAndIsActiveIsTrue(slug)
+        return this.productRepository.findBySlugAndIsActiveIsTrue(slug)
                 .orElseThrow(() -> new NotFoundException("Product not found"));
-//        boolean isInStock = this.inventoryService.productIsInStock(product.getId());
-//        product.setAvailInStock(isInStock);
-        return product;
     }
 
     @Override
     public ProductEntity getProductById(Long id) {
         return this.productRepository.findById(id).orElseThrow(() -> new NotFoundException("Product not found"));
+    }
+
+    @Override
+    public ProductLineCartResponseDto getProductLineCart(Long id) {
+        ProductEntity product = this.productRepository.findByIdAndIsActiveIsTrue(id)
+                .orElseThrow(() -> new NotFoundException("not found"));
+        PriceEntity price = this.priceRepository.findByProductIdAndIsActiveIsTrue(product);
+        String urlThumbnail = this.mediaService.getFile(product.getThumbnailId()).url();
+        return new ProductLineCartResponseDto(
+                product.getId(),
+                product.getName(),
+                product.getSlug(),
+                price.getPrice(),
+                urlThumbnail
+        );
     }
 
     private List<PriceRange> getPriceRanges(String queryString) {
@@ -120,6 +145,27 @@ public class ProductReadService implements IProductReadService {
             spec = spec.and(ProductSpec.filterByFilterId(this.getListIdsFromString(queryString)));
         }
         return spec;
+    }
+
+    private ProductGetListWithPageDto getProductResponseWithPage(Page<ProductEntity> page) {
+        MetadataDto metadataDto = MetadataDto.mapToDto(page);
+        List<ProductEntity> productEntities = page.getContent();
+        List<ProductCardDto> records = new ArrayList<>();
+        for (ProductEntity product : productEntities) {
+            BrandEntity brand = product.getBrandId();
+            String urlThumbnail = this.mediaService.getFile(product.getThumbnailId()).url();
+            String urlBrandThumbnail = this.mediaService.getFile(brand.getThumbnailId()).url();
+
+            records.add(new ProductCardDto(
+                    product.getId(),
+                    product.getName(),
+                    product.getSlug(),
+                    urlThumbnail,
+                    product.getPrice().get(0).getPrice(),
+                    new BrandCardDto(brand.getId(), brand.getName(), brand.getSlug(), urlBrandThumbnail)
+            ));
+        }
+        return new ProductGetListWithPageDto(records, metadataDto);
     }
 
 

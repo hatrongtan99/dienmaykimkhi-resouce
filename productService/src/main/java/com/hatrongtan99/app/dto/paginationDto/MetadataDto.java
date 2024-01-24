@@ -11,7 +11,7 @@ public record MetadataDto(
     public static <T>MetadataDto mapToDto(Page<T> page) {
         return new MetadataDto(
                 page.getNumber(),
-                page.getSize(),
+                page.getNumberOfElements(),
                 page.getTotalPages(),
                 (int) page.getTotalElements()
         );
