@@ -8,6 +8,7 @@ public record CartItemResponseDto(
         Long id,
         Long productId,
         int quantity,
+        boolean isActive,
         Date createAt,
         Date updateAt
 ) {
@@ -16,6 +17,7 @@ public record CartItemResponseDto(
                 item.getId(),
                 item.getProductId(),
                 item.getQuantity(),
+                item.isActive(),
                 item.getCreateAt(),
                 item.getLastModifyAt()
         );

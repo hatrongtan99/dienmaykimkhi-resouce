@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CartItemRepository extends JpaRepository<CartItemEntity, Long> {
-    Integer countByCartId(CartEntity cartId);
+    Integer countByCartIdAndIsActiveIsTrue(CartEntity cartId);
 
     @Query(value = """
-                FROM CartItemEntity AS i LEFT JOIN i.cartId AS c WHERE c.userId = :userId AND c.id = :cartId ORDER BY i.lastModifyAt DESC 
+                FROM CartItemEntity AS i LEFT JOIN i.cartId AS c WHERE c.userId = :userId AND c.id = :cartId AND i.isActive = TRUE ORDER BY i.lastModifyAt DESC 
             """)
     List<CartItemEntity> findAllCartItemByUserIdAndCartId(@Param("userId") Long userId, @Param("cartId") Long cartId);
     Optional<CartItemEntity> findByCartIdAndProductId(CartEntity currentCart, Long ProductId);

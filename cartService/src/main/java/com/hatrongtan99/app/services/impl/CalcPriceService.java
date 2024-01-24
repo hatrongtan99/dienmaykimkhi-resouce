@@ -51,11 +51,12 @@ public class CalcPriceService extends AbstractCartServiceHelper implements ICalc
             assert detailPrice != null;
             totalCostOfGoods += detailPrice.price() * cartItem.getQuantity();
         }
+        double totalPrice = totalCostOfGoods == 0 ? 0 : totalCostOfGoods - totalCostProductDiscount;
         return new TotalPriceDto(
                 totalCostOfGoods,
                 totalCostProductDiscount,
-                totalCostOfGoods - totalCostProductDiscount,
-                totalCostOfGoods - totalCostProductDiscount
+                totalCostProductDiscount,
+                totalPrice
         );
     }
 }

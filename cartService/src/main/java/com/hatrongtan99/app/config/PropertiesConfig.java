@@ -10,4 +10,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class PropertiesConfig {
     private String productServiceUrl;
     private String mediaServiceUrl;
+    private String inventoriesServiceUrl;
 }

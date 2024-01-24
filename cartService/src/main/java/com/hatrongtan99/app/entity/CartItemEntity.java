@@ -22,6 +22,9 @@ public class CartItemEntity extends BaseAuditEntity {
     private Long productId;
     private int quantity;
 
+    @Builder.Default
+    private boolean isActive = true;
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
