@@ -23,10 +23,10 @@ public abstract class BaseAuditEntity {
 
     @CreatedBy
     @Column(updatable = false)
-    private String createBy;
+    private Long createBy;
 
     @LastModifiedBy
-    private String lastModifiedBy;
+    private Long lastModifiedBy;
 
     @CreationTimestamp
     @Column(updatable = false)
