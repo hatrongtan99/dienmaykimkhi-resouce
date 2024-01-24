@@ -1,6 +1,6 @@
 package com.hatrongtan99.app.utils;
 
-import com.hatrongtan99.app.Exception.RequiredSignInException;
+import com.hatrongtan99.app.exceptions.RequiredSignInException;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

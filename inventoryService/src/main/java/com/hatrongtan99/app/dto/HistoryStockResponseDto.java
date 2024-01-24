@@ -1,6 +1,11 @@
 package com.hatrongtan99.app.dto;
 
-public record HistoryStockResponseDto(
+import java.util.Date;
 
+public record HistoryStockResponseDto(
+    Long id,
+    Integer adjustQuantity,
+    String note,
+    Date createAt
 ) {
 }

@@ -18,6 +18,7 @@ public class StockEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private Long productId;
 
     private int quantity;

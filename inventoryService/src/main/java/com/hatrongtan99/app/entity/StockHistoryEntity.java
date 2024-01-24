@@ -19,6 +19,7 @@ public class StockHistoryEntity extends BaseAuditEntity{
     @JoinColumn(name = "stock_id")
     private StockEntity stockId;
 
+    @Column(updatable = false)
     private int adjustedQuantity;
 
     private String note;
