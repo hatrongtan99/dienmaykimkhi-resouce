@@ -1,5 +1,6 @@
 package com.hatrongtan99.app.config;
 
+import com.hatrongtan99.app.utils.AuthenticationUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
@@ -13,9 +14,6 @@ public class AuditingConfig {
 
     @Bean
     public AuditorAware<Long> auditorAware() {
-//        return AuthenticationUtils::getCurrentAuditing;
-        return () -> {
-            return Optional.of(1l);
-        };
+        return AuthenticationUtils::getCurrentAuditing;
     }
 }
