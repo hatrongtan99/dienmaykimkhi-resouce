@@ -10,20 +10,21 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserAddressEntity {
+public class AddressUserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long userId;
 
+    private String fullName;
     private String phoneNumber;
     private String addressLine1;
     private String addressLine2;
     private String addressLine3;
 
     @Builder.Default
-    private boolean isMain = false;
+    private boolean isDefault = false;
 
     @Builder.Default
     private boolean isActive = true;
