@@ -22,9 +22,9 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 public class SecurityConfig {
 
-//
-//    @Autowired
-//    private DefaultOAuth2UserService oAuth2UserService;
+
+    @Autowired
+    private DefaultOAuth2UserService oAuth2UserService;
 
     @Autowired
     private AuthenticationSuccessHandler authenticationSuccessHandler;
@@ -51,6 +51,7 @@ public class SecurityConfig {
                     oauth2
                             .authorizationEndpoint(oauth -> oauth.baseUri("/oauth2/authorize"))
                             .redirectionEndpoint(oauth -> oauth.baseUri("/oauth2/callback/**"))
+                            .userInfoEndpoint(endPoint -> endPoint.userService(oAuth2UserService))
                             .successHandler(authenticationSuccessHandler);
                 });
         return http.build();

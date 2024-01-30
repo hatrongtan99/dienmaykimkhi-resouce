@@ -5,8 +5,11 @@ import com.hatrongtan99.app.dto.StockUpdateWhenOrderDto;
 import com.hatrongtan99.app.entity.StockEntity;
 import com.hatrongtan99.app.entity.StockHistoryEntity;
 import com.hatrongtan99.app.exceptions.BadRequestException;
+import com.hatrongtan99.app.messageBroker.dto.ProductChangeStatusInStockDto;
+import com.hatrongtan99.app.messageBroker.publisher.InventoryMessageService;
 import com.hatrongtan99.app.repository.StockHistoryRepository;
 import com.hatrongtan99.app.repository.StockRepository;
+import com.hatrongtan99.enumeration.order.OrderStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,12 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+
 @Service
 @RequiredArgsConstructor
-public class InventoryService implements IInventoryService{
+public class InventoryService implements IInventoryService {
 
     private final StockRepository stockRepository;
     private final StockHistoryRepository stockHistoryRepository;
+    private final InventoryMessageService inventoryMessageService;
 
     @Override
     @Transactional
@@ -44,17 +49,12 @@ public class InventoryService implements IInventoryService{
         if (stock.getQuantity() < 0) {
             throw new BadRequestException("Can't update quantity because quantity is negative");
         }
+        // pub to product service change available in stock
+        boolean isInStock = stock.getQuantity() > 0;
+        inventoryMessageService.pubChangeStatusInStock(new ProductChangeStatusInStockDto(productId, isInStock));
         stock.getStockHistoryList().add(stockHistory);
     }
-
-    @Override
-    @Transactional
-    public void updateWhenOrder(Long productId, StockUpdateWhenOrderDto updateDto) {
-        StockEntity stock = this.getStockByProductId(productId);
-        stock.setQuantity(stock.getQuantity() - updateDto.quantity());
-        this.stockRepository.saveAndFlush(stock);
-    }
-
+    
     @Override
     @Transactional
     public StockEntity getByProductId(Long productId) {
@@ -78,5 +78,5 @@ public class InventoryService implements IInventoryService{
 
         this.stockRepository.save(stock);
         return stock;
-    };
+    }
 }

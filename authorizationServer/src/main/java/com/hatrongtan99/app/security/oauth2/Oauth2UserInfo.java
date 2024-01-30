@@ -8,11 +8,9 @@ public abstract class Oauth2UserInfo {
         this.attributes = attributes;
     }
 
-    public abstract String getId();
-
-    public abstract String getFullName();
+    public abstract String getProviderId();
 
     public abstract String getEmail();
 
-    public abstract String getUrlImage();
+    public abstract String getFullName();
 }

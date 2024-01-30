@@ -8,7 +8,7 @@ spring:
             client-secret: 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
             redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
             scope:
-              - openid
+#              - openid
               - email
               - profile
           github:
@@ -16,6 +16,6 @@ spring:
             client-secret: 87fd66a81d3694e5d8d95db8d34351a4c2cac787
             redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
             scope:
-              - openid
+#              - openid
               - user:email
               - read:user

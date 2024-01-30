@@ -1,5 +1,6 @@
 package com.hatrongtan99.app.config;
 
+import com.hatrongtan99.app.security.UserPrincipal;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
@@ -14,10 +15,14 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
+import org.springframework.security.oauth2.core.oidc.endpoint.OidcParameterNames;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.server.authorization.OAuth2TokenType;
 import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
@@ -25,6 +30,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
+import org.springframework.security.oauth2.server.authorization.token.DefaultOAuth2TokenContext;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
@@ -67,7 +73,6 @@ public class Oauth2SecurityConfig {
                 .redirectUri("http://localhost:8080/login/oauth2/code/api-client")
                 .postLogoutRedirectUri("http://localhost:8080/")
                 .scope(OidcScopes.OPENID)
-                .scope(OidcScopes.PROFILE)
                 .build();
         return new InMemoryRegisteredClientRepository(oidcClient);
     }
@@ -113,17 +118,22 @@ public class Oauth2SecurityConfig {
     @Bean
     public OAuth2TokenCustomizer<JwtEncodingContext> accessTokenCustomizer () {
         return context -> {
-            UserDetails userDetails = null;
-            if (context.getPrincipal() instanceof OAuth2ClientAuthenticationToken) {
-                userDetails = (UserDetails) context.getPrincipal().getDetails();
-            } else if (context.getPrincipal() instanceof AbstractAuthenticationToken) {
-                userDetails = (UserDetails) context.getPrincipal().getPrincipal();
-            }
+            UserPrincipal userDetails = (UserPrincipal) context.getPrincipal().getPrincipal();
+
             assert userDetails != null;
-            context.getClaims().claim("authorities", userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
-                    .claim("username", userDetails.getUsername());
+            if (context.getTokenType().equals(OAuth2TokenType.ACCESS_TOKEN)) {
+                // customize access token
+                context.getClaims().claim("authorities", userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
+                        .claim("sub", userDetails.getId())
+                        .claim("username", userDetails.getUsername());
+            } else if (context.getTokenType().getValue().equals(OidcParameterNames.ID_TOKEN)) {
+                // custom id token
+                context.getClaims().claim("authorities", userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList())
+                        .claim("sub", userDetails.getId())
+                        .claim("fullName", userDetails.getFullName())
+                        .claim("email", userDetails.getEmail())
+                        .claim("username", userDetails.getUsername());
+            }
         };
     }
-
-
 }

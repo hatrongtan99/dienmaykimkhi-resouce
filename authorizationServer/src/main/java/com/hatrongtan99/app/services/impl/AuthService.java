@@ -60,9 +60,7 @@ public class AuthService implements IAuthService {
             String token = jwtUtils.getToken(principal);
             return new UserDetailAuthResponseDto(
                     principal.getId(),
-                    principal.getFullName(),
                     principal.getUsername(),
-                    principal.getEmail(),
                     principal.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList(),
                     token
             );
@@ -76,9 +74,7 @@ public class AuthService implements IAuthService {
         }
 
         UserEntity newUser = UserEntity.builder()
-                .fullName(userInfo.username())
                 .username(userInfo.username())
-                .email(userInfo.email())
                 .password(passwordEncoder.encode(userInfo.password()))
                 .build();
         RoleEntity role = roleRepository.findByName("USER").get();

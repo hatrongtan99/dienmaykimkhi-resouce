@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.management.relation.Role;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,4 +28,9 @@ public class RoleEntity {
 
     @ManyToMany(mappedBy = "roles")
     private Set<UserEntity> users = new HashSet<>();
+
+    public RoleEntity(String name, boolean isActive) {
+        this.name = name;
+        this.isActive = isActive;
+    }
 }

@@ -8,13 +8,8 @@ public class Oauth2UserInfoGithub extends Oauth2UserInfo{
         super(attributes);
     }
     @Override
-    public String getId() {
+    public String getProviderId() {
         return this.attributes.get("id").toString();
-    }
-
-    @Override
-    public String getFullName() {
-        return (String) this.attributes.get("name");
     }
 
     @Override
@@ -23,7 +18,7 @@ public class Oauth2UserInfoGithub extends Oauth2UserInfo{
     }
 
     @Override
-    public String getUrlImage() {
-        return (String) this.attributes.get("avatar_url");
+    public String getFullName() {
+        return (String) this.attributes.get("name");
     }
 }

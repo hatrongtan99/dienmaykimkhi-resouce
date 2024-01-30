@@ -9,14 +9,10 @@ public class Oauth2UserInfoGoogle extends Oauth2UserInfo{
     }
 
     @Override
-    public String getId() {
+    public String getProviderId() {
         return (String) this.attributes.get("sub");
     }
 
-    @Override
-    public String getFullName() {
-        return (String) this.attributes.get("name");
-    }
 
     @Override
     public String getEmail() {
@@ -24,7 +20,7 @@ public class Oauth2UserInfoGoogle extends Oauth2UserInfo{
     }
 
     @Override
-    public String getUrlImage() {
-        return (String) this.attributes.get("picture");
+    public String getFullName() {
+        return (String) this.attributes.get("name");
     }
 }

@@ -19,8 +19,6 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fullName;
-
     @Column(unique = true)
     private String username;
 
@@ -28,13 +26,14 @@ public class UserEntity {
 
     private String email;
 
+    private String fullName;
+
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "varchar(50) default 'LOCAL'")
     @Builder.Default
     private TypeProvider typeProvider = TypeProvider.LOCAL;
 
     private String providerId;
-    private String imageUrl;
 
     @Column(columnDefinition="boolean default 1")
     @Builder.Default

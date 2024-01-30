@@ -12,35 +12,43 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import java.util.*;
 
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
-public class UserPrincipal implements UserDetails {
+public class UserPrincipal implements UserDetails, OAuth2User {
 
     private Long id;
-    private String fullName;
     private String username;
+    private String fullName;
     private String email;
     private String password;
-    private String imageUrl;
     private Set<RoleEntity> roles;
     private Set<AuthorityEntity> authorities;
+    private Map<String,Object> attributes;
     private boolean isActive;
 
 
-    public static UserPrincipal create(UserEntity user) {
+    public static UserPrincipal create( UserEntity user) {
         return UserPrincipal.builder()
                 .id(user.getId())
-                .fullName(user.getFullName())
                 .username(user.getUsername())
+                .fullName(user.getFullName())
                 .email(user.getEmail())
                 .password(user.getPassword())
-                .imageUrl(user.getImageUrl())
                 .roles(user.getRoles())
                 .authorities(user.getAuthorities())
                 .isActive(user.isActive())
                 .build();
+    }
+
+    public static UserPrincipal create(UserEntity user, Map<String, Object> attributes) {
+        UserPrincipal userPrincipal = create(user);
+        userPrincipal.setAttributes(attributes);
+        return userPrincipal;
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return this.attributes;
     }
 
     @Override
@@ -62,7 +70,7 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return username != null ? username : fullName;
     }
 
     @Override
@@ -83,5 +91,10 @@ public class UserPrincipal implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String getName() {
+        return this.username;
     }
 }
