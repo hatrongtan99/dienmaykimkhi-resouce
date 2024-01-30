@@ -9,6 +9,7 @@ import com.hatrongtan99.app.entity.CartItemEntity;
 import com.hatrongtan99.app.repository.CartItemRepository;
 import com.hatrongtan99.app.repository.CartRepository;
 import com.hatrongtan99.app.services.ICalcPriceService;
+import com.hatrongtan99.app.services.IInventoryService;
 import com.hatrongtan99.enumeration.cart.CartStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,15 +23,13 @@ import java.util.List;
 public class CalcPriceService extends AbstractCartServiceHelper implements ICalcPriceService {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
-    private final WebClient webClient;
-    private final PropertiesConfig propertiesConfig;
+    private final IInventoryService inventoryService;
 
-    public CalcPriceService(CartRepository cartRepository, CartItemRepository cartItemRepository, WebClient webClient, PropertiesConfig propertiesConfig) {
+    public CalcPriceService(CartRepository cartRepository, CartItemRepository cartItemRepository, IInventoryService inventoryService) {
         super(cartRepository, cartItemRepository);
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
-        this.webClient = webClient;
-        this.propertiesConfig = propertiesConfig;
+        this.inventoryService = inventoryService;
     }
 
     @Override
@@ -42,12 +41,7 @@ public class CalcPriceService extends AbstractCartServiceHelper implements ICalc
         double totalCostOfGoods = 0;
         double totalCostProductDiscount = 30000;
         for (CartItemEntity cartItem : listCartItem) {
-            final URI detailPriceProductUri = UriComponentsBuilder
-                    .fromUriString(this.propertiesConfig.getProductServiceUrl())
-                    .path("/bff-customer/products/cart-item/{productId}").buildAndExpand(cartItem.getProductId()).toUri();
-            DetailPriceProductDto detailPrice = this.webClient
-                    .get().uri(detailPriceProductUri)
-                    .retrieve().bodyToMono(DetailPriceProductDto.class).block();
+            DetailPriceProductDto detailPrice = this.inventoryService.getDetailProductPrice(cartItem.getProductId());
             assert detailPrice != null;
             totalCostOfGoods += detailPrice.price() * cartItem.getQuantity();
         }

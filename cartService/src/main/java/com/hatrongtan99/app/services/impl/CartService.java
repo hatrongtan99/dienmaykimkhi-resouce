@@ -114,6 +114,7 @@ public class CartService extends AbstractCartServiceHelper implements ICartServi
             // else plus quantity in cartItem
             CartItemEntity existInCart = this.findExistItemInCart(mainCart, cartItem.productId());
             existInCart.setQuantity(Collections.min(List.of(inStock.quantity(), existInCart.getQuantity() + cartItem.quantity())));
+            existInCart.setActive(true);
         }
         return this.cartRepository.save(mainCart);
     }
@@ -133,7 +134,7 @@ public class CartService extends AbstractCartServiceHelper implements ICartServi
     }
 
     private boolean checkProductIsAvailable(ProductInStockResponseDto inStock, Integer quantity) {
-        return inStock.quantity() > quantity;
+        return inStock.quantity() >= quantity;
     }
 
     private void validateQuantityInStock(ProductInStockResponseDto inStock, Integer quantity) {

@@ -6,6 +6,11 @@ import com.hatrongtan99.app.utils.AuthenticationUtils;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +29,8 @@ public class CartController {
     }
 
     @GetMapping("/count")
-    public ResponseEntity<CountCartItemResponseDto> countCurrenCartItem() {
+    public ResponseEntity<CountCartItemResponseDto> countCurrenCartItem(@AuthenticationPrincipal DefaultOidcUser oidcUser) {
+
         Long userId = AuthenticationUtils.getAuthenticationUserId();
         int count = this.cartService.countCartItem(userId);
         return ResponseEntity.ok(new CountCartItemResponseDto(count));

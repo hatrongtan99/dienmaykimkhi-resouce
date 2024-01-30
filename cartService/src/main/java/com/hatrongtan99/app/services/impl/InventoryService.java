@@ -1,6 +1,7 @@
 package com.hatrongtan99.app.services.impl;
 
 import com.hatrongtan99.app.config.PropertiesConfig;
+import com.hatrongtan99.app.dto.priceDto.DetailPriceProductDto;
 import com.hatrongtan99.app.dto.stock.ProductInStockResponseDto;
 import com.hatrongtan99.app.services.IInventoryService;
 import com.hatrongtan99.app.utils.AuthenticationUtils;
@@ -28,5 +29,15 @@ public class InventoryService implements IInventoryService {
                 .retrieve()
                 .bodyToMono(ProductInStockResponseDto.class)
                 .block();
+    }
+
+    @Override
+    public DetailPriceProductDto getDetailProductPrice(Long productId) {
+        final URI detailPriceProductUri = UriComponentsBuilder
+                .fromUriString(this.propertiesConfig.getProductServiceUrl())
+                .path("/bff-customer/products/cart-item/{productId}").buildAndExpand(productId).toUri();
+        return this.webClient
+                .get().uri(detailPriceProductUri)
+                .retrieve().bodyToMono(DetailPriceProductDto.class).block();
     }
 }
