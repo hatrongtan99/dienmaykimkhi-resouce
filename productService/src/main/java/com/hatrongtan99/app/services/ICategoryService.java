@@ -15,5 +15,9 @@ public interface ICategoryService {
 
     Page<CategoryEntity> getAllChildCategory(Long id, int pageNumber, int pageLimit);
 
+    Page<CategoryEntity> getAllChildCategory(String categorySlug, int pageNumber, int pageLimit);
+
+    Page<CategoryEntity> getChildCategoryBySlug(String categorySlug, int pageNumber, int pageLimit);
+
 //    Object getDetailCategory(Long id);
 }

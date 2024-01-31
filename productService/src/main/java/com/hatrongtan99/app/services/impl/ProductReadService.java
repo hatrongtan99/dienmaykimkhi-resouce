@@ -5,6 +5,7 @@ import com.hatrongtan99.app.dto.mediaDto.ThumbnailResponseDto;
 import com.hatrongtan99.app.dto.paginationDto.MetadataDto;
 import com.hatrongtan99.app.dto.productDto.ProductCardDto;
 import com.hatrongtan99.app.dto.productDto.ProductGetListWithPageDto;
+import com.hatrongtan99.app.dto.productDto.ProductIsInStockDto;
 import com.hatrongtan99.app.dto.productDto.ProductLineCartResponseDto;
 import com.hatrongtan99.app.entity.BrandEntity;
 import com.hatrongtan99.app.entity.CategoryEntity;
@@ -103,6 +104,13 @@ public class ProductReadService implements IProductReadService {
                 price.getPrice(),
                 urlThumbnail
         );
+    }
+
+    @Override
+    public ProductIsInStockDto getStatusInStock(Long productId) {
+        ProductEntity product = this.productRepository.findById(productId)
+                .orElseThrow(() -> new NotFoundException("not found"));
+        return new ProductIsInStockDto(product.getId(), product.isAvailInStock());
     }
 
     private List<PriceRange> getPriceRanges(String queryString) {

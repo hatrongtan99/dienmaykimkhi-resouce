@@ -63,11 +63,4 @@ public class BranchController {
         BrandEntity brandUpdate = this.brandService.findBySlug(slug);
         return ResponseEntity.ok(BrandResponseDto.mapToDto(brandUpdate));
     }
-
-    @PostMapping("/test")
-    public String test(
-            @RequestBody Object body
-    ) {
-        return "success";
-    }
 }

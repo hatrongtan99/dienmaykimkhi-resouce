@@ -1,6 +1,7 @@
 package com.hatrongtan99.app.services;
 
 import com.hatrongtan99.app.dto.productDto.ProductGetListWithPageDto;
+import com.hatrongtan99.app.dto.productDto.ProductIsInStockDto;
 import com.hatrongtan99.app.dto.productDto.ProductLineCartResponseDto;
 import com.hatrongtan99.app.entity.ProductEntity;
 import org.springframework.data.domain.Page;
@@ -14,4 +15,6 @@ public interface IProductReadService {
     ProductEntity getProductBySlug(String slug);
     ProductEntity getProductById(Long id);
     ProductLineCartResponseDto getProductLineCart(Long id);
+
+    ProductIsInStockDto getStatusInStock(Long productId);
 }

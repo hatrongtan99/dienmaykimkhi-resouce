@@ -14,6 +14,6 @@ public class AuditingConfig {
 
     @Bean
     public AuditorAware<Long> auditorAware() {
-        return AuthenticationUtils::getCurrentAuditing;
+        return AuthenticationUtils::getAuditor;
     }
 }

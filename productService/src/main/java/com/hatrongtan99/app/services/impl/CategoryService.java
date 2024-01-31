@@ -35,6 +35,9 @@ public class CategoryService implements ICategoryService {
         if (category.parentId() != null) {
             CategoryEntity parentCate = this.categoryRepository.findById(category.parentId())
                     .orElseThrow(() -> new NotFoundException("parent category not found"));
+            if (!parentCate.isHasChild()) {
+                parentCate.setHasChild(true);
+            }
             newCate.setParentId(parentCate);
         }
         return this.categoryRepository.saveAndFlush(newCate);
@@ -52,10 +55,17 @@ public class CategoryService implements ICategoryService {
         existCategory.setSlug(category.slug());
         existCategory.setDescription(category.description());
         if (category.parentId() == null) {
-            existCategory.setParentId(null);
+            CategoryEntity parenOfCate =existCategory.getParentId();
+            if (parenOfCate != null){
+                if (parenOfCate.getCategories().size() == 1 && parenOfCate.getCategories().contains(existCategory)) {
+                    parenOfCate.setHasChild(false);
+                }
+                existCategory.setParentId(null);
+            }
         } else {
             CategoryEntity parentCate = this.validateParentCategory(id, category.parentId());
-
+            // update parent Cate has child;
+            parentCate.setHasChild(true);
             existCategory.setParentId(parentCate);
         }
         if (category.thumbnailId() != null) {
@@ -78,13 +88,37 @@ public class CategoryService implements ICategoryService {
 
     @Override
     public Page<CategoryEntity> getAllChildCategory(Long id, int pageNumber, int pageLimit) {
+        if (!this.checkExistCategoryById(id)){
+            throw new NotFoundException("Parent category not found");
+        }
         Pageable pageable = PageRequest.of(pageNumber, pageLimit);
         return this.categoryRepository.findAllChildByParentId(id, pageable);
     }
 
+    @Override
+    public Page<CategoryEntity> getAllChildCategory(String categorySlug, int pageNumber, int pageLimit) {
+        if (!this.checkExistCategorySlug(categorySlug)){
+            throw new NotFoundException("Parent category not found");
+        }
+        Pageable pageable = PageRequest.of(pageNumber, pageLimit);
+        return this.categoryRepository.findAllChildByParentSlug(categorySlug, pageable);
+    }
+
+    @Override
+    public Page<CategoryEntity> getChildCategoryBySlug(String categorySlug, int pageNumber, int pageLimit) {
+        if (!this.checkExistCategorySlug(categorySlug)){
+            throw new NotFoundException("Parent category not found");
+        }
+        Pageable pageable = PageRequest.of(pageNumber, pageLimit);
+        return this.categoryRepository.findChildByParentSlug(categorySlug, pageable);
+    }
+
+
     private boolean checkExistCategorySlug(String slug) {
         return this.categoryRepository.existsBySlug(slug);
     }
+
+    private boolean checkExistCategoryById(Long id) {return this.categoryRepository.existsById(id);}
 
     private CategoryEntity validateParentCategory(Long currentId, Long parentId) {
         if (currentId.equals(parentId)) {

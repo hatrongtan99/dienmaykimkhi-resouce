@@ -43,6 +43,9 @@ public class CategoryEntity extends BaseAuditEntity {
     private List<FilterGroup> filterGroups = new ArrayList<>();
 
     @Builder.Default
+    private boolean hasChild = false;
+
+    @Builder.Default
     private boolean isActive = true;
 
     private int displayOrder;

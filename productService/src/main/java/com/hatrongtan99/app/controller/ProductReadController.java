@@ -2,6 +2,7 @@ package com.hatrongtan99.app.controller;
 
 import com.hatrongtan99.app.dto.productDto.ProductDetailPageResponseDto;
 import com.hatrongtan99.app.dto.productDto.ProductGetListWithPageDto;
+import com.hatrongtan99.app.dto.productDto.ProductIsInStockDto;
 import com.hatrongtan99.app.dto.productDto.ProductLineCartResponseDto;
 import com.hatrongtan99.app.entity.ProductEntity;
 import com.hatrongtan99.app.services.IProductReadService;
@@ -52,6 +53,13 @@ public class ProductReadController {
     ) {
         ProductLineCartResponseDto responseDto = this.productReadService.getProductLineCart(productId);
         return ResponseEntity.ok(responseDto);
+    }
+
+    @GetMapping("/status-in-stock/{productId}")
+    public ResponseEntity<ProductIsInStockDto> statusIsInStock(
+            @PathVariable("productId") Long productId
+    ) {
+        return ResponseEntity.ok(this.productReadService.getStatusInStock(productId));
     }
 
 }

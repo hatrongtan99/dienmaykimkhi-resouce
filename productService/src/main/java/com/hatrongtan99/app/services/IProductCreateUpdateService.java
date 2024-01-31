@@ -7,5 +7,4 @@ public interface IProductCreateUpdateService {
     ProductEntity createProduct(ProductSaveDto product);
     ProductEntity updateProduct(Long id, ProductUpdateDto product);
     void deleteProduct(Long id);
-
 }

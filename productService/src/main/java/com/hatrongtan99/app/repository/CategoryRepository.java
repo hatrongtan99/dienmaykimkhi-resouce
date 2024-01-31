@@ -29,10 +29,36 @@ public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> 
             countQuery = """
                     select count(*) from (
                     with RECURSIVE cte as (
-                    	select c0.* from category as c0 where c0.parent_id = 1
+                    	select c0.* from category as c0 where c0.parent_id = :parentId
                     	UNION all
                     	select c1.* from category as c1 INNER JOIN cte on c1.parent_id = cte.id
                     ) SELECT * from cte) as c;
                     """)
     Page<CategoryEntity> findAllChildByParentId(@Param("parentId") Long id, Pageable pageable);
+
+    @Query(
+            value = """
+                    with recursive cte as (
+                    	SELECT c0.* from category as c0 where c0.slug = :parentSlug
+                    	UNION all
+                    	select c1.* from category as c1 INNER JOIN cte on c1.parent_id = cte.id
+                    ) SELECT * from cte where cte.slug != :parentSlug
+                    """,
+            nativeQuery = true,
+            countQuery = """
+                    select count(*) from (
+                    with RECURSIVE cte as (
+                    	select c0.* from category as c0 where c0.slug = :parentSlug
+                    	UNION all
+                    	select c1.* from category as c1 INNER JOIN cte on c1.parent_id = cte.id
+                    ) SELECT * from cte where cte.slug != :parentSlug) as c;
+                    """)
+    Page<CategoryEntity> findAllChildByParentSlug(@Param("parentSlug") String slug, Pageable pageable);
+
+    @Query(
+            value = """
+                     FROM CategoryEntity AS c0 INNER JOIN c0.parentId AS p WHERE p.slug = :parentSlug 
+                    """
+    )
+    Page<CategoryEntity> findChildByParentSlug(@Param("parentSlug") String slug, Pageable pageable);
 }

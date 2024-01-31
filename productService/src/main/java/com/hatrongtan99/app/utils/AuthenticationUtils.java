@@ -10,8 +10,6 @@ import java.util.Optional;
 
 public class AuthenticationUtils {
 
-    private static String claimsIdUser = "idUser";
-
     private AuthenticationUtils() {
 
     }
@@ -23,12 +21,12 @@ public class AuthenticationUtils {
         return null;
     }
 
-    public static Optional<Long> getCurrentAuditing() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication instanceof AnonymousAuthenticationToken) {
+    public static Optional<Long> getAuditor() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth instanceof AnonymousAuthenticationToken || auth == null) {
             return Optional.empty();
         }
-        Long idUser = ((Jwt) authentication.getPrincipal()).getClaim(claimsIdUser);
-        return Optional.of(idUser);
+        Jwt jwt = (Jwt) auth.getPrincipal();
+        return Optional.of(Long.valueOf(jwt.getSubject()));
     }
 }

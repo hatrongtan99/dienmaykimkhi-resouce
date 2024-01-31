@@ -11,7 +11,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -39,7 +38,7 @@ public class CategoryController {
     @GetMapping("/parents")
     public ResponseEntity<CategoryParentWithPage> getAllParentCategories(
             @RequestParam(name = "page", required = false, defaultValue = "0") int pageNumber,
-            @RequestParam(name = "pageLimit", required = false, defaultValue = "5") int pageLimit
+            @RequestParam(name = "limit", required = false, defaultValue = "5") int pageLimit
     ) {
         Page<CategoryEntity> page = this.categoryService.getAllParentCategory(pageNumber, pageLimit);
         MetadataDto metadataPage = MetadataDto.mapToDto(page);
@@ -47,13 +46,37 @@ public class CategoryController {
         return ResponseEntity.ok(new CategoryParentWithPage(records, metadataPage));
     }
 
-    @GetMapping("/child/{id}")
+    @GetMapping("/all-child/{id}")
     public ResponseEntity<CategoryChildWithPage> getAllChildCategory(
             @PathVariable("id") Long parentId,
             @RequestParam(name = "page", required = false, defaultValue = "0") int pageNumber,
-            @RequestParam(name = "pageLimit", required = false, defaultValue = "5") int pageLimit
+            @RequestParam(name = "limit", required = false, defaultValue = "5") int pageLimit
     ) {
         Page<CategoryEntity> page = this.categoryService.getAllChildCategory(parentId, pageNumber, pageLimit);
+        MetadataDto metadataPage = MetadataDto.mapToDto(page);
+        List<CategoryResponseDto> records = this.setImages(page, CategoryResponseDto::mapToDto);
+        return ResponseEntity.ok(new CategoryChildWithPage(records, metadataPage));
+    }
+
+    @GetMapping("/all-child/slug/{categorySlug}")
+    public ResponseEntity<CategoryChildWithPage> getAllChildCategory(
+            @PathVariable("categorySlug") String categorySlug,
+            @RequestParam(name = "page", required = false, defaultValue = "0") int pageNumber,
+            @RequestParam(name = "limit", required = false, defaultValue = "5") int pageLimit
+    ) {
+        Page<CategoryEntity> page = this.categoryService.getAllChildCategory(categorySlug, pageNumber, pageLimit);
+        MetadataDto metadataPage = MetadataDto.mapToDto(page);
+        List<CategoryResponseDto> records = this.setImages(page, CategoryResponseDto::mapToDto);
+        return ResponseEntity.ok(new CategoryChildWithPage(records, metadataPage));
+    }
+
+    @GetMapping("/child/slug/{categorySlug}")
+    public ResponseEntity<CategoryChildWithPage> getListChildCategory(
+            @PathVariable("categorySlug") String categorySlug,
+            @RequestParam(name = "page", required = false, defaultValue = "0") int pageNumber,
+            @RequestParam(name = "limit", required = false, defaultValue = "5") int pageLimit
+    ) {
+        Page<CategoryEntity> page = this.categoryService.getChildCategoryBySlug(categorySlug, pageNumber, pageLimit);
         MetadataDto metadataPage = MetadataDto.mapToDto(page);
         List<CategoryResponseDto> records = this.setImages(page, CategoryResponseDto::mapToDto);
         return ResponseEntity.ok(new CategoryChildWithPage(records, metadataPage));

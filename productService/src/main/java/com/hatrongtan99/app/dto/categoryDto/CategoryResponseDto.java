@@ -11,6 +11,7 @@ public record CategoryResponseDto(
         String description,
         ThumbnailResponseDto thumbnail,
         Long parentId,
+        boolean hasChild,
         boolean isActive
 ) {
     public static CategoryResponseDto mapToDto(CategoryEntity category, MediaResponseDto media) {
@@ -26,6 +27,7 @@ public record CategoryResponseDto(
                 category.getDescription(),
                 thumbnail,
                 category.getParentId() == null ? null : category.getParentId().getId(),
+                category.isHasChild(),
                 category.isActive()
         );
     }

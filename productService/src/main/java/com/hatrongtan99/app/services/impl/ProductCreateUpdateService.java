@@ -85,5 +85,4 @@ public class ProductCreateUpdateService extends ProductServiceHelper implements 
         product.setActive(false);
     }
 
-
 }
