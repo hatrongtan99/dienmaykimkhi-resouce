@@ -7,7 +7,7 @@ import useLoadmore from "@/hook/useLoadmore";
 import {
     ProductItemResponse,
     ProductResponseWithPage,
-} from "@/types/product.type";
+} from "@/types/products/product.type";
 import { buildParamsString } from "@/utils";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";

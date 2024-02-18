@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { CategoryResponse } from "@/types/categories.type";
+import { CategoryResponse } from "@/types/products/categories.type";
 import { usePathname } from "next/navigation";
 
 interface ListCategoryLinkCardProps {

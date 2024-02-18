@@ -3,7 +3,7 @@
 import CheckBoxFilterInput from "./CheckBoxFilterInput";
 import { SORT_QUERY_PRICE_ASC, SORT_QUERY_PRICE_DESC } from "@/constants";
 import { MouseEvent, useContext } from "react";
-import { RouterConftext } from "@/api/context/RouterContextProvider";
+import { RouterConftext } from "@/context/RouterContextProvider";
 import { useSearchParams } from "next/navigation";
 
 const SortProductSession = () => {

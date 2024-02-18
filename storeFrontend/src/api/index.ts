@@ -19,6 +19,7 @@ const customFetch = <T>(
         })
             .then((res) => {
                 if (res.ok) {
+                    if (res.status === 204) return resolve(null as T);
                     return resolve(res.json());
                 } else {
                     return reject({

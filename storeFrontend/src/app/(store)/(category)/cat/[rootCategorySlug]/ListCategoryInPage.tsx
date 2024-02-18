@@ -2,7 +2,7 @@
 
 import CategoryHeadRoot from "@/components/categories/CategoryHeadRoot";
 import Button from "@/components/custom/button/Button";
-import { CategoriesChildResponse } from "@/types/categories.type";
+import { CategoriesChildResponse } from "@/types/products/categories.type";
 import { useState } from "react";
 
 const RANGE_CATEGORY_PREVIEW = 4;

@@ -4,6 +4,7 @@ import { MdOutlineLocalShipping } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";
 
 import Button from "../../custom/button/Button";
+import { formatPriceDisplay } from "@/utils";
 
 interface PriceDetailProductProps {
     brand: {
@@ -23,10 +24,10 @@ const PriceDetailProduct = (props: PriceDetailProductProps) => {
             <div className="border-b border-solid ">
                 <div className="flex space-x-4 py-4 px-5 bg-stone-200 rounded-sm mb-4">
                     <span className="text-sm line-through inline-block text-text-light-color">
-                        {price.toLocaleString()} đ
+                        {formatPriceDisplay(price)}
                     </span>
                     <strong className="text-red-600 text-xl font-semibold">
-                        {price.toLocaleString()} đ
+                        {formatPriceDisplay(price)}
                     </strong>{" "}
                     <span className="bg-red-500 text-white text-xs h-[16px] px-[2px] mt-1 inline-block">
                         giảm 10%

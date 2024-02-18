@@ -3,7 +3,7 @@ import config from "@/constants";
 import {
     CategoriesChildResponse,
     CategoriesParentResponse,
-} from "@/types/categories.type";
+} from "@/types/products/categories.type";
 
 const BASE_URL_CATEGORIES_API =
     config.BASE_URL_BFF + "/products/bff-customer/categories";

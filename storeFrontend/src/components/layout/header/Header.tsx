@@ -1,49 +1,47 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import Button from "@/components/custom/button/Button"
+import Link from "next/link";
+import Button from "@/components/custom/button/Button";
 import { AiFillCaretDown } from "react-icons/ai";
-import AuthhHeader from "./AuthhHeader"
-import CardHeaderIcon from "./CardHeaderIcon"
-import SearchInput from "./SearchInput"
-import { useEffect, useRef } from "react";
+import CardHeaderIcon from "./HeaderCartIcon";
+import SearchInput from "./SearchInput";
+import { ReactNode, useEffect, useRef } from "react";
 
-const HEADER_HEIGHT = 50
+const HEADER_HEIGHT = 50;
 
-const Header = () => {
-    const refHeaderRef = useRef<HTMLHeadElement>(null)
+const Header = ({ children }: { children: ReactNode }) => {
+    const refHeaderRef = useRef<HTMLHeadElement>(null);
 
     useEffect(() => {
         const fixedHeader = () => {
             if (window.scrollY > HEADER_HEIGHT) {
-                refHeaderRef.current!.classList.add("fixed")
-                refHeaderRef.current!.classList.add("top-0")
-                refHeaderRef.current!.classList.add("left-0")
+                refHeaderRef.current!.classList.add("fixed", "top-0", "left-0");
             } else {
-                refHeaderRef.current!.classList.remove("fixed")
-                refHeaderRef.current!.classList.remove("top-0")
-                refHeaderRef.current!.classList.remove("left-0")
-
+                refHeaderRef.current!.classList.remove(
+                    "fixed",
+                    "top-0",
+                    "left-0"
+                );
             }
-        }
+        };
 
         if (refHeaderRef.current) {
-            window.addEventListener("scroll", fixedHeader)
+            window.addEventListener("scroll", fixedHeader);
         }
 
         return () => {
-            window.removeEventListener("scroll", fixedHeader)
-        }
-    }, [])
-
+            window.removeEventListener("scroll", fixedHeader);
+        };
+    }, []);
 
     return (
-        <header className="w-full bg-primary-color h-[var(--header-height)] z-50" ref={refHeaderRef}>
+        <header
+            className="w-full bg-primary-color h-[var(--header-height)] z-50"
+            ref={refHeaderRef}
+        >
             <div className="container flex justify-between items-center h-full">
                 <div className="text-xl text-white">
-                    <Link href={"#"}>
-                        dienmaykimkhi
-                    </Link>
+                    <Link href={"#"}>dienmaykimkhi</Link>
                 </div>
                 {/* search */}
                 <div className="">
@@ -65,12 +63,10 @@ const Header = () => {
                         Sản phẩm đã xem
                     </Button>
                 </div>
-                <div className="">
-                    <AuthhHeader />
-                </div>
+                <div className="">{children}</div>
             </div>
         </header>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;

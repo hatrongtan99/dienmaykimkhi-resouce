@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import CardMainProduct from "../product/CardMainProduct";
-import { CategoryResponse } from "@/types/categories.type";
+import { CategoryResponse } from "@/types/products/categories.type";
 import {
     HydrationBoundary,
     QueryClient,
@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-query";
 import { getAllChildCategoryByParentIdOption } from "@/api/category/cactegory.queryOption";
 import { getProductByCategorySlugOption } from "@/api/product/product.queryOption";
+import { getDetailPromotionProductOptopns } from "@/api/promotions/product/product.queryOptions";
 
 interface HomeCategoriesSectionProps {
     category: CategoryResponse;
@@ -31,6 +32,7 @@ const HomeCategoriesSection = async ({
             params: "page=0&limit=12",
         })
     );
+
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
             <section className="container mt-4">
@@ -66,12 +68,14 @@ const HomeCategoriesSection = async ({
                 </div>
                 {/* list product */}
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 container gap-[2px]">
-                    {productByCategorySlug.records.map((product) => (
-                        <CardMainProduct
-                            productItem={product}
-                            key={product.id}
-                        />
-                    ))}
+                    {productByCategorySlug.records.map((product) => {
+                        return (
+                            <CardMainProduct
+                                productItem={product}
+                                key={product.id}
+                            />
+                        );
+                    })}
                 </div>
             </section>
         </HydrationBoundary>

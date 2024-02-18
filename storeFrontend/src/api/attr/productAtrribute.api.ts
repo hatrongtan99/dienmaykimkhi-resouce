@@ -1,4 +1,4 @@
-import { ProductAtrributeResponse } from "@/types/attribute.type";
+import { ProductAtrributeResponse } from "@/types/products/attribute.type";
 import customFetch from "..";
 import config from "@/constants";
 

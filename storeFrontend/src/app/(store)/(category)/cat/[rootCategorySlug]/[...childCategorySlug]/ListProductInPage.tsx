@@ -1,18 +1,13 @@
 "use client";
 
-import { RouterConftext } from "@/api/context/RouterContextProvider";
 import { getProductByCategorySlugOption } from "@/api/product/product.queryOption";
 import Button from "@/components/custom/button/Button";
 import CardMainProduct from "@/components/product/CardMainProduct";
 import useLoadmore from "@/hook/useLoadmore";
-import {
-    ProductItemResponse,
-    ProductResponseWithPage,
-} from "@/types/product.type";
+import { ProductResponseWithPage } from "@/types/products/product.type";
 import { buildParamsString } from "@/utils";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useParams, useSearchParams } from "next/navigation";
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { useState } from "react";
 
 interface ListProductInPageProps {
     products: ProductResponseWithPage;
@@ -21,17 +16,12 @@ interface ListProductInPageProps {
 const ListProductInPage = ({
     products: initialData,
 }: ListProductInPageProps) => {
-    const queryClient = useQueryClient();
-
-    const { setSearchParamsObject } = useContext(RouterConftext);
-
     const params = useParams();
     const searchParams = useSearchParams();
 
     const lastCategorySlug =
         params.childCategorySlug[params.childCategorySlug.length - 1];
     const [page, setPage] = useState(0);
-
     const {
         listResult: listProduct,
         metadata,

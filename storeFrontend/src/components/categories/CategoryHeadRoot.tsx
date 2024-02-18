@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 import SlideWraper from "../common/SlideWraper";
 import CardMainProduct from "../product/CardMainProduct";
-import { CategoryResponse } from "@/types/categories.type";
+import { CategoryResponse } from "@/types/products/categories.type";
 import { useQuery } from "@tanstack/react-query";
 import { getProductByCategorySlugOption } from "@/api/product/product.queryOption";
 import { useParams } from "next/navigation";

@@ -1,6 +1,6 @@
 "use client";
 import { TypeButtonSlide } from "@/types";
-import { BrandResponse } from "@/types/brand.type";
+import { BrandResponse } from "@/types/products/brand.type";
 import { useMemo, useState } from "react";
 import { useBreakpoint } from "@/hook";
 import { v4 as uuid } from "uuid";

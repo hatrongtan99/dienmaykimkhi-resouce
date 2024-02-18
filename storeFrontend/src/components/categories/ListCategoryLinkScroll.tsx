@@ -1,5 +1,5 @@
 "use client";
-import { CategoryResponse } from "@/types/categories.type";
+import { CategoryResponse } from "@/types/products/categories.type";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 

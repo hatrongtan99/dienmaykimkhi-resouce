@@ -1,5 +1,8 @@
 import { getFileMediaByIdOption } from "@/api/media/media.queryOption";
-import { getDetailProductBySlugOption } from "@/api/product/product.queryOption";
+import {
+    getDetailProductBySlugOption,
+    getStatusInStockOptions,
+} from "@/api/product/product.queryOption";
 import BreadCrumb from "@/components/layout/BreadCrumb";
 import CatalogSectionDetail from "@/components/product/detailPage/CatalogSectionDetail";
 import NameSectionDetail from "@/components/product/detailPage/NameSectionDetail";
@@ -31,19 +34,35 @@ const ProductDetailPage = async ({
 
     // fetch data
     const detailProduct = await queryClient.fetchQuery(
-        getDetailProductBySlugOption({ productSlug })
+        getDetailProductBySlugOption({
+            productSlug,
+            refetchOnWindowFocus: false,
+        })
     );
     // imgs
     const imagesUrl: string[] = [];
     for (const idImage of detailProduct.images) {
         const { url } = await queryClient.fetchQuery(
-            getFileMediaByIdOption({ id: idImage })
+            getFileMediaByIdOption({
+                id: idImage,
+                refetchOnWindowFocus: false,
+                staleTime: 1000 * 60 * 5,
+            })
         );
         imagesUrl.push(url);
     }
-
+    // catalog session
     const attributesProduct = await queryClient.fetchQuery(
-        getAttributeProductByIdOption({ id: detailProduct.id })
+        getAttributeProductByIdOption({
+            id: detailProduct.id,
+            refetchOnWindowFocus: false,
+            staleTime: 1000 * 60 * 5,
+        })
+    );
+
+    // status in stock
+    const statusInStock = await queryClient.fetchQuery(
+        getStatusInStockOptions({ productId: detailProduct.id, staleTime: 0 })
     );
 
     return (
@@ -63,10 +82,13 @@ const ProductDetailPage = async ({
                                     brand={{ name: "makita", slug: "makita" }}
                                     guarantee={detailProduct.guarantee}
                                     sku={detailProduct.sku}
-                                    isInstock={detailProduct.isAvailInStock}
+                                    isInstock={statusInStock.isInStock}
                                     price={detailProduct.price}
                                 />
-                                <BtnCartGroup />
+                                <BtnCartGroup
+                                    productId={detailProduct.id}
+                                    disableBtn={!statusInStock.isInStock}
+                                />
                             </div>
                         </div>
                     </div>

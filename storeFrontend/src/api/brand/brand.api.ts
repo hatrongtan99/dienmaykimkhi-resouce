@@ -1,6 +1,6 @@
 import customFetch from "..";
 import config from "@/constants";
-import { BrandResponse } from "@/types/brand.type";
+import { BrandResponse } from "@/types/products/brand.type";
 
 const BASE_URL_BRAND_API =
     config.BASE_URL_BFF + "/products/bff-customer/brands";

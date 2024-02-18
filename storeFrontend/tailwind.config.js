@@ -7,7 +7,9 @@ module.exports = {
     ],
     theme: {
         extend: {
-            backgroundImage: {},
+            backgroundImage: {
+                "internal-error": "url('/images/loi-http-error-4.png')",
+            },
             colors: {
                 "primary-color": "var(--primary-color)",
                 "primary-light-color": "var(--primary-light-color)",
@@ -18,6 +20,39 @@ module.exports = {
             },
             borderRadius: {
                 "1/2": "50%",
+            },
+            keyframes: {
+                fadeIn: {
+                    "0%": {
+                        transform: "scale(0)",
+                    },
+                    "100%": {
+                        transform: "scale(1)",
+                    },
+                },
+
+                fadeOut: {
+                    "0%": {
+                        transform: "scale(1)",
+                    },
+                    "100%": {
+                        transform: "scale(0)",
+                    },
+                },
+
+                "dot-bounce": {
+                    "0%, 60%, 100%": {
+                        transform: "translateY(0)",
+                    },
+                    "30%": {
+                        transform: "translateY(-4px)",
+                    },
+                },
+            },
+            animation: {
+                fadeIn: "fadeIn 0.2s ease-in-out",
+                fadeOut: "fadeOut 0.2s ease-in-out",
+                "dot-bounce": "dot-bounce 1.3s linear infinite",
             },
         },
         container: {
