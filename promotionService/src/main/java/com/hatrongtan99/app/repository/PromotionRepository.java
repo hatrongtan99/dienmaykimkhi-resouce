@@ -12,5 +12,8 @@ public interface PromotionRepository extends JpaRepository<PromotionEntity, Long
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     Optional<PromotionEntity> findById(Long id);
 
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    Optional<PromotionEntity> findByCouponCodeAndIsActiveIsTrue(String couponCode);
+
     boolean existsByCouponCode(String couponCode);
 }

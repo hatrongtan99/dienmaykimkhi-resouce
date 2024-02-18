@@ -6,7 +6,6 @@ import com.hatrongtan99.app.entity.PromotionProductEntity;
 import com.hatrongtan99.app.service.IPromotionProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.hatrongtan99.app.dto.PromotionProductDto;
+package com.hatrongtan99.app.dto.PromotionDto;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -7,17 +7,28 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.ZonedDateTime;
 
-public record PromotionProductSaveDto(
-        @NotNull
-        Long productId,
+public record PromotionSaveDto(
+        @NotBlank
+        String name,
+        String description,
 
+        @NotNull
+        Integer quantity,
+
+        @NotNull
         @Min(1)
         @Max(100)
-        Integer percentDiscount,
+        Integer percentCoupon,
 
-        @NotBlank
+        @NotNull
+        Double minPriceAccept,
+
+        Double maxAmount,
+
+        @NotNull
         ZonedDateTime startDate,
-        @NotBlank
+
+        @NotNull
         ZonedDateTime endDate
 ) {
 }

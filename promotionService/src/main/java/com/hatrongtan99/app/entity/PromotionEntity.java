@@ -1,14 +1,11 @@
 package com.hatrongtan99.app.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.ZonedDateTime;
-import java.util.Date;
 
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -31,9 +28,9 @@ public class PromotionEntity extends BaseAuditEntity {
 
     private Integer percentCoupon;
 
-    private String minPriceAccept;
+    private Double minPriceAccept;
 
-    private Double totalAmount;
+    private Double maxAmount;
 
     private ZonedDateTime startDate;
 
