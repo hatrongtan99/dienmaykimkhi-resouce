@@ -4,10 +4,7 @@ import { getProductByBrandSlugOption } from "@/api/product/product.queryOption";
 import Button from "@/components/custom/button/Button";
 import CardMainProduct from "@/components/product/CardMainProduct";
 import useLoadmore from "@/hook/useLoadmore";
-import {
-    ProductItemResponse,
-    ProductResponseWithPage,
-} from "@/types/products/product.type";
+import { ProductResponseWithPage } from "@/types/products/product.type";
 import { buildParamsString } from "@/utils";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";

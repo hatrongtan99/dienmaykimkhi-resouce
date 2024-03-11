@@ -1,5 +1,6 @@
 export interface AddressUserResponse {
     id: number;
+    userId: number;
     fullName: string;
     phoneNumber: string;
     addressLine1: string;

@@ -18,13 +18,6 @@ import {
 import BtnCartGroup from "./BtnCartGroup";
 import { getAttributeProductByIdOption } from "@/api/attr/productAttribute.queryOption";
 
-const imagesUrl = [
-    "/images/products/500x-may-khoan-van-vit-dung-pin-18v-makita-df488dwe-1-1639707151.jpg",
-    "/images/products/500x-may-khoan-van-vit-dung-pin-18v-makita-df488dwe-3-1639707174.jpg",
-    "/images/products/500x-may-khoan-van-vit-dung-pin-18v-makita-df488dwe-8-1639707518.jpg",
-    "/images/products/500x-may-khoan-van-vit-dung-pin-18v-makita-df488dwe-1639706758.jpeg",
-];
-
 const ProductDetailPage = async ({
     params: { productSlug },
 }: {

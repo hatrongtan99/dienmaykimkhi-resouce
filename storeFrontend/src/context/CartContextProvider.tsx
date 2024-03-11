@@ -181,6 +181,7 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
         [auth]
     );
 
+    // check one product
     const handleAddProductIdIntoList = useCallback((id: number) => {
         setListProductIds((prev) => {
             if (prev.includes(id)) {
@@ -191,6 +192,14 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
         });
     }, []);
 
+    // init listProductIds
+    useEffect(() => {
+        if (listDetailCartItem) {
+            setListProductIds(listDetailCartItem.map((p) => p.productId));
+        }
+    }, [listDetailCartItem]);
+
+    // check all
     const handleClickCheckBoxAll = () => {
         if (listDetailCartItem) {
             if (listProductIds.length == countCartItem) {

@@ -11,22 +11,19 @@ interface CardMainProduct {
     productItem: ProductItemResponse;
 }
 
-const CardMainProduct = async ({
-    hasBrandImg,
-    productItem,
-}: CardMainProduct) => {
+const CardMainProduct = ({ hasBrandImg, productItem }: CardMainProduct) => {
     const queryClient = new QueryClient();
 
     const { brand, id, name, price, slug, thumbnail } = productItem;
 
-    const promotionProduct = await queryClient.fetchQuery(
-        getDetailPromotionProductOptopns({ productId: id })
-    );
+    // const promotionProduct = await queryClient.fetchQuery(
+    //     getDetailPromotionProductOptopns({ productId: id })
+    // );
 
-    const promotionPrice =
-        promotionProduct && promotionProduct.percentDiscount > 0
-            ? (promotionProduct.percentDiscount * price) / 100
-            : 0;
+    // const promotionPrice =
+    //     promotionProduct && promotionProduct.percentDiscount > 0
+    //         ? (promotionProduct.percentDiscount * price) / 100
+    //         : 0;
 
     return (
         <div className="rounded-sm bg-white h-full overflow-hidden group hover:border hover:border-red-300 shadow-lg">
@@ -60,7 +57,7 @@ const CardMainProduct = async ({
                     </Link>
                 ) : null}
                 {/* price */}
-                <div className="">
+                {/* <div className="">
                     <strong className="text-red-600 font-bold text-sm md:text-base line-clamp-1">
                         {formatPriceDisplay(price - promotionPrice)}
                     </strong>
@@ -71,7 +68,7 @@ const CardMainProduct = async ({
                             -{promotionProduct!.percentDiscount}%
                         </span>
                     </div>
-                ) : null}
+                ) : null} */}
             </div>
         </div>
     );

@@ -1,8 +1,12 @@
+"use client";
+
 import Button from "@/components/custom/button/Button";
+import { AddressContext } from "@/context/users/AddressContextProvider";
 import { AddressUserResponse } from "@/types/users/addressUser.type";
-import React from "react";
+import { useContext } from "react";
 
 const AddressItem = ({ address }: { address: AddressUserResponse }) => {
+    const { hanleClickChangeDefaultAddress } = useContext(AddressContext);
     return (
         <div className="py-6 border-b last:border-b-0">
             <div className="flex justify-between">
@@ -26,9 +30,9 @@ const AddressItem = ({ address }: { address: AddressUserResponse }) => {
 
             <div className="flex justify-between">
                 <div className="text-sm text-text-light-color">
-                    <p className="line-clamp-1">{address.addressLine1}</p>
-                    <p className="line-clamp-1">
-                        {[address.addressLine1, address.addressLine2].join(
+                    <p className="line-clamp-1 my-1">{address.addressLine1}</p>
+                    <p className="line-clamp-1 my-1">
+                        {[address.addressLine2, address.addressLine3].join(
                             ", "
                         )}
                     </p>
@@ -39,6 +43,7 @@ const AddressItem = ({ address }: { address: AddressUserResponse }) => {
                     size="sm"
                     className="h-[30px] min-h-0"
                     disable={address.isDefault}
+                    onClick={() => hanleClickChangeDefaultAddress(address.id)}
                 >
                     Thiết lập mặc định
                 </Button>

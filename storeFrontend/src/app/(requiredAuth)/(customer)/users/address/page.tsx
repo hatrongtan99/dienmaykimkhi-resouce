@@ -1,9 +1,11 @@
 "use client";
 import { getListAddressUserOptions } from "@/api/user/address/addressUser.queryOptions";
+import ModalPopup from "@/components/common/ModalPopup";
 import LoadingBubble from "@/components/common/loadingIndicator/LoadingBubble";
 import Button from "@/components/custom/button/Button";
 import AddressItem from "@/components/users/address/AddressItem";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { IoMdAdd } from "react-icons/io";
 
 const AddressPageUser = () => {
@@ -17,6 +19,8 @@ const AddressPageUser = () => {
             refetchOnWindowFocus: false,
         })
     );
+
+    const [isOpenForm, setIsOpenForm] = useState(false);
 
     if (isError) {
         throw new Error("some thing wrong!");
@@ -40,6 +44,7 @@ const AddressPageUser = () => {
                             as="button"
                             leftIcon={<IoMdAdd size={20} />}
                             className="text-sm font-light"
+                            onClick={() => setIsOpenForm(true)}
                         >
                             Thêm địa chỉ mới
                         </Button>
@@ -47,9 +52,16 @@ const AddressPageUser = () => {
                 </div>
                 <div className="">
                     {listAddress.map((address) => (
-                        <AddressItem address={address} />
+                        <AddressItem address={address} key={address.id} />
                     ))}
                 </div>
+
+                {/* create new address form */}
+                {isOpenForm ? (
+                    <ModalPopup handleClick={() => setIsOpenForm(false)}>
+                        <div className="bg-white"> heloo</div>
+                    </ModalPopup>
+                ) : null}
             </div>
         );
 };

@@ -55,3 +55,7 @@ export const deleteAddress = ({ addressId }: { addressId: number }) => {
         method: "DELETE",
     });
 };
+
+export const getAddressDefault = () => {
+    return customFetch<AddressUserResponse>(BASE_URL_USER_API + "/default");
+};

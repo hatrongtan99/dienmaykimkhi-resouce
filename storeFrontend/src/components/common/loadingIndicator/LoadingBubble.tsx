@@ -6,7 +6,7 @@ const LoadingBubble = ({ className }: { className?: ClassNameValue }) => {
     return (
         <div
             className={twMerge(
-                "flex space-x-2 justify-center items-center bg-[#e5e5e5] w-[52px] h-[40px] rounded-xl",
+                "inline-flex space-x-2 justify-center items-center bg-[#e5e5e5] w-[52px] h-[40px] rounded-xl",
                 className
             )}
         >

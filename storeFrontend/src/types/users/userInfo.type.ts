@@ -18,4 +18,5 @@ export interface UserInfoUpdate {
     avatarUrl: string | null;
     fullName: string;
     numberPhone: string | null;
+    email: string;
 }

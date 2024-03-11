@@ -1,2 +1,2 @@
-package com.hatrongtan99.app.services;public class ICartService {
+package com.hatrongtan99.app.services;public interface ICartService {
 }

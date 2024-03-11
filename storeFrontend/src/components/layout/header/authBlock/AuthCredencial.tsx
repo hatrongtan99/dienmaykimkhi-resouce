@@ -19,7 +19,7 @@ const AuthCredencial = () => {
                 if (newWindow.closed) {
                     try {
                         const res = await getCurrentUser();
-                        console.log({ res });
+                        console.log(res);
                         setAuth(res);
                     } catch (error) {
                         console.log(error);

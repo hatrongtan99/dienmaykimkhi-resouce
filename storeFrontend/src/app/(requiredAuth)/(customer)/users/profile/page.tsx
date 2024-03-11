@@ -12,7 +12,6 @@ const DEFAULT_AVATAR = "/images/defaultAvatar.jpeg";
 
 const UserProfilePage = () => {
     const { auth } = useContext(AuthContext);
-
     const {
         data: userInfo,
         isError,
@@ -23,9 +22,11 @@ const UserProfilePage = () => {
                 fullName: auth!.fullName,
                 avatarUrl: null,
                 numberPhone: null,
+                email: auth!.email,
             },
         })
     );
+
     if (isError) {
         throw new Error("some thing wrong!");
     }

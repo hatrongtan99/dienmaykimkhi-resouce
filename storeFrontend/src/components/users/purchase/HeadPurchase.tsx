@@ -5,7 +5,7 @@ import { RouterConftext } from "@/context/RouterContextProvider";
 import { useSearchParams } from "next/navigation";
 import { useContext, useState } from "react";
 
-const KEY_ORDER_STATUS_FILTER = "orderStatus";
+export const KEY_ORDER_STATUS_FILTER = "orderStatus";
 
 const tagsTypeOrderStatus = [
     {

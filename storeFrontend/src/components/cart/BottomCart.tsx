@@ -43,8 +43,6 @@ const BottomCart = () => {
         router.push("/checkout");
     };
 
-    console.log(infoPriceCurrentCart);
-
     return (
         <div
             className="bg-white my-6 py-5 px-5 flex items-center bottom-[-1px] sticky z-10 "

@@ -41,7 +41,7 @@ const UserLayout = ({ children }: { children: ReactNode }) => {
                                 height={50}
                             />
                         </div>
-                        <p className="text-lg font-normal ml-2">hatrongtan</p>
+                        <p className="text-lg font-normal ml-2">use name</p>
                     </div>
 
                     <div className="flex flex-col space-y-3 ml-2 mt-2 text-sm font-medium">
@@ -82,6 +82,7 @@ const UserLayout = ({ children }: { children: ReactNode }) => {
                                                             ? "text-secondary-color"
                                                             : ""
                                                     }`}
+                                                    key={index}
                                                 >
                                                     {ic.label}
                                                 </Link>

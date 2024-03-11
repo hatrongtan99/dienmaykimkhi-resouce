@@ -44,7 +44,15 @@ const FilterSession = <
         if (datasetValue) {
             setSearchParamsObject((prev) => {
                 const result = { ...prev };
-                const listValueSet = prev[fieldFilter];
+                const iterator = searchParams.entries();
+                let current = iterator.next();
+                while (!current.done) {
+                    const [key, value] = current.value;
+                    // @ts-ignore
+                    result[key] = value.split(",");
+                    current = iterator.next();
+                }
+                const listValueSet = result[fieldFilter];
                 if (listValueSet) {
                     const existInField = listValueSet.includes(datasetValue);
                     if (existInField) {

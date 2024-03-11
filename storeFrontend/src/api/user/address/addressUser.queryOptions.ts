@@ -1,5 +1,9 @@
 import { queryOptions } from "@tanstack/react-query";
-import { getDetailAddressById, getListAddressUser } from "./addressUser.api";
+import {
+    getAddressDefault,
+    getDetailAddressById,
+    getListAddressUser,
+} from "./addressUser.api";
 import { CustomUndefinedInitialDataOptions } from "@/types";
 import { AddressUserResponse } from "@/types/users/addressUser.type";
 
@@ -22,6 +26,16 @@ export const getDetailAddressByIdOptions = ({
     return queryOptions({
         queryKey: ["address-user-by-id", { addressId }],
         queryFn: () => getDetailAddressById({ addressId }),
+        ...options,
+    });
+};
+
+export const getDetailAddressDefaultOptions = ({
+    ...options
+}: CustomUndefinedInitialDataOptions<AddressUserResponse> = {}) => {
+    return queryOptions({
+        queryKey: ["address-user-default"],
+        queryFn: getAddressDefault,
         ...options,
     });
 };

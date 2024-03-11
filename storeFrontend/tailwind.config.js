@@ -9,6 +9,7 @@ module.exports = {
         extend: {
             backgroundImage: {
                 "internal-error": "url('/images/loi-http-error-4.png')",
+                nolist: "url('/images/noList.png')",
             },
             colors: {
                 "primary-color": "var(--primary-color)",

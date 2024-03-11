@@ -50,7 +50,7 @@ const UserAvatar = ({ auth }: { auth: UserAuthenticate }) => {
                     </div>
                 }
             >
-                <Link href={"/me/purchase"} className="font-light">
+                <Link href={"/users/profile"} className="font-light">
                     <div className="flex text-white ">
                         <div className="mr-2 overflow-hidden rounded-1/2 ">
                             <Image

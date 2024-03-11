@@ -30,18 +30,7 @@ const RouterConftextProvider = ({ children }: { children: ReactNode }) => {
     const router = useRouter();
 
     const [searchParamsObject, setSearchParamsObject] =
-        useState<SearchParamsObjectType>(() => {
-            const result: any = {};
-            const iterator = searchParams.entries();
-            let current = iterator.next();
-            while (!current.done) {
-                const [key, value] = current.value;
-                result[key] = value.split(",");
-                current = iterator.next();
-            }
-            return result;
-        });
-
+        useState<SearchParamsObjectType>({});
     const firstLoadRef = useRef(false);
 
     useEffect(() => {
@@ -69,13 +58,11 @@ const RouterConftextProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         firstLoadRef.current = true;
-    }, []);
-
-    // reset if path route change
-    useEffect(() => {
-        if (firstLoadRef.current) {
+        return () => {
+            firstLoadRef.current = false;
+            // reset when change pathname
             setSearchParamsObject({});
-        }
+        };
     }, [pathname]);
 
     return (
