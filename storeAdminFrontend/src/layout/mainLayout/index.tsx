@@ -37,7 +37,7 @@ const MainLayout = () => {
             />
             <Box
                 component="main"
-                sx={{ width: "100%", flexGrow: 1, minHeight: "100vh" }}
+                sx={{ width: "100%", flexGrow: 1, minHeight: "100vh", mt: 1 }}
             >
                 <Toolbar />
                 <Outlet />

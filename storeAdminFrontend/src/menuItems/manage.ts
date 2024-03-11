@@ -14,24 +14,28 @@ export default {
             title: "Product",
             type: "item",
             icon: FaLinode,
+            url: "/manage/products",
         },
         {
             id: "Categories",
             title: "Categories",
             type: "item",
             icon: BiCategoryAlt,
+            url: "/manage/categories",
         },
         {
             id: "Brand",
             title: "Brand",
             type: "item",
             icon: TbBrandAirtable,
+            url: "/manage/brands",
         },
         {
             id: "Orders",
             title: "Orders",
             type: "item",
             icon: TbShoppingCartDollar,
+            url: "/manage/orders",
         },
         {
             id: "Promotions",
@@ -40,16 +44,18 @@ export default {
             icon: BiSolidDiscount,
             children: [
                 {
-                    id: "Promotions-code",
-                    title: "Promotion code",
-                    type: "item",
-                    icon: CiDiscount1,
-                },
-                {
                     id: "Promotions-product",
                     title: "Promotion products",
                     type: "item",
                     icon: CiDiscount1,
+                    url: "/manage/promotions/code",
+                },
+                {
+                    id: "Promotions-code",
+                    title: "Promotion code",
+                    type: "item",
+                    icon: CiDiscount1,
+                    url: "/manage/promotions/products",
                 },
             ],
         },

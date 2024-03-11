@@ -11,7 +11,7 @@ const Search = () => (
                 startAdornment={
                     <InputAdornment
                         position="start"
-                        sx={{ mr: -0.5, color: "text.secondary" }}
+                        sx={{ color: "text.secondary" }}
                     >
                         <SearchOutlined />
                     </InputAdornment>
