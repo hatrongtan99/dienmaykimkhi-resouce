@@ -1,5 +1,7 @@
 package com.hatrongtan99.app.dto;
-public record UserInfoResponse(
-        String fullName
+public record UserNameResponseDto(
+        String username,
+        String fullName,
+        String email
 ) {
 }

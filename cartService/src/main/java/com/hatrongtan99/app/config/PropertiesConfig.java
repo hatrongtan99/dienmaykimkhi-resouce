@@ -11,4 +11,5 @@ public class PropertiesConfig {
     private String productServiceUrl;
     private String mediaServiceUrl;
     private String inventoriesServiceUrl;
+    private String promotionServiceUrl;
 }

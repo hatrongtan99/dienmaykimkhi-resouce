@@ -48,6 +48,7 @@ public class CartService extends AbstractCartServiceHelper implements ICartServi
                 this.updateActiveCartItem(item, false);
             } else {
                 item.setQuantity(Collections.min(List.of(item.getQuantity(), inStock.quantity())));
+                listValid.add(item);
             }
         }
         this.cartItemRepository.saveAllAndFlush(items);
@@ -120,6 +121,7 @@ public class CartService extends AbstractCartServiceHelper implements ICartServi
     }
 
     @Override
+    @Transactional
     public CartEntity changeStatusCartUser(Long userId, CartStatus status) {
         CartEntity mainCart = this.getOrCreateCartIdle(userId);
         mainCart.setStatus(status);

@@ -4,6 +4,7 @@ import com.hatrongtan99.app.entity.AddressUserEntity;
 
 public record AddressUserResponseDto(
         Long id,
+        Long userId,
         String fullName,
         String phoneNumber,
         String addressLine1,
@@ -14,6 +15,7 @@ public record AddressUserResponseDto(
     public static AddressUserResponseDto mapToDto(AddressUserEntity entity) {
         return new AddressUserResponseDto(
                 entity.getId(),
+                entity.getUserId(),
                 entity.getFullName(),
                 entity.getPhoneNumber(),
                 entity.getAddressLine1(),

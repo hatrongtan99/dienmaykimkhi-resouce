@@ -15,7 +15,7 @@ public record MediaFileResponseDto(
     public static MediaFileResponseDto mapToDto(MediaEntity mediaEntity) {
         String url = mediaEntity.getUrl();
         if (url == null) {
-            url = UriComponentsBuilder.fromUriString("http://localhost:8083")
+            url = UriComponentsBuilder.fromUriString("http://localhost:8083/api/v1/")
                     .path("/medias/file").path("/" + mediaEntity.getId())
                     .build().toUriString();
         }

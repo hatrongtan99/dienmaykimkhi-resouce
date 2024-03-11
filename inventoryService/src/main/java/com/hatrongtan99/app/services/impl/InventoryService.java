@@ -1,15 +1,16 @@
-package com.hatrongtan99.app.services;
+package com.hatrongtan99.app.services.impl;
 
-import com.hatrongtan99.app.dto.StockAdjustQuantityDto;
-import com.hatrongtan99.app.dto.StockUpdateWhenOrderDto;
 import com.hatrongtan99.app.entity.StockEntity;
 import com.hatrongtan99.app.entity.StockHistoryEntity;
 import com.hatrongtan99.app.exceptions.BadRequestException;
-import com.hatrongtan99.app.messageBroker.dto.ProductChangeStatusInStockDto;
 import com.hatrongtan99.app.messageBroker.publisher.InventoryMessageService;
 import com.hatrongtan99.app.repository.StockHistoryRepository;
 import com.hatrongtan99.app.repository.StockRepository;
+import com.hatrongtan99.app.services.IInventoryService;
 import com.hatrongtan99.enumeration.order.OrderStatus;
+import com.hatrongtan99.saga.dto.inventoryProduct.ProductChangeStatusInStockDto;
+import com.hatrongtan99.saga.dto.inventoryProduct.StockAdjustQuantityDto;
+import com.hatrongtan99.saga.dto.inventoryProduct.StockUpdateWhenOrderDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +24,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class InventoryService implements IInventoryService {
+public class InventoryService extends InventoryServiceHelper implements IInventoryService {
 
     private final StockRepository stockRepository;
     private final StockHistoryRepository stockHistoryRepository;
@@ -54,7 +55,26 @@ public class InventoryService implements IInventoryService {
         inventoryMessageService.pubChangeStatusInStock(new ProductChangeStatusInStockDto(productId, isInStock));
         stock.getStockHistoryList().add(stockHistory);
     }
-    
+
+    @Override
+    @Transactional
+    public void updateWhenOrder( StockUpdateWhenOrderDto updateDto) {
+        List<StockAdjustQuantityDto> listAdjust = updateDto.products();
+        boolean isCompensation = OrderStatus.getListStatusCompensation().contains(updateDto.statusOrder());
+        for (StockAdjustQuantityDto product : listAdjust) {
+            StockEntity stock = this.getStockByProductId(product.productId());
+            if (isCompensation) {
+                stock.setQuantity(stock.getQuantity() + product.adjustedQuantity());
+            } else {
+                stock.setQuantity(stock.getQuantity() - product.adjustedQuantity());
+            }
+            // pub to product service change available in stock
+            boolean isInStock = stock.getQuantity() > 0;
+            inventoryMessageService.pubChangeStatusInStock(new ProductChangeStatusInStockDto(product.productId(), isInStock));
+            this.stockRepository.saveAndFlush(stock);
+        }
+    }
+
     @Override
     @Transactional
     public StockEntity getByProductId(Long productId) {
@@ -68,15 +88,5 @@ public class InventoryService implements IInventoryService {
         return this.stockHistoryRepository.findByProductId(productId, pageable);
     }
 
-    private StockEntity getStockByProductId(Long id) {
-        StockEntity stock = this.stockRepository.findByProductId(id)
-                .orElse(StockEntity.builder()
-                        .productId(id)
-                        .quantity(0)
-                        .quantitySold(0)
-                        .build());
 
-        this.stockRepository.save(stock);
-        return stock;
-    }
 }

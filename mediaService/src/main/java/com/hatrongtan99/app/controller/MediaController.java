@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class MediaController {
     private final IMediaService mediaService;
 
-    @PostMapping(path = "/", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<MediaFileResponseDto> uploadFile(
             @Valid MediaSaveDto mediaSaveDto
     ) {
@@ -26,7 +26,7 @@ public class MediaController {
     }
 
     @GetMapping(path = "/{id}")
-    public  ResponseEntity<MediaFileResponseDto> getFileById(
+    public ResponseEntity<MediaFileResponseDto> getFileById(
             @PathVariable("id") Long id
     ) {
         MediaEntity mediaEntity = this.mediaService.getMediaById(id);

@@ -1,13 +1,11 @@
 package com.hatrongtan99.app.controller;
 
-import com.hatrongtan99.app.dto.DetailStockResponseDto;
-import com.hatrongtan99.app.dto.HistoryStockResponseDto;
-import com.hatrongtan99.app.dto.HistoryStockWithPageableResponseDto;
-import com.hatrongtan99.app.dto.StockAdjustQuantityDto;
+import com.hatrongtan99.app.dto.*;
 import com.hatrongtan99.app.dto.paginationDto.MetadataDto;
 import com.hatrongtan99.app.entity.StockEntity;
 import com.hatrongtan99.app.entity.StockHistoryEntity;
 import com.hatrongtan99.app.services.IInventoryService;
+import com.hatrongtan99.saga.dto.inventoryProduct.StockAdjustQuantityDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,7 +29,7 @@ public class InventoryController {
         return ResponseEntity.ok(isAvailable);
     }
 
-    @PostMapping("/{productId}")
+    @PatchMapping("/{productId}")
     public ResponseEntity<Void> adjustQuantityProduct(
             @PathVariable("productId") Long productId,
             @Valid @RequestBody StockAdjustQuantityDto adjustBody
@@ -59,5 +57,4 @@ public class InventoryController {
         List<HistoryStockResponseDto> records = page.getContent().stream().map(i -> new HistoryStockResponseDto(i.getId(), i.getAdjustedQuantity(), i.getNote(), i.getCreateAt())).toList();
         return ResponseEntity.ok(new HistoryStockWithPageableResponseDto(records, metadata));
     }
-//    @PostMapping()
 }

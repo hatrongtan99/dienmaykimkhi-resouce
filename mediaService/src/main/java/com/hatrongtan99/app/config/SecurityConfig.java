@@ -29,8 +29,9 @@ public class SecurityConfig {
                 .sessionManagement(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         authorize -> authorize
-                                .requestMatchers(HttpMethod.GET, "/medias/*").permitAll()
-                                .anyRequest().hasRole("ADMIN")
+                                .requestMatchers(HttpMethod.GET, "/medias/**").permitAll()
+                                .anyRequest().permitAll()
+//                                .anyRequest().hasRole("ADMIN")
                 )
                 .formLogin(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)

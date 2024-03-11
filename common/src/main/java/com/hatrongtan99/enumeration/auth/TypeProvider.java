@@ -12,4 +12,13 @@ public enum TypeProvider {
     public String getName() {
         return this.name;
     }
+
+    public static TypeProvider getByName(String name) {
+        for(TypeProvider e :values()) {
+            if (e.name.equals(name)){
+                return e;
+            }
+        }
+        return null;
+    }
 }

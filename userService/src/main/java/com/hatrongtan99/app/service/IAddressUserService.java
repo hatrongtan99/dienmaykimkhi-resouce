@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface IAddressUserService {
     AddressUserEntity getAddressById(Long userId, Long addressId);
+    AddressUserEntity getAddressDefault(Long userId);
     List<AddressUserEntity> getAllAddress(Long userId);
     AddressUserEntity createNewAddress(Long userId, AddressUserSaveOrUpdateDto addressUser);
     AddressUserEntity updateAddress(Long userId, Long addressId, AddressUserSaveOrUpdateDto addressUser);

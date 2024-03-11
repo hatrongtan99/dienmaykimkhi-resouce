@@ -1,12 +1,10 @@
-package com.hatrongtan99.app.config;
+package com.hatrongtan99.paymentservice.config;
 
-import com.hatrongtan99.app.utils.AuthenticationUtils;
+import com.hatrongtan99.paymentservice.utils.AuthenticationUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-
-import java.util.Optional;
 
 @Configuration
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")

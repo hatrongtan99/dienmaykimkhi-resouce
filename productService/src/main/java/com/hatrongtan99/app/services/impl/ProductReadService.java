@@ -1,7 +1,6 @@
 package com.hatrongtan99.app.services.impl;
 
 import com.hatrongtan99.app.dto.brandDto.BrandCardDto;
-import com.hatrongtan99.app.dto.mediaDto.ThumbnailResponseDto;
 import com.hatrongtan99.app.dto.paginationDto.MetadataDto;
 import com.hatrongtan99.app.dto.productDto.ProductCardDto;
 import com.hatrongtan99.app.dto.productDto.ProductGetListWithPageDto;
@@ -14,7 +13,6 @@ import com.hatrongtan99.app.entity.ProductEntity;
 import com.hatrongtan99.app.repository.*;
 import com.hatrongtan99.app.repository.filter.PriceRange;
 import com.hatrongtan99.app.repository.spec.ProductSpec;
-import com.hatrongtan99.app.services.IInventoryService;
 import com.hatrongtan99.app.services.IMediaService;
 import com.hatrongtan99.app.services.IProductReadService;
 import com.hatrongtan99.app.utils.CommonUtils;
@@ -36,7 +34,6 @@ import java.util.*;
 public class ProductReadService implements IProductReadService {
 
     private final ProductRepository productRepository;
-    private final IInventoryService inventoryService;
     private final IMediaService mediaService;
     private final PriceRepository priceRepository;
     @Override

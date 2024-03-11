@@ -1,4 +1,4 @@
-package com.hatrongtan99.app.config;
+package com.hatrongtan99.paymentservice.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

@@ -1,4 +1,4 @@
-package com.hatrongtan99.paymentservice.controller.config;
+package com.hatrongtan99.paymentservice.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

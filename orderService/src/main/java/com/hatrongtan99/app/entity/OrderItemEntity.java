@@ -15,15 +15,18 @@ public class OrderItemEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long productId;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "order_id")
     private OrderEntity orderId;
 
     private String productName;
+    private String thumbnailUrl;
 
     private double productPrice;
 
     private int quantity;
 
-    private double discount;
+    private Integer discount;
 }

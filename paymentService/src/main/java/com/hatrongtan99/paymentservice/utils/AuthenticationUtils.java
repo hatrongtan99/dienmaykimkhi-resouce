@@ -1,6 +1,6 @@
-package com.hatrongtan99.app.utils;
+package com.hatrongtan99.paymentservice.utils;
 
-import com.hatrongtan99.app.exception.RequiredSignInException;
+import com.hatrongtan99.paymentservice.exceptions.RequiredSignInException;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,5 +28,9 @@ public class AuthenticationUtils {
         }
         Jwt jwt = (Jwt) auth.getPrincipal();
         return Optional.of(Long.valueOf(jwt.getSubject()));
+    }
+
+    public static String getToken() {
+        return ((Jwt) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getTokenValue();
     }
 }

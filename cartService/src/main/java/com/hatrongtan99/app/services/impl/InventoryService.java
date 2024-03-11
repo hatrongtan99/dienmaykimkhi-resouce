@@ -30,14 +30,4 @@ public class InventoryService implements IInventoryService {
                 .bodyToMono(ProductInStockResponseDto.class)
                 .block();
     }
-
-    @Override
-    public DetailPriceProductDto getDetailProductPrice(Long productId) {
-        final URI detailPriceProductUri = UriComponentsBuilder
-                .fromUriString(this.propertiesConfig.getProductServiceUrl())
-                .path("/bff-customer/products/cart-item/{productId}").buildAndExpand(productId).toUri();
-        return this.webClient
-                .get().uri(detailPriceProductUri)
-                .retrieve().bodyToMono(DetailPriceProductDto.class).block();
-    }
 }

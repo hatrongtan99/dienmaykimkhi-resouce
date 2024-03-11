@@ -1,4 +1,4 @@
-package com.hatrongtan99.sagaservice.ochestration.dto.inventoryDto;
+package com.hatrongtan99.saga.dto.inventoryProduct;
 
 import com.hatrongtan99.enumeration.order.OrderStatus;
 

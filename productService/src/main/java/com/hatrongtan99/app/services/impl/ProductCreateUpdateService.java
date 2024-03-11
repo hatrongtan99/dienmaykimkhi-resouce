@@ -19,13 +19,12 @@ public class ProductCreateUpdateService extends ProductServiceHelper implements 
 
     public ProductCreateUpdateService(
             ProductRepository productRepository,
-            MediaService mediaService,
             BrandRepository brandRepository,
             ProductImageRepository productImageRepository,
             CategoryRepository categoryRepository,
             ProductMetaDataRepository metaDataRepository,
             IProductAttributeService productAttributeService) {
-        super(productRepository, mediaService, brandRepository, productImageRepository, categoryRepository, metaDataRepository, productAttributeService);
+        super(productRepository, brandRepository, productImageRepository, categoryRepository, metaDataRepository, productAttributeService);
         this.productRepository = productRepository;
     }
 

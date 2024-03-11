@@ -1,4 +1,4 @@
-package com.hatrongtan99.sagaservice.choreography.inventoryProduct.declare;
+package com.hatrongtan99.sagaservice.choreography.declare.inventoryProduct;
 
 import com.hatrongtan99.saga.constants.QueueName;
 import com.hatrongtan99.saga.constants.RoutingKey;

@@ -1,12 +1,11 @@
-package com.hatrongtan99.app.dto.cartDto;
+package com.hatrongtan99.app.dto.order;
 
-public record CartItemDto(
-        Long id,
+public record OrderItemRequestDto(
         Long productId,
         String productName,
         String thumbnailUrl,
         Integer quantity,
         Double price,
-        Double discount
+        Integer discount
 ) {
 }

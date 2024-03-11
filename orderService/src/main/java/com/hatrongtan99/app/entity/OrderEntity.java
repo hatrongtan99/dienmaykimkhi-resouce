@@ -21,7 +21,10 @@ public class OrderEntity extends BaseAuditEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST}, optional = false)
+    @Column(nullable = false)
+    private Long userId;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST}, optional = false)
     @JoinColumn(name = "address_id")
     private OrderAddressEntity addressId;
 
@@ -30,6 +33,8 @@ public class OrderEntity extends BaseAuditEntity {
 
     @OneToMany(mappedBy = "orderId", fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
     private List<OrderItemEntity> orderItemList = new ArrayList<>();
+
+    private String couponCode;
 
     private double discount;
 
@@ -40,7 +45,7 @@ public class OrderEntity extends BaseAuditEntity {
     private double deliveryFee;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "varchar(50) default `PENDING`")
+    @Column(columnDefinition = "varchar(50) default 'PENDING'")
     private OrderStatus orderStatus;
 
     private String deliveryMethod;
@@ -49,7 +54,6 @@ public class OrderEntity extends BaseAuditEntity {
     private PaymentMethod paymentMethod;
 
     @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "varchar(50) default `PENDING`")
     private PaymentStatus paymentStatus;
 
     @Column(columnDefinition = "text default null")

@@ -16,7 +16,6 @@ import java.util.List;
 public abstract class ProductServiceHelper {
 
     private final ProductRepository productRepository;
-    private final MediaService mediaService;
     private final BrandRepository brandRepository;
     private final ProductImageRepository productImageRepository;
     private final CategoryRepository categoryRepository;

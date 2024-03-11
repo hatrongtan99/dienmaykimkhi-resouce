@@ -21,7 +21,7 @@ public class AuthenticationUtils {
 
     public static Optional<Long> getAuditor() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth instanceof AnonymousAuthenticationToken) {
+        if (auth instanceof AnonymousAuthenticationToken || auth == null) {
             return Optional.empty();
         }
         Jwt jwt = (Jwt) auth.getPrincipal();

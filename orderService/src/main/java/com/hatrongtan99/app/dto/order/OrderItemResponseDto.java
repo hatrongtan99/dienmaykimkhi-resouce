@@ -2,17 +2,19 @@ package com.hatrongtan99.app.dto.order;
 
 import com.hatrongtan99.app.entity.OrderItemEntity;
 
-public record OrderItemResponseEntity(
+public record OrderItemResponseDto(
         Long id,
         String productName,
+        String thumbnailUrl,
         Double productPrice,
         Integer quantity,
-        Double discount
+        Integer discount
 ) {
-    public static OrderItemResponseEntity mapToDto(OrderItemEntity entity) {
-        return new OrderItemResponseEntity(
+    public static OrderItemResponseDto mapToDto(OrderItemEntity entity) {
+        return new OrderItemResponseDto(
                 entity.getId(),
                 entity.getProductName(),
+                entity.getThumbnailUrl(),
                 entity.getProductPrice(),
                 entity.getQuantity(),
                 entity.getDiscount()

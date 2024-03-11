@@ -1,0 +1,14 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://127.0.0.1:9000
+
+properties:
+  media-url: http://localhost:8083/api/v1
+  inventory-url: http://localhost:8085/api/v1
+  order-url: http://localhost:8086/api/v1
+server:
+  servlet:
+    context-path: /api/v1/

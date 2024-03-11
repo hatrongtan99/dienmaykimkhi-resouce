@@ -1,19 +1,17 @@
 package com.hatrongtan99.app.services;
 
-import com.hatrongtan99.app.dto.StockAdjustQuantityDto;
-import com.hatrongtan99.app.dto.StockUpdateWhenOrderDto;
 import com.hatrongtan99.app.entity.StockEntity;
 import com.hatrongtan99.app.entity.StockHistoryEntity;
+import com.hatrongtan99.saga.dto.inventoryProduct.StockAdjustQuantityDto;
+import com.hatrongtan99.saga.dto.inventoryProduct.StockUpdateWhenOrderDto;
 import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 public interface IInventoryService {
     boolean productIsInStock(Long id);
 
     void adjustQuantity(Long productId, StockAdjustQuantityDto adjustment);
 
-    void updateWhenOrder(Long productId, StockUpdateWhenOrderDto updateDto);
+    void updateWhenOrder(StockUpdateWhenOrderDto updateDto);
 
     StockEntity getByProductId(Long productId);
 

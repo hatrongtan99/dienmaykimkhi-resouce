@@ -23,6 +23,11 @@ public class AddressUserService implements IAddressUserService {
     }
 
     @Override
+    public AddressUserEntity getAddressDefault(Long userId) {
+        return this.addressUserEntityRepository.findByUserIdAndIsDefaultIsTrue(userId).orElseThrow(() -> new NotFoundException("address default not found"));
+    }
+
+    @Override
     public List<AddressUserEntity> getAllAddress(Long userId) {
         return this.addressUserEntityRepository.findByUserIdOrderByIsDefaultDesc(userId);
     }
@@ -71,7 +76,7 @@ public class AddressUserService implements IAddressUserService {
         this.validateAddress(userId, addressId);
         AddressUserEntity exist = this.addressUserEntityRepository.findByIdAndUserId(addressId, userId).get();
         if (exist.isDefault()) return;
-        AddressUserEntity mainAddress = this.addressUserEntityRepository.findByUserIdAndIsDefaultIsTrue(userId);
+        AddressUserEntity mainAddress = this.addressUserEntityRepository.findByUserIdAndIsDefaultIsTrue(userId).orElse(null);
         if (mainAddress == null) {
             throw new NotFoundException("not found");
         }

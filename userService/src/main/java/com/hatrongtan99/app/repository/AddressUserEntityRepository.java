@@ -10,5 +10,5 @@ public interface AddressUserEntityRepository extends JpaRepository<AddressUserEn
     List<AddressUserEntity> findByUserIdOrderByIsDefaultDesc(Long userId);
     Optional<AddressUserEntity> findByIdAndUserId(Long id, Long userId);
     Integer countAddressUserEntityByUserId(Long userId);
-    AddressUserEntity findByUserIdAndIsDefaultIsTrue(Long useId);
+    Optional<AddressUserEntity> findByUserIdAndIsDefaultIsTrue(Long useId);
 }

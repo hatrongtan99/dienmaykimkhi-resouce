@@ -5,6 +5,4 @@ import com.hatrongtan99.app.dto.stock.ProductInStockResponseDto;
 
 public interface IInventoryService {
     ProductInStockResponseDto getQuantityInStock(Long productId);
-
-    DetailPriceProductDto getDetailProductPrice(Long productId);
 }

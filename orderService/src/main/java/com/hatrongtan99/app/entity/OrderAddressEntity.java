@@ -19,7 +19,7 @@ public class OrderAddressEntity {
 
     private String email;
 
-    @OneToOne(mappedBy = "orderId", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "addressId", fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
     private OrderEntity orderId;
 

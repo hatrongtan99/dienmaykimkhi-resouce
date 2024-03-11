@@ -23,6 +23,7 @@ spring:
           filters:
             - RewritePath=/api/v1/products/(?<segment>.*), /api/v1/$\{segment}
             - TokenRelay=
+
         - id: api_medias
           uri: http://localhost:8083
           predicates:
@@ -30,6 +31,62 @@ spring:
           filters:
             - RewritePath=/api/v1/medias/(?<segment>.*), /api/v1/$\{segment}
             - TokenRelay=
+
+        - id: api_carts
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/v1/carts/**
+          filters:
+            - RewritePath=/api/v1/carts/(?<segment>.*), /api/v1/$\{segment}
+            - TokenRelay=
+
+        - id: api_inventories
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/v1/inventories/**
+          filters:
+            - RewritePath=/api/v1/inventories/(?<segment>.*), /api/v1/$\{segment}
+            - TokenRelay=
+
+        - id: api_orders
+          uri: http://localhost:8086
+          predicates:
+            - Path=/api/v1/orders/**
+          filters:
+            - RewritePath=/api/v1/orders/(?<segment>.*), /api/v1/$\{segment}
+            - TokenRelay=
+
+        - id: api_payments
+          uri: http://localhost:8087
+          predicates:
+            - Path=/api/v1/payments/**
+          filters:
+            - RewritePath=/api/v1/payments/(?<segment>.*), /api/v1/$\{segment}
+            - TokenRelay=
+
+        - id: api_users
+          uri: http://localhost:8088
+          predicates:
+            - Path=/api/v1/users/**
+          filters:
+            - RewritePath=/api/v1/users/(?<segment>.*), /api/v1/$\{segment}
+            - TokenRelay=
+
+        - id: api_promotions
+          uri: http://localhost:8089
+          predicates:
+            - Path=/api/v1/promotions/**
+          filters:
+            - RewritePath=/api/v1/promotions/(?<segment>.*), /api/v1/$\{segment}
+            - TokenRelay=
+
+        - id: storeFrontend
+          uri: http://localhost:3000
+          predicates:
+            - Path=/**
+          filters:
+            - TokenRelay=
+
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
       globalcors:

@@ -1,7 +1,7 @@
 package com.hatrongtan99.app.dto.productDto;
 
-public record ProductOrderResponseDto(
+public record DetailPriceProductDto(
         Long id,
-        Double price 
+        Double price
 ) {
 }

@@ -1,4 +1,4 @@
-package com.hatrongtan99.app.dto;
+package com.hatrongtan99.app.dto.inventory;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

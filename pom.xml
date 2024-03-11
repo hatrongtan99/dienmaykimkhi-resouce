@@ -17,6 +17,11 @@
         <module>ratingService</module>
         <module>orderService</module>
         <module>inventoryService</module>
-        <module>identifyService</module>
+        <module>bffCustomer</module>
+        <module>userService</module>
+        <module>authorizationServer</module>
+        <module>promotionService</module>
+        <module>paymentService</module>
+        <module>sagaService</module>
     </modules>
 </project>

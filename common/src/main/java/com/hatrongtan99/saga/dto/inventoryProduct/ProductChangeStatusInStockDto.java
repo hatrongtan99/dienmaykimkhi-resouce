@@ -1,4 +1,4 @@
-package com.hatrongtan99.sagaservice.choreography.inventoryProduct.dto;
+package com.hatrongtan99.saga.dto.inventoryProduct;
 
 public record ProductChangeStatusInStockDto(
         Long productId,

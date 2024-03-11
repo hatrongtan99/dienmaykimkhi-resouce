@@ -34,6 +34,14 @@ public class AddressUserController {
         return ResponseEntity.ok(AddressUserResponseDto.mapToDto(addressUser));
     }
 
+    @GetMapping("/default")
+    public ResponseEntity<AddressUserResponseDto> getDetailAddressDefault(
+    ) {
+        Long userId = AuthenticationUtils.getAuthenticationUserId();
+        AddressUserEntity addressUser = this.addressUserService.getAddressDefault(userId);
+        return ResponseEntity.ok(AddressUserResponseDto.mapToDto(addressUser));
+    }
+
     @PostMapping
     public ResponseEntity<Void> createNewAddress(
             @Valid @RequestBody AddressUserSaveOrUpdateDto body

@@ -8,6 +8,12 @@ services:
 ##      - 443:443
 #    volumes:
 #      - ./docker/nginx/customConfig.conf:/etc/nginx/conf.d/customConfig.conf
+#  identify-service:
+#    build:
+#      context: ./identifyService
+#    ports:
+#      - 8081:8081
+
   db-mysql:
     image: mysql:8.2.0
     restart: always
