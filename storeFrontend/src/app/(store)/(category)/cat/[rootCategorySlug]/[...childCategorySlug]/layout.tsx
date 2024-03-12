@@ -71,8 +71,9 @@ const ChildCategoryLayout = async ({
                             fieldFilter="price"
                         />
                     </aside>
-
-                    {children}
+                    <div className="col-span-1 sm:col-span-2 md:col-span-3">
+                        {children}
+                    </div>
                 </div>
             </div>
         </HydrationBoundary>

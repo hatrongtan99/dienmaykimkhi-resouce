@@ -25,6 +25,7 @@ const HomeSlideImg = () => {
     const refContainerLinkTags = useRef<HTMLDivElement>(null);
     const [currentIndex, setCurrentIndex] = useState(1);
     const [needTransition, setNeedTransition] = useState(false);
+    const [isMoving, setIsMoving] = useState(false);
 
     useLayoutEffect(() => {
         urlImg = [urlImg[urlImg.length - 1], ...urlImg, urlImg[0]];
@@ -32,12 +33,14 @@ const HomeSlideImg = () => {
     }, []);
 
     const handleMoveSlide = (value: TypeButtonSlide) => {
+        if (isMoving) return;
         if (value == "next") {
             setCurrentIndex((prev) => prev + 1);
         } else {
             setCurrentIndex((prev) => prev - 1);
         }
         setNeedTransition(true);
+        setIsMoving(true);
     };
 
     const handleTransionEnd = () => {
@@ -48,6 +51,7 @@ const HomeSlideImg = () => {
             setCurrentIndex(urlImg.length - 2);
             setNeedTransition(false);
         }
+        setIsMoving(false);
     };
 
     return (

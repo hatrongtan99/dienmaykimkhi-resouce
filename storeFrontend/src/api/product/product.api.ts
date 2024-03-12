@@ -20,7 +20,7 @@ export const getStatusInStock = ({ productId }: { productId: number }) => {
     return customFetch<StatusProductInStock>(
         BASE_URL_PRODUCT_API + `/status-in-stock/${productId}`,
         {
-            cache: "no-cache",
+            cache: "no-store",
         }
     );
 };

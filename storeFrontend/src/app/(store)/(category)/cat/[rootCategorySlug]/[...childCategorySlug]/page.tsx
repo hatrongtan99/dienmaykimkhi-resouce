@@ -40,18 +40,15 @@ const ChildCategoryPage = async ({
             params: buildParamsString({ ...searchParams, page: 0, limit: 8 }),
         })
     );
+
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
-            <div className="col-span-1 sm:col-span-2 md:col-span-3">
-                {listChildOfCurrent.records.length ? (
-                    <ListCategoryLinkCard
-                        categories={listChildOfCurrent.records}
-                    />
-                ) : null}
-                <SortProductSession />
-                {/* list product */}
-                <ListProductInPage products={listProductByChildCateSlug} />
-            </div>
+            {listChildOfCurrent.records.length ? (
+                <ListCategoryLinkCard categories={listChildOfCurrent.records} />
+            ) : null}
+            <SortProductSession />
+            {/* list product */}
+            <ListProductInPage products={listProductByChildCateSlug} />
         </HydrationBoundary>
     );
 };

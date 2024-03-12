@@ -1,6 +1,8 @@
 "use client";
+import { getDetailCartUserOption } from "@/api/cart/cart.queryOptions";
 import { createOrder } from "@/api/order/order.api";
 import { calcDetailPriceOrderToCheckoutOptions } from "@/api/order/order.queryOptions";
+import { paymentOnlineRequest } from "@/api/payment/payment.api";
 import AddressCheckout from "@/components/checkout/AddressCheckout";
 import CheckOutItem from "@/components/checkout/CheckOutItem";
 import HeadCheckout from "@/components/checkout/HeadCheckout";
@@ -12,35 +14,20 @@ import { CartContext } from "@/context/CartContextProvider";
 import { CheckoutContext } from "@/context/checkout/CheckoutContextProvider";
 import { OrderRequest, PaymentMethod } from "@/types/orders/orders.type";
 import { formatPriceDisplay } from "@/utils";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
 import { IoIosCheckmark } from "react-icons/io";
 import { twMerge } from "tailwind-merge";
 
 const paymentMethods = [PaymentMethod.BANKING, PaymentMethod.COD] as const;
-
 const CheckoutPage = () => {
-    const { listDetailCartItem } = useContext(CartContext);
+    const { listDetailCartItem, revalidateDetailCart } =
+        useContext(CartContext);
     const { handleChangePaymentMethod, paymentMethod, getCheckoutBody } =
         useContext(CheckoutContext);
     const { data: detailOrderPrice, isLoading: isLoadingOrderPrice } = useQuery(
         calcDetailPriceOrderToCheckoutOptions()
     );
-
-    const handleCheckout = () => {
-        fetch(
-            "http://localhost:8080/api/v1/payments/bff-customer/payment-online",
-            { method: "POST", cache: "no-cache" }
-        )
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                }
-            })
-            .then((data) => {
-                window.location = data.url;
-            });
-    };
 
     const { mutateAsync } = useMutation({
         mutationFn: (body: OrderRequest) => createOrder({ body }),
@@ -53,10 +40,16 @@ const CheckoutPage = () => {
             body.deliveryFee = detailOrderPrice!.deliveryFee;
             const res = await mutateAsync(body);
             if (paymentMethod == PaymentMethod.BANKING) {
-                handleCheckout();
+                const paymentonlineResponse = await paymentOnlineRequest({
+                    orderId: res.id,
+                });
+                if (paymentonlineResponse) {
+                    window.location = paymentonlineResponse.url as any;
+                }
             } else {
                 alert("order success");
             }
+            revalidateDetailCart();
         } catch (error) {
             console.log(error);
         }

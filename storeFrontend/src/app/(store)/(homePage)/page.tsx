@@ -7,7 +7,6 @@ import {
     QueryClient,
     dehydrate,
 } from "@tanstack/react-query";
-import HomeSlideImg from "./HomeSlideImg";
 
 export default async function Home() {
     const queryClient = new QueryClient();
@@ -20,23 +19,10 @@ export default async function Home() {
 
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
-            <>
-                <section className="container">
-                    <div className="ml-56 mt-2 h-[340px] grid grid-cols-3 ">
-                        <div className="ml-2 col-span-2">
-                            <HomeSlideImg />
-                        </div>
-                        <div className="col-span-1">post new</div>
-                    </div>
-                </section>
-                <SlideBrand brands={brands} />
-                {allParentCategories.records.map((category) => (
-                    <HomeCategoriesSection
-                        category={category}
-                        key={category.id}
-                    />
-                ))}
-            </>
+            <SlideBrand brands={brands} />
+            {allParentCategories.records.map((category) => (
+                <HomeCategoriesSection category={category} key={category.id} />
+            ))}
         </HydrationBoundary>
     );
 }

@@ -21,6 +21,7 @@ const SlideBrand = ({ brands }: SlideBrandProps) => {
 
     const [imgIndex, setCurentIndex] = useState(1);
     const [needTransition, setNeedTransition] = useState(false);
+    const [isMoving, setIsMoving] = useState(false);
 
     const listBrandWithInfinity = useMemo<BrandResponse[]>(() => {
         if ((isLg && brands.length <= 8) || (!isLg && brands.length <= 4)) {
@@ -31,12 +32,14 @@ const SlideBrand = ({ brands }: SlideBrandProps) => {
     }, [brands]);
 
     const handleMoveSlide = (type: TypeButtonSlide) => {
+        if (isMoving) return;
         if (type == "next") {
             setCurentIndex((prev) => prev + 1);
         } else {
             setCurentIndex((prev) => prev - 1);
         }
         setNeedTransition(true);
+        setIsMoving(true);
     };
 
     const handleTransitionEnd = () => {
@@ -47,6 +50,7 @@ const SlideBrand = ({ brands }: SlideBrandProps) => {
             setCurentIndex(listBrandWithInfinity.length - 2);
             setNeedTransition(false);
         }
+        setIsMoving(false);
     };
 
     const styleTransition = useMemo(() => {

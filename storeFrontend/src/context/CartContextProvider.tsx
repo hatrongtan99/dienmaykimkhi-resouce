@@ -46,6 +46,7 @@ export const CartContext = createContext(
         listProductIds: number[];
         listDetailCartItem: CartItemResponse[] | undefined;
         infoPriceCurrentCart: InfoPriceCurrentCart | undefined;
+        revalidateDetailCart: () => void;
     }
 );
 
@@ -61,6 +62,9 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
         });
         queryClient.invalidateQueries({
             queryKey: getInfoPriceCurrentCartOptions()["queryKey"],
+        });
+        queryClient.invalidateQueries({
+            queryKey: getCountCurrentCartUserOption()["queryKey"],
         });
     };
 
@@ -222,6 +226,7 @@ const CartContextProvider = ({ children }: { children: ReactNode }) => {
                 listDetailCartItem,
                 listProductIds,
                 infoPriceCurrentCart,
+                revalidateDetailCart,
             }}
         >
             {children}

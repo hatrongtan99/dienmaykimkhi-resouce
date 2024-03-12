@@ -55,7 +55,7 @@ const ProductDetailPage = async ({
 
     // status in stock
     const statusInStock = await queryClient.fetchQuery(
-        getStatusInStockOptions({ productId: detailProduct.id, staleTime: 0 })
+        getStatusInStockOptions({ productId: detailProduct.id })
     );
 
     return (

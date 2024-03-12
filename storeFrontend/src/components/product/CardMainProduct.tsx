@@ -1,10 +1,13 @@
+"use client";
+
 import { getDetailPromotionProductOptopns } from "@/api/promotions/product/product.queryOptions";
 import { ProductItemResponse } from "@/types/products/product.type";
 import { PromotionProductResponse } from "@/types/promotions/promotionProduct.type";
 import { formatPriceDisplay } from "@/utils";
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient, useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import Link from "next/link";
+import { useMemo } from "react";
 
 interface CardMainProduct {
     hasBrandImg?: boolean;
@@ -12,18 +15,17 @@ interface CardMainProduct {
 }
 
 const CardMainProduct = ({ hasBrandImg, productItem }: CardMainProduct) => {
-    const queryClient = new QueryClient();
-
     const { brand, id, name, price, slug, thumbnail } = productItem;
+    const { data: promotionProduct } = useQuery(
+        getDetailPromotionProductOptopns({ productId: id })
+    );
 
-    // const promotionProduct = await queryClient.fetchQuery(
-    //     getDetailPromotionProductOptopns({ productId: id })
-    // );
-
-    // const promotionPrice =
-    //     promotionProduct && promotionProduct.percentDiscount > 0
-    //         ? (promotionProduct.percentDiscount * price) / 100
-    //         : 0;
+    const promotionPrice = useMemo(() => {
+        if (promotionProduct && promotionProduct.percentDiscount > 0) {
+            return (promotionProduct.percentDiscount * price) / 100;
+        }
+        return 0;
+    }, [promotionProduct]);
 
     return (
         <div className="rounded-sm bg-white h-full overflow-hidden group hover:border hover:border-red-300 shadow-lg">
@@ -57,7 +59,7 @@ const CardMainProduct = ({ hasBrandImg, productItem }: CardMainProduct) => {
                     </Link>
                 ) : null}
                 {/* price */}
-                {/* <div className="">
+                <div className="">
                     <strong className="text-red-600 font-bold text-sm md:text-base line-clamp-1">
                         {formatPriceDisplay(price - promotionPrice)}
                     </strong>
@@ -68,7 +70,7 @@ const CardMainProduct = ({ hasBrandImg, productItem }: CardMainProduct) => {
                             -{promotionProduct!.percentDiscount}%
                         </span>
                     </div>
-                ) : null} */}
+                ) : null}
             </div>
         </div>
     );
