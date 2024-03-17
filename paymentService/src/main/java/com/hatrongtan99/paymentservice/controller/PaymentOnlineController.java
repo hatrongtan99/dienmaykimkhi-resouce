@@ -1,6 +1,7 @@
 package com.hatrongtan99.paymentservice.controller;
 
 import com.hatrongtan99.paymentservice.dto.CheckoutUrlResponse;
+import com.hatrongtan99.paymentservice.service.IPaymentOnlineService;
 import com.stripe.Stripe;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.exception.StripeException;
@@ -14,6 +15,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.service.invoker.AbstractReactorHttpExchangeAdapter;
@@ -24,37 +26,16 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/bff-customer/payment-online")
+@RequiredArgsConstructor
 public class PaymentOnlineController {
-
+    private final IPaymentOnlineService paymentOnlineService;
     private final String WEBHOOK_SECRET = "whsec_e24b928e51c5948ea5c80a957fb16546f21c686a8e3188408fceb93cc1def850";
     @PostMapping("/{orderId}")
     public ResponseEntity<CheckoutUrlResponse> charge(
-        @PathVariable String orderId
+        @PathVariable Long orderId
     ) throws StripeException {
 
-        SessionCreateParams.LineItem lineItem = SessionCreateParams.LineItem.builder()
-                .setPriceData(SessionCreateParams.LineItem.PriceData.builder()
-                        .setCurrency("usd")
-                        .setProductData(SessionCreateParams.LineItem.PriceData.ProductData.builder()
-                                .setName("product name")
-                                .addImage("https://img.super-mro.com/super-mro/2022/04/w550/1y358-may-khoan-van-vit-dung-pin-dewalt-dcd708n-kr.jpg.webp")
-                                .build())
-                        .setUnitAmount(200L)
-                        .build())
-                .setQuantity(1L)
-                .build();
-
-        SessionCreateParams params =
-                SessionCreateParams.builder()
-                        .setSuccessUrl("http://localhost:8080/payment-success")
-                        .setCancelUrl("http://localhost:8080/cart")
-                        .setCurrency("usd")
-                        .addAllLineItem(
-                                List.of(lineItem, lineItem, lineItem, lineItem)
-                        )
-                        .setMode(SessionCreateParams.Mode.PAYMENT)
-                        .putMetadata("orderId", "orderId")
-                        .build();
+        SessionCreateParams params = this.paymentOnlineService.getSessionCreateParams(orderId);
         Session session = Session.create(params);
         return ResponseEntity.ok(new CheckoutUrlResponse(session.getUrl()));
     }

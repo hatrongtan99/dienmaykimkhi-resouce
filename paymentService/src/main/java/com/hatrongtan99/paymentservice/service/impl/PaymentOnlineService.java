@@ -29,7 +29,6 @@ public class PaymentOnlineService implements IPaymentOnlineService {
         Stripe.apiKey = this.secretKey;
     }
 
-
     @Override
     public SessionCreateParams getSessionCreateParams(Long orderId) {
         DetailOrderResponseDto orderInfo = this.orderService.getDetailOrder(orderId);
@@ -42,7 +41,7 @@ public class PaymentOnlineService implements IPaymentOnlineService {
                                 .setName(productItem.productName())
                                 .addImage(productItem.thumbnailUrl())
                                 .build())
-                        .setUnitAmount(Long.valueOf(productItem.productPrice().toString()))
+                        .setUnitAmount(productItem.productPrice().longValue())
                         .build())
                 .setQuantity(Long.valueOf(productItem.quantity().toString()))
                 .build()).toList();

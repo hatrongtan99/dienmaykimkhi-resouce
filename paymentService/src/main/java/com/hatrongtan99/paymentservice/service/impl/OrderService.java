@@ -19,7 +19,7 @@ public class OrderService implements IOrderService {
     @Override
     public DetailOrderResponseDto getDetailOrder(Long orderId) {
         final URI uri = UriComponentsBuilder.fromHttpUrl(this.propertiesConfig.getOrderUrl())
-                .path("/orders/bff-customer/orders/{orderId}").buildAndExpand(orderId).toUri();
+                .path("/bff-customer/orders/{orderId}").buildAndExpand(orderId).toUri();
 
         return this.webClient.get()
                 .uri(uri)
