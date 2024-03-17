@@ -39,9 +39,9 @@ export interface ProductItemResponse {
     };
 }
 
-export type ProductResponseWithPage = {
+export interface ProductResponseWithPage extends MetadataPage {
     records: ProductItemResponse[];
-} & MetadataPage;
+}
 
 export interface ProductLineCartDetail {
     id: number;

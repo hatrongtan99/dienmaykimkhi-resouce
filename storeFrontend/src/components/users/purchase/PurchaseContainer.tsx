@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ForwardedRef, forwardRef, useContext } from "react";
 import PurchaseItem from "./PurchaseItem";
 import { formatPriceDisplay } from "@/utils";
 import Button from "@/components/custom/button/Button";
@@ -11,6 +11,7 @@ import {
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { cancelOrder } from "@/api/order/order.api";
 import { getListOrderByUserOptions } from "@/api/order/order.queryOptions";
+import { OrdersContext } from "@/context/users/OrdersContexProvider";
 
 const HeadStatusOrder = (orderStatus: keyof typeof OrderStatus) => {
     let message = "",
@@ -87,80 +88,88 @@ const HeadStatusOrder = (orderStatus: keyof typeof OrderStatus) => {
     return body;
 };
 
-const PurchaseContainer = ({ perchase }: { perchase: OrderResponse }) => {
-    const queryClient = useQueryClient();
+const PurchaseContainer = forwardRef(
+    (
+        { perchase }: { perchase: OrderResponse },
+        ref: ForwardedRef<HTMLDivElement>
+    ) => {
+        const { handleUpdateWhenCancelOrderByIdInTable } =
+            useContext(OrdersContext);
+        const queryClient = useQueryClient();
 
-    const { mutateAsync } = useMutation({
-        mutationFn: (body: CancelOrderRequest) => cancelOrder({ body }),
-        onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: [getListOrderByUserOptions()["queryKey"][0]],
-                exact: false,
-            });
-        },
-    });
+        const { mutateAsync } = useMutation({
+            mutationFn: (body: CancelOrderRequest) => cancelOrder({ body }),
+            onSuccess: () => {
+                queryClient.invalidateQueries({
+                    queryKey: [getListOrderByUserOptions()["queryKey"][0]],
+                    exact: false,
+                });
+                handleUpdateWhenCancelOrderByIdInTable(perchase.id);
+            },
+        });
 
-    const handleCancelOrder = async () => {
-        try {
-            await mutateAsync({ orderId: perchase.id, reason: "" });
-        } catch (error) {
-            console.log(error);
-        }
-    };
+        const handleCancelOrder = async () => {
+            try {
+                await mutateAsync({ orderId: perchase.id, reason: "" });
+            } catch (error) {
+                console.log(error);
+            }
+        };
 
-    const buttonAction = () => {
-        const status = perchase.orderStatus;
-        const statusIsCancelable: (keyof typeof OrderStatus)[] = [
-            "ACCEPTED",
-            "PAID",
-            "PENDING",
-            "PENDING_PAYMENT",
-            "PREPARE",
-        ];
-        if (statusIsCancelable.includes(status)) {
-            return (
-                <Button size="md" as="button" onClick={handleCancelOrder}>
-                    Huỷ đơn hàng
-                </Button>
-            );
-        } else if (status == "COMPLETED") {
-            return (
-                <Button size="md" as="button">
-                    Đánh giá
-                </Button>
-            );
-        }
-        return null;
-    };
-    return (
-        <div className="my-4">
-            <div className="rounded-b-md overflow-hidden bg-white px-8 py-8">
-                <div className="border-b pb-2 text-end">
-                    <div className="inline-flex items-center">
-                        {HeadStatusOrder(perchase.orderStatus)}
+        const buttonAction = () => {
+            const status = perchase.orderStatus;
+            const statusIsCancelable: (keyof typeof OrderStatus)[] = [
+                "ACCEPTED",
+                "PAID",
+                "PENDING",
+                "PENDING_PAYMENT",
+                "PREPARE",
+            ];
+            if (statusIsCancelable.includes(status)) {
+                return (
+                    <Button size="md" as="button" onClick={handleCancelOrder}>
+                        Huỷ đơn hàng
+                    </Button>
+                );
+            } else if (status == "COMPLETED") {
+                return (
+                    <Button size="md" as="button">
+                        Đánh giá
+                    </Button>
+                );
+            }
+            return null;
+        };
+        return (
+            <div className="my-4" ref={ref}>
+                <div className="rounded-b-md overflow-hidden bg-white px-8 py-8">
+                    <div className="border-b pb-2 text-end">
+                        <div className="inline-flex items-center">
+                            {HeadStatusOrder(perchase.orderStatus)}
+                        </div>
+                    </div>
+                    <div className="mt-2">
+                        {perchase.items.map((item) => (
+                            <PurchaseItem orderItem={item} key={item.id} />
+                        ))}
                     </div>
                 </div>
-                <div className="mt-2">
-                    {perchase.items.map((item) => (
-                        <PurchaseItem orderItem={item} key={item.id} />
-                    ))}
+                <div className="rounded-t-md text-end mt-0.5 bg-white px-6 py-8 relative">
+                    <div className="inline-flex items-center ">
+                        <span className="mr-4 text-sm font-normal">
+                            Thành tiền:
+                        </span>
+                        <span className="text-xl text-red-500 font-medium">
+                            {formatPriceDisplay(perchase.totalPrice)}
+                        </span>
+                    </div>
+                    <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
+                        {buttonAction()}
+                    </div>
                 </div>
             </div>
-            <div className="rounded-t-md text-end mt-0.5 bg-white px-6 py-8 relative">
-                <div className="inline-flex items-center ">
-                    <span className="mr-4 text-sm font-normal">
-                        Thành tiền:
-                    </span>
-                    <span className="text-xl text-red-500 font-medium">
-                        {formatPriceDisplay(perchase.totalPrice)}
-                    </span>
-                </div>
-                <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2">
-                    {buttonAction()}
-                </div>
-            </div>
-        </div>
-    );
-};
+        );
+    }
+);
 
 export default PurchaseContainer;

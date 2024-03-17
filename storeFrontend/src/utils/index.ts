@@ -1,4 +1,7 @@
+import { KEY_ORDER_STATUS_FILTER } from "@/components/users/purchase/HeadPurchase";
+import { OrderStatusFilter } from "@/constants";
 import { PageableParams } from "@/types";
+import { ReadonlyURLSearchParams } from "next/navigation";
 
 export const buildParamsString = (
     object: { [key: string]: string | number } & PageableParams = {},
@@ -23,4 +26,11 @@ export const formatPriceDisplay = (price: number) => {
         style: "currency",
         currency: "VND",
     }).format(price);
+};
+
+export const getKeyOrderFromSearchParams = (
+    searchParams: ReadonlyURLSearchParams
+) => {
+    return (searchParams.get(KEY_ORDER_STATUS_FILTER) ??
+        OrderStatusFilter.ALL) as OrderStatusFilter;
 };

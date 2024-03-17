@@ -96,9 +96,8 @@ export interface OrderItemRequest {
     discount: number;
 }
 
-export interface ListOrderUserResponse {
+export interface ListOrderUserResponse extends MetadataPage {
     records: OrderResponse[];
-    _metadata: MetadataPage;
 }
 
 export interface DetailOrderPriceCheckoutResponse {

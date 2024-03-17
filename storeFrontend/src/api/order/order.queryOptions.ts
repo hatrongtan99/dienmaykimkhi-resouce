@@ -41,7 +41,7 @@ export const calcDetailPriceOrderToCheckoutOptions = ({
     params,
     ...options
 }: {
-    params: string;
+    params?: string;
 } & CustomUndefinedInitialDataOptions<DetailOrderPriceCheckoutResponse> = {}) => {
     return queryOptions({
         queryKey: ["detail-price-checkout-order", { params }],

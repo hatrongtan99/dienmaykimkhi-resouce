@@ -38,7 +38,7 @@ export const cancelOrder = ({ body }: { body: CancelOrderRequest }) => {
 export const calcDetailPriceOrderToCheckout = ({
     params,
 }: {
-    params: string;
+    params?: string;
 }) => {
     return customFetch<DetailOrderPriceCheckoutResponse>(
         BASE_URL_ORDER_API + "/price-checkout" + `?${params}`
