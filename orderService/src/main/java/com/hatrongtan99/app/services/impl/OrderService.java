@@ -58,6 +58,7 @@ public class OrderService implements IOrderService {
                 .paymentStatus(PaymentStatus.PENDING)
                 .orderStatus(OrderStatus.PENDING)
                 .paymentMethod(body.paymentMethod())
+                .numberItem(body.cartItems().size())
                 .build();
 
         OrderAddressEntity address = OrderAddressEntity.builder()

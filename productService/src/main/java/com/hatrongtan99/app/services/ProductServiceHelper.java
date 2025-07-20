@@ -21,6 +21,7 @@ public abstract class ProductServiceHelper {
     private final CategoryRepository categoryRepository;
     private final ProductMetaDataRepository metaDataRepository;
     private final IProductAttributeService productAttributeService;
+
     private boolean checkExistBySlug(String slug) {
         return this.productRepository.existsBySlug(slug);
     }
@@ -83,7 +84,8 @@ public abstract class ProductServiceHelper {
         List<Long> deleteImageId = existImagesId.stream().filter(id -> !newImageId.contains(id)).toList();
         // delete image row
         this.productImageRepository.deleteByImageIdInAndProductId(deleteImageId, product);
-        product.setImages(newImageId.stream().map(id -> ProductImageEntity.builder().productId(product).imageId(id).build()).toList());
+        product.setImages(newImageId.stream()
+                .map(id -> ProductImageEntity.builder().productId(product).imageId(id).build()).toList());
     }
 
     protected void setCategories(ProductEntity product, List<Long> categoriesId) {
@@ -98,8 +100,10 @@ public abstract class ProductServiceHelper {
             product.setCategories(categories);
         } else {
             List<CategoryEntity> currentCategory = product.getCategories();
-            List<CategoryEntity> listDelete = currentCategory.stream().filter(cate -> !categories.contains(cate)).toList();
-            List<CategoryEntity> listSave = categories.stream().filter(cate -> !currentCategory.contains(cate)).toList();
+            List<CategoryEntity> listDelete = currentCategory.stream().filter(cate -> !categories.contains(cate))
+                    .toList();
+            List<CategoryEntity> listSave = categories.stream().filter(cate -> !currentCategory.contains(cate))
+                    .toList();
             product.getCategories().removeAll(listDelete);
             product.getCategories().addAll(listSave);
         }
@@ -118,8 +122,10 @@ public abstract class ProductServiceHelper {
             product.setProductRelate(listProductRelate);
         } else {
             List<ProductEntity> currentProductRelate = product.getProductRelate();
-            List<ProductEntity> listDelete = currentProductRelate.stream().filter(p -> !listProductRelate.contains(p)).toList();
-            List<ProductEntity> listSave = listProductRelate.stream().filter(p -> !currentProductRelate.contains(p)).toList();
+            List<ProductEntity> listDelete = currentProductRelate.stream().filter(p -> !listProductRelate.contains(p))
+                    .toList();
+            List<ProductEntity> listSave = listProductRelate.stream().filter(p -> !currentProductRelate.contains(p))
+                    .toList();
             product.getProductRelate().removeAll(listDelete);
             product.getProductRelate().addAll(listSave);
         }
@@ -144,15 +150,15 @@ public abstract class ProductServiceHelper {
                         .productId(product)
                         .name(metadata.name())
                         .value(metadata.value())
-                        .build()
-                );
+                        .build());
             }
         }
         if (product.getMetadata() == null) {
             product.setMetadata(metadataSave);
         } else {
             List<ProductMetaDataEntity> currentMetadata = product.getMetadata();
-            List<ProductMetaDataEntity> deleteMetadata = currentMetadata.stream().filter(m -> !metadataUpdate.contains(m)).toList();
+            List<ProductMetaDataEntity> deleteMetadata = currentMetadata.stream()
+                    .filter(m -> !metadataUpdate.contains(m)).toList();
             product.getMetadata().removeAll(deleteMetadata);
             product.getMetadata().addAll(metadataSave);
             this.metaDataRepository.saveAllAndFlush(metadataUpdate);
@@ -164,7 +170,8 @@ public abstract class ProductServiceHelper {
             return;
         }
         attributes.forEach(attribute -> {
-            this.productAttributeService.saveListAttributeItem(product.getId(), attribute.attributeId(), attribute.items());
+            this.productAttributeService.saveListAttributeItem(product.getId(), attribute.attributeId(),
+                    attribute.items());
         });
     }
 }

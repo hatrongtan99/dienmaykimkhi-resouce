@@ -11,7 +11,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping({"/bff-customer/promotion-code", "/bff-admin/promotion-code"})
+@RequestMapping({ "/bff-customer/promotion-code", "/bff-admin/promotion-code" })
 @RequiredArgsConstructor
 public class PromotionController {
 
@@ -20,8 +20,7 @@ public class PromotionController {
 
     @PostMapping
     public ResponseEntity<PromotionResponseDto> createPromotionCode(
-            @Valid @RequestBody PromotionSaveDto body
-    ) {
+            @Valid @RequestBody PromotionSaveDto body) {
         PromotionEntity promotion = this.promotionService.createPromotionCode(body);
         // active promotion code
         this.taskScheduler.schedule(new Runnable() {
@@ -43,8 +42,7 @@ public class PromotionController {
 
     @GetMapping("/{couponCode}")
     public ResponseEntity<PromotionResponseDto> getPromotionCode(
-            @PathVariable("couponCode") String couponCode
-    ) {
+            @PathVariable("couponCode") String couponCode) {
         PromotionEntity promotion = this.promotionService.getDetailPromotionCodeByCouponCode(couponCode);
         return ResponseEntity.ok(PromotionResponseDto.mapToDto(promotion));
     }

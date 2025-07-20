@@ -5,14 +5,28 @@ services:
 #    restart: always
 #    ports:
 #      - 80:80
-##      - 443:443
+#      - 443:443
 #    volumes:
 #      - ./docker/nginx/customConfig.conf:/etc/nginx/conf.d/customConfig.conf
-#  identify-service:
+#  common-service:
+#    platform: linux/x86_64
 #    build:
-#      context: ./identifyService
+#      context: ./common
+#  authorization-server-service:
+#    platform: linux/x86_64
+#    build:
+#      context: ./authorizationServer
 #    ports:
-#      - 8081:8081
+#      - 9000:9000
+#    depends_on:
+#      - common-service
+#      - db-mysql
+#  store-frontend-service:
+#    build:
+#      context: ./storeFrontend
+#    ports:
+#      - 3000:3000
+
 
   db-mysql:
     image: mysql:8.2.0

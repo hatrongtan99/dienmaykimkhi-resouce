@@ -5,207 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="974fcd77-4e25-4405-8968-39bc4febdb19" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/dto/cartDto/UpdateCartStatusDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/services/IProductService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/services/impl/ProductService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/hatrongtan99/saga/dto/inventoryProduct/StockAdjustQuantityDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/hatrongtan99/saga/dto/inventoryProduct/StockUpdateWhenOrderDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/messageBroker/consumer/UpdateQuantityInStock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/config/AuditingConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/cartDto/UpdateCartStatusDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/inventory/StockUpdateWhenOrderDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/order/DetailOrderResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/order/OrderAddressResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/order/OrderItemRequestDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/priceDto/PriceOrderResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/priceDto/TotalPriceCartResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/exceptions/BadRequestException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/messageBroker/config/RabbitMqTemplateConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/messageBroker/publisher/InventoryMessageService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/services/CartService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/services/IPromotionService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/dto/DetailOrderResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/dto/OrderAddressResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/dto/OrderItemResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/service/IOrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/service/impl/OrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sagaService/src/main/java/com/hatrongtan99/sagaservice/ochestration/declare/InventoryEventDeclare.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sagaService/src/main/java/com/hatrongtan99/sagaservice/ochestration/declare/OrderEventDeclare.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sagaService/src/main/java/com/hatrongtan99/sagaservice/ochestration/service/OrderInventoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/.env.development" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/.eslintrc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/.prettierrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/nest-cli.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/app.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/config/configuration.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/test/app.e2e-spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/test/jest-e2e.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/tsconfig.build.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bffCustomer/src/main/java/com/hatrongtan99/app/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/bffCustomer/src/main/java/com/hatrongtan99/app/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bffCustomer/src/main/java/com/hatrongtan99/app/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bffCustomer/src/main/java/com/hatrongtan99/app/controller/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bffCustomer/src/main/java/com/hatrongtan99/app/dto/UserNameResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/bffCustomer/src/main/java/com/hatrongtan99/app/dto/UserNameResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bffCustomer/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/bffCustomer/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/config/PropertiesConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/config/PropertiesConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/controller/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/controller/CartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/dto/cartItemDto/CartItemResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/dto/cartItemDto/CartItemResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/dto/priceDto/DetailPriceProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/dto/priceDto/DetailPriceProductDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/dto/promotion/PromotionProductResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/dto/promotion/PromotionProductResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/services/IInventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/services/IInventoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/services/IPromotionProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/services/IPromotionProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/services/impl/CalcPriceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/services/impl/CalcPriceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/services/impl/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/services/impl/CartService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/services/impl/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/services/impl/InventoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/services/impl/PromotionProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/cartService/src/main/java/com/hatrongtan99/app/services/impl/PromotionProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cartService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/cartService/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/hatrongtan99/enumeration/auth/TypeProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/hatrongtan99/enumeration/auth/TypeProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/hatrongtan99/enumeration/order/OrderStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/hatrongtan99/enumeration/order/OrderStatus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/hatrongtan99/saga/constants/ExchangeName.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/hatrongtan99/saga/constants/ExchangeName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/hatrongtan99/saga/constants/QueueName.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/hatrongtan99/saga/constants/QueueName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/hatrongtan99/saga/constants/RoutingKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/hatrongtan99/saga/constants/RoutingKey.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/hatrongtan99/saga/dto/inventoryProduct/ProductChangeStatusInStockDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/hatrongtan99/saga/dto/inventoryProduct/ProductChangeStatusInStockDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/authorizationServer/settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorizationServer/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/authorizationServer/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorizationServer/src/main/java/com/hatrongtan99/app/AuthorizationServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorizationServer/src/main/java/com/hatrongtan99/app/AuthorizationServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authorizationServer/src/test/java/com/hatrongtan99/app/IdentifyServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/authorizationServer/src/test/java/com/hatrongtan99/app/IdentifyServiceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker/database/mysql/init/initialDatabase.sql" beforeDir="false" afterPath="$PROJECT_DIR$/docker/database/mysql/init/initialDatabase.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventoryService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/inventoryService/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/controller/InventoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/controller/InventoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/dto/StockAdjustQuantityDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/inventory/StockAdjustQuantityDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/dto/StockUpdateWhenOrderDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/messageBroker/config/RabbitMqTemplateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/messageBroker/config/RabbitMqTemplateConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/messageBroker/publisher/InventoryMessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/messageBroker/publisher/InventoryMessageService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/services/IInventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/services/IInventoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/services/impl/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/services/impl/InventoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/services/impl/InventoryServiceHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/services/impl/InventoryServiceHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/utils/AuthenticationUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/inventoryService/src/main/java/com/hatrongtan99/app/utils/AuthenticationUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mediaService/src/main/java/com/hatrongtan99/app/config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/mediaService/src/main/java/com/hatrongtan99/app/config/CorsConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mediaService/src/main/java/com/hatrongtan99/app/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/mediaService/src/main/java/com/hatrongtan99/app/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mediaService/src/main/java/com/hatrongtan99/app/controller/MediaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/mediaService/src/main/java/com/hatrongtan99/app/controller/MediaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mediaService/src/main/java/com/hatrongtan99/app/dto/MediaFileResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/mediaService/src/main/java/com/hatrongtan99/app/dto/MediaFileResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mediaService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/mediaService/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mediaService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mediaService/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/note.txt" beforeDir="false" afterPath="$PROJECT_DIR$/note.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/OrderServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/OrderServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/config/CorsConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/config/PropertiesConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/config/PropertiesConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/config/WebClientConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/config/WebClientConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/cartDto/CartCurrentResponseDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/cartDto/CartItemDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/order/CancelOrderRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/order/CancelOrderRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/order/ListOrderByUserWithPageDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/order/ListOrderByUserWithPageDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/order/OrderByUserResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/order/OrderByUserResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/order/OrderItemResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/order/OrderItemResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/order/OrderSaveDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/order/OrderSaveDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/productDto/DetailPriceProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/productDto/DetailPriceProductDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/stock/ProductInStockResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/stock/ProductInStockResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/userDto/AddressUserDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/userDto/UserInfoResponseDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/entity/BaseAuditEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/entity/BaseAuditEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/entity/OrderAddressEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/entity/OrderAddressEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/entity/OrderEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/entity/OrderEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/entity/OrderItemEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/entity/OrderItemEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/exceptions/NotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/exceptions/NotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/exceptions/RequiredSignInException.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/exceptions/RequiredSignInException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/repository/OrderRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/services/ICartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/services/ICartService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/services/IInventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/services/IInventoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/services/IOrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/services/IOrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/services/IProductService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/services/impl/CartService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/services/impl/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/services/impl/InventoryService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/services/impl/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/services/impl/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/utils/AuthenticationUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/utils/AuthenticationUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/orderService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/orderService/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/config/AppConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/config/AuditingConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/config/AuditingConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/config/CorsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/config/CorsConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/config/PropertiesConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/config/PropertiesConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/config/WebclientConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/config/WebclientConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/controller/PaymentOnlineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/controller/PaymentOnlineController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/dto/CheckoutUrlResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/dto/CheckoutUrlResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/entity/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/entity/BaseEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/entity/PaymentEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/entity/PaymentEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/exceptions/RequiredSignInException.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/exceptions/RequiredSignInException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/repository/PaymentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/repository/PaymentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/service/IPaymentOnlineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/service/IPaymentOnlineService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/service/impl/PaymentOnlineService.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/service/impl/PaymentOnlineService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/utils/AuthenticationUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/utils/AuthenticationUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paymentService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/paymentService/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/controller/DemoController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/entity/test/GroupEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/entity/test/StudentEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/messageBroker/config/ExchangeConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/messageBroker/consumer/ProductInventoryEventHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/messageBroker/consumer/ProductInventoryEventHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/repository/test/GroupRepo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/repository/test/StudentRepo.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/services/IInventoryService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/repository/spec/ProductSpec.java" beforeDir="false" afterPath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/repository/spec/ProductSpec.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/services/ProductServiceHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/services/ProductServiceHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/services/impl/InventoryService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/services/impl/ProductCreateUpdateService.java" beforeDir="false" afterPath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/services/impl/ProductCreateUpdateService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/services/impl/ProductReadService.java" beforeDir="false" afterPath="$PROJECT_DIR$/productService/src/main/java/com/hatrongtan99/app/services/impl/ProductReadService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/productService/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productService/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/productService/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ratingService/src/main/java/com/hatrongtan99/app/RatingServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/ratingService/src/main/java/com/hatrongtan99/app/RatingServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ratingService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ratingService/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sagaService/src/main/java/com/hatrongtan99/sagaservice/choreography/inventoryProduct/declare/InventoryProductDeclare.java" beforeDir="false" afterPath="$PROJECT_DIR$/sagaService/src/main/java/com/hatrongtan99/sagaservice/choreography/declare/inventoryProduct/InventoryProductDeclare.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeAdminFrontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/storeAdminFrontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeAdminFrontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/storeAdminFrontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeAdminFrontend/src/layout/mainLayout/header/headerContent/Search.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeAdminFrontend/src/layout/mainLayout/header/headerContent/Search.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeAdminFrontend/src/layout/mainLayout/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeAdminFrontend/src/layout/mainLayout/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeAdminFrontend/src/menuItems/manage.ts" beforeDir="false" afterPath="$PROJECT_DIR$/storeAdminFrontend/src/menuItems/manage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeAdminFrontend/src/routes/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeAdminFrontend/src/routes/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/api/order/order.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/api/order/order.api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/api/order/order.queryOptions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/api/order/order.queryOptions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/api/user/address/addressUser.api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/api/user/address/addressUser.api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/api/user/address/addressUser.queryOptions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/api/user/address/addressUser.queryOptions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/app/(requiredAuth)/(checkout)/checkout/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/app/(requiredAuth)/(checkout)/checkout/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/app/(requiredAuth)/(customer)/users/address/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/app/(requiredAuth)/(customer)/users/address/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/app/(requiredAuth)/(customer)/users/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/app/(requiredAuth)/(customer)/users/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/app/(requiredAuth)/(customer)/users/profile/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/app/(requiredAuth)/(customer)/users/profile/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/app/(requiredAuth)/(customer)/users/purchase/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/app/(requiredAuth)/(customer)/users/purchase/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/app/(store)/(brand)/brand/[brandSlug]/ListProductByBrandSlug.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/app/(store)/(brand)/brand/[brandSlug]/ListProductByBrandSlug.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/app/(store)/(category)/cat/[rootCategorySlug]/[...childCategorySlug]/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/app/(store)/(category)/cat/[rootCategorySlug]/[...childCategorySlug]/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/app/(store)/(category)/cat/[rootCategorySlug]/[...childCategorySlug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/app/(store)/(category)/cat/[rootCategorySlug]/[...childCategorySlug]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/app/(store)/(product)/product/[productSlug]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/app/(store)/(product)/product/[productSlug]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/components/cart/BottomCart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/components/cart/BottomCart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/components/cart/CartItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/components/cart/CartItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/components/checkout/AddressCheckout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/components/checkout/AddressCheckout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/components/checkout/CheckOutItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/components/checkout/CheckOutItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/components/checkout/HeadCheckout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/components/checkout/HeadCheckout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/components/common/Modal.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/components/filterProduct/FilterSession.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/components/filterProduct/FilterSession.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/components/layout/header/authBlock/AuthCredencial.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/components/layout/header/authBlock/AuthCredencial.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/components/layout/header/authBlock/UserAvatar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/components/layout/header/authBlock/UserAvatar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/components/product/CardMainProduct.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/components/product/CardMainProduct.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/components/users/address/AddressItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/components/users/address/AddressItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/components/users/purchase/HeadPurchase.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/components/users/purchase/HeadPurchase.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/components/users/purchase/PurchaseContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/components/users/purchase/PurchaseContainer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/components/users/purchase/PurchaseItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/components/users/purchase/PurchaseItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/context/CartContextProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/context/CartContextProvider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/context/ContextProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/context/ContextProvider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/context/RouterContextProvider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/context/RouterContextProvider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/hook/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/hook/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/types/cart/cart.type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/types/cart/cart.type.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/types/users/addressUser.type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/types/users/addressUser.type.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/src/types/users/userInfo.type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/src/types/users/userInfo.type.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storeFrontend/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/tailwind.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userService/src/main/java/com/hatrongtan99/app/controller/AddressUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/userService/src/main/java/com/hatrongtan99/app/controller/AddressUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userService/src/main/java/com/hatrongtan99/app/dto/addressDto/AddressUserResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/userService/src/main/java/com/hatrongtan99/app/dto/addressDto/AddressUserResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userService/src/main/java/com/hatrongtan99/app/repository/AddressUserEntityRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/userService/src/main/java/com/hatrongtan99/app/repository/AddressUserEntityRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userService/src/main/java/com/hatrongtan99/app/service/IAddressUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/userService/src/main/java/com/hatrongtan99/app/service/IAddressUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/userService/src/main/java/com/hatrongtan99/app/service/impl/AddressUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/userService/src/main/java/com/hatrongtan99/app/service/impl/AddressUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/promotionService/src/main/java/com/hatrongtan99/app/controller/PromotionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/promotionService/src/main/java/com/hatrongtan99/app/controller/PromotionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storeFrontend/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/storeFrontend/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,8 +48,8 @@
         <option value="package-info" />
         <option value="HTML File" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="Record" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -270,7 +83,7 @@
     &quot;android.gradle.sync.needed&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/tanha/dev/work/dienmaykimkhiResource/paymentService/src/main/java/com/hatrongtan99/paymentservice/dto&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/tanha/dev/work/dienmaykimkhiResource/common&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -280,7 +93,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;2faed29cd947343d066e657d3a316e7d&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;24d5c8156fa40cc1ce7aeb6f0c4a0774&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -289,11 +102,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/common" />
       <recent name="$PROJECT_DIR$/paymentService/src/main/java/com/hatrongtan99/paymentservice/dto" />
       <recent name="$PROJECT_DIR$/common/src/main/java/com/hatrongtan99/saga/dto/inventoryProduct" />
       <recent name="$PROJECT_DIR$/orderService/src/main/java/com/hatrongtan99/app/dto/inventory" />
       <recent name="$PROJECT_DIR$/promotionService/src/main/resources" />
-      <recent name="$PROJECT_DIR$/promotionService/src/main/java/com/hatrongtan99/app" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.hatrongtan99.paymentservice" />
@@ -306,7 +119,7 @@
       <recent name="com.hatrongtan99.app.messageBroker.config" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.PromotionServiceApplication">
+  <component name="RunManager" selected="JUnit.IdentifyServiceApplicationTests.contextLoads">
     <configuration name="ProductServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.hatrongtan99.app.ProductServiceApplication" />
       <module name="productService" />
@@ -342,6 +155,22 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="IdentifyServiceApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="authorizationServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.hatrongtan99.app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.hatrongtan99.app" />
+      <option name="MAIN_CLASS_NAME" value="com.hatrongtan99.app.IdentifyServiceApplicationTests" />
+      <option name="METHOD_NAME" value="contextLoads" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -430,8 +259,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.IdentifyServiceApplicationTests.contextLoads" />
         <item itemvalue="Application.PromotionServiceApplication" />
         <item itemvalue="Application.RatingServiceApplication" />
         <item itemvalue="Application.ProductServiceApplication" />
@@ -517,7 +353,18 @@
       <workItem from="1710075422652" duration="6738000" />
       <workItem from="1710123077372" duration="10000" />
       <workItem from="1710162944696" duration="50000" />
-      <workItem from="1710163082300" duration="3524000" />
+      <workItem from="1710163082300" duration="4504000" />
+      <workItem from="1710222381737" duration="2980000" />
+      <workItem from="1710592947673" duration="2135000" />
+      <workItem from="1710679404808" duration="14956000" />
+      <workItem from="1710938391376" duration="3166000" />
+      <workItem from="1713442891849" duration="72000" />
+      <workItem from="1714272494224" duration="349000" />
+      <workItem from="1715570873202" duration="2865000" />
+      <workItem from="1715863038792" duration="13000" />
+      <workItem from="1716019879514" duration="800000" />
+      <workItem from="1716714593198" duration="146000" />
+      <workItem from="1716969099893" duration="100000" />
     </task>
     <servers />
   </component>

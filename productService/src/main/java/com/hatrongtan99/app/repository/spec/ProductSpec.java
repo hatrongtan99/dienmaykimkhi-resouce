@@ -36,15 +36,12 @@ public class ProductSpec {
     public static Specification<ProductEntity> filterByPrice(List<PriceRange> priceRangeList) {
         return (root, query, criteriaBuilder) -> {
             Join<ProductEntity, PriceEntity> pricejoin = root.join("price");
-            List<Predicate> predicates = priceRangeList.stream().map(range ->
-                    criteriaBuilder.between(pricejoin.get("price"), range.getStartRange(), range.getEndRange())
-            ).toList();
+            List<Predicate> predicates = priceRangeList.stream().map(range -> criteriaBuilder
+                    .between(pricejoin.get("price"), range.getStartRange(), range.getEndRange())).toList();
             return criteriaBuilder.and(
                     criteriaBuilder.equal(pricejoin.get("isActive"), true),
-                    criteriaBuilder.or(predicates.toArray(new Predicate[0]))
-            );
+                    criteriaBuilder.or(predicates.toArray(new Predicate[0])));
         };
     }
-
 
 }

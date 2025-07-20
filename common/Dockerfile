@@ -11,5 +11,4 @@ RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 COPY --from=build /app/target /target
-EXPOSE 9000
 ENTRYPOINT ["java", "-jar", "target/*.jar"]
